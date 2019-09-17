@@ -3,7 +3,7 @@
   "author": "NTLx",
   "version": "0.0.1",
   "description": "AneuFiler",
-  "license": "GNU GPLv3",
+  "license": "GPL-3.0",
   "repository": "https://github.com/Cubicise-Medical/G020.git",
   "main": "main.js",
   "scripts": {
@@ -30,20 +30,25 @@
       "jquery-3.4.1.min.js"
     ],
     "directories": {
-        "buildResources": "build",
-        "output": "dist"
+      "buildResources": "build",
+      "output": "dist"
     },
     "mac": {
-        "category": "public.app-category.developer-tools",
-        "target": ["dmg"],
-        "icon": "build/Icon.icns"
+      "category": "public.app-category.developer-tools",
+      "target": [
+        "dmg"
+      ],
+      "icon": "build/Icon.icns"
     },
     "dmg": {
-        "title": "AneuFiler",
-        "icon": "build/Icon.icns"
+      "title": "AneuFiler",
+      "icon": "build/Icon.icns"
     },
     "win": {
-        "target": ["portable","nsis"]
+      "target": [
+        "portable",
+        "nsis"
+      ]
     }
   }
 }
