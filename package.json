@@ -1,22 +1,49 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "aneufiler",
+  "author": "NTLx",
+  "version": "0.0.1",
+  "description": "AneuFiler",
+  "license": "GNU GPLv3",
+  "repository": "https://github.com/Cubicise-Medical/G020.git",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Data Analysis",
+    "AneuFiler"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^6.0.9"
+    "electron": "^6.0.8"
+  },
+  "build": {
+    "appId": "AneuFiler.app",
+    "productName": "AneuFiler",
+    "files": [
+      "data_format_darwin_dev",
+      "data_format_win32_dev",
+      "main.js",
+      "index.html",
+      "renderer.js",
+      "style.css",
+      "jquery-3.4.1.min.js"
+    ],
+    "directories": {
+        "buildResources": "build",
+        "output": "dist"
+    },
+    "mac": {
+        "category": "public.app-category.developer-tools",
+        "target": ["dmg"],
+        "icon": "build/Icon.icns"
+    },
+    "dmg": {
+        "title": "AneuFiler",
+        "icon": "build/Icon.icns"
+    },
+    "win": {
+        "target": ["portable","nsis"]
+    }
   }
 }
