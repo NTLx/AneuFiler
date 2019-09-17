@@ -36,7 +36,7 @@ or use installer instead.
 
 Move app to `Application` :
 
-![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190916183109.png)
+![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190917162246.png)
 
 [Download for Mac OS](https://github.com/NTLx/AneuFiler/releases/download/v0.0.1/AneuFiler.v0.0.1.macOS.dmg)
 

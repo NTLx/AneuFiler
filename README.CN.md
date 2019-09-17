@@ -36,7 +36,7 @@
 
 在 Mac OS X 系统下，双击安装包，将软件包移动至 `应用程序` 文件夹内即可使用：
 
-![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190916183109.png)
+![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190917162246.png)
 
 [Mac OS 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.0.1/AneuFiler.v0.0.1.macOS.dmg)
 
