@@ -8,7 +8,7 @@
 - Based on [electron-quick-start](https://github.com/electron/electron-quick-start) project
 - core algorithm was not open source
 
-Current release is [`v0.0.1`](), `Pre-release` was not recommended for actual production.
+Current release is [`v0.0.1`](https://github.com/NTLx/AneuFiler/releases/tag/v0.0.1), `Pre-release` was not recommended for actual production.
 
 > Version introduction:
 > 
@@ -26,11 +26,11 @@ Suitable for Windows x64 and Mac OS X.
 
 `Portable` package can run without installation.
 
-[Download Portable for win]()
+[Download Portable for win](https://github.com/NTLx/AneuFiler/releases/download/v0.0.1/AneuFiler.v0.0.1.win64.Portable.exe)
 
 or use installer instead.
 
-[Download Installer for win]()
+[Download Installer for win](https://github.com/NTLx/AneuFiler/releases/download/v0.0.1/AneuFiler.v0.0.1.win64.Installer.exe)
 
 ### Mac OS
 
@@ -38,7 +38,7 @@ Move app to `Application` :
 
 ![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190916183109.png)
 
-[Download for Mac OS]()
+[Download for Mac OS](https://github.com/NTLx/AneuFiler/releases/download/v0.0.1/AneuFiler.v0.0.1.macOS.dmg)
 
 ## Usage
 
@@ -80,7 +80,7 @@ Press the blue button `退出` could exit the software:
 
 ## Feedback
 
-Welcome to [open issue]() on this project to help us make improve for this software, or you can see the [existing issues]().
+Welcome to [open issue](https://github.com/NTLx/AneuFiler/issues/new/choose) on this project to help us make improve for this software, or you can see the [existing issues](https://github.com/NTLx/AneuFiler/issues).
 
 ## Participate
 

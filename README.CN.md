@@ -8,7 +8,7 @@
 - 基于 [electron-quick-start](https://github.com/electron/electron-quick-start) 项目搭建用户界面
 - 核心算法模块不开源
 
-当前发布版本为 [`v0.0.1`]() ， `Pre-release` 版本的核心算法尚未完善，不建议用于实际生产。
+当前发布版本为 [`v0.0.1`](https://github.com/NTLx/AneuFiler/releases/tag/v0.0.1) ， `Pre-release` 版本的核心算法尚未完善，不建议用于实际生产。
 
 > 版本号发布格式说明：
 > 
@@ -26,11 +26,11 @@
 
 在 Windows 系统下可直接运行 `Portable` 版程序，无需安装。
 
-[Portable 下载链接]()
+[Portable 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.0.1/AneuFiler.v0.0.1.win64.Portable.exe)
 
 也可以使用安装版本：双击软件包，安装后即可使用。
 
-[Installer 下载链接]()
+[Installer 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.0.1/AneuFiler.v0.0.1.win64.Installer.exe)
 
 ### Mac OS
 
@@ -38,7 +38,7 @@
 
 ![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190916183109.png)
 
-[Mac OS 下载链接]()
+[Mac OS 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.0.1/AneuFiler.v0.0.1.macOS.dmg)
 
 ## 软件使用
 
@@ -85,7 +85,7 @@
 
 ## 反馈
 
-如在本软件的使用过程中有任何意见或建议，欢迎 [提出]()，也可以 [点这里]() 查看留言。
+如在本软件的使用过程中有任何意见或建议，欢迎 [提出](https://github.com/NTLx/AneuFiler/issues/new/choose)，也可以 [查看留言](https://github.com/NTLx/AneuFiler/issues) 。
 
 ## 参与
 
