@@ -8,7 +8,7 @@
 - Based on [electron-quick-start](https://github.com/electron/electron-quick-start) project
 - core algorithm was not open source
 
-Current release is [`v0.0.1`](https://github.com/Cubicise-Medical/G020/releases/tag/v0.0.6), `Pre-release` was not recommended for actual production.
+Current release is [`v0.0.1`](), `Pre-release` was not recommended for actual production.
 
 > Version introduction:
 > 
@@ -26,11 +26,11 @@ Suitable for Windows x64 and Mac OS X.
 
 `Portable` package can run without installation.
 
-[Download Portable for win](https://github.com/Cubicise-Medical/G020/releases/download/v0.0.6/G020.Analysis.v0.0.6.win_portable.exe)
+[Download Portable for win]()
 
 or use installer instead.
 
-[Download Installer for win](https://github.com/Cubicise-Medical/G020/releases/download/v0.0.6/G020.Analysis.v0.0.6.win_installer.exe)
+[Download Installer for win]()
 
 ### Mac OS
 
@@ -38,7 +38,7 @@ Move app to `Application` :
 
 ![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190916183109.png)
 
-[Download for Mac OS](https://github.com/Cubicise-Medical/G020/releases/download/v0.0.6/G020.Analysis.v0.0.6.MacOS.dmg)
+[Download for Mac OS]()
 
 ## Usage
 
@@ -80,7 +80,7 @@ Press the blue button `退出` could exit the software:
 
 ## Feedback
 
-Welcome to [open issue](https://github.com/Cubicise-Medical/G020/issues) on this project to help us make improve for this software, or you can see the [existing issues](https://github.com/Cubicise-Medical/G020/issues).
+Welcome to [open issue]() on this project to help us make improve for this software, or you can see the [existing issues]().
 
 ## Participate
 
