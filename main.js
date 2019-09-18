@@ -7,7 +7,7 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 680,
     height: 410,
     autoHideMenuBar: true,
     frame: true,
