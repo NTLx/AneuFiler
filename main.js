@@ -8,7 +8,7 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 400,
+    height: 410,
     autoHideMenuBar: true,
     frame: true,
     transparent: false,
