@@ -1,98 +1,177 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>AneuFiler</title>
-    <script>
-      if (typeof module === 'object') {window.module = module; module = undefined;}
-    </script>
-    <script src="jquery-3.4.1.min.js"></script>
-    <script>if (window.module) module = window.module;</script>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
+	<head>
+		<meta charset="UTF-8">
+		<title>AneuFiler</title>
+		<script src="node_modules/mdui/dist/js/mdui.min.js"></script>
+		<link rel="stylesheet" href="node_modules/mdui/dist/css/mdui.min.css">
+	</head>
+	<body class="mdui-theme-primary-indigo mdui-bottom-nav-fixed">
+		<div class="mdui-tab mdui-tab-centered mdui-tab-full-width" mdui-tab>
+			<a href="#tab1" class="mdui-ripple mdui-tab-active" onmousedown="mOver1(this)"><i id="tab1_icon" class="mdui-icon material-icons">&#xe24d;</i></a>
+			<a href="#tab2" class="mdui-ripple" onmousedown="mOver2(this)"><i id="tab2_icon" class="mdui-icon material-icons">&#xe8b8;</i></a>
+		</div>
+		<div id="tab1" class="mdui-p-a-1">
+			<div id="holder" class="mdui-valign mdui-hoverable mdui-ripple mdui-shadow-1 mdui-m-a-2 mdui-color-theme mdui-img-rounded" style="height: 200px;">
+				<p class="mdui-center"><i class="mdui-icon material-icons">&#xe226;</i>文件处理区</p>
+			</div>
+			<div class="mdui-m-x-2 mdui-m-y-4">
+				<button class="mdui-btn mdui-ripple mdui-color-orange mdui-btn-raised mdui-float-left" onclick="window.open('https://github.com/NTLx/AneuFiler')"><i class="mdui-icon material-icons">&#xe8fd;</i>帮助</button>
+				<button class="mdui-btn mdui-ripple mdui-color-teal mdui-btn-raised mdui-float-right" onclick="javascript:window.close()"><i class="mdui-icon material-icons">&#xe879;</i>退出</button>
+			</div>
+		</div>
+		<div id="tab2" class="mdui-p-a-3">
+			<div class="mdui-valign mdui-center mdui-p-a-3">
+			<label class="mdui-switch mdui-center">
+				<input id="sample_out" type="checkbox" checked/>
+				<i class="mdui-switch-icon"></i>
+				<span class="mdui-m-a-1">按样本输出</span>
+			</label>
+			</div>
+			<div class="mdui-valign mdui-center mdui-p-a-3">
+				<label class="mdui-center">选择输出格式</label>
+			</div>
+			<div class="mdui-valign mdui-center" style="width: 140px; height: 40px">
+				<form class="mdui-center mdui-p-a-1">
+					<label class="mdui-radio mdui-center">
+						<input id="utf" type="radio" name="group1"/>
+						<i class="mdui-radio-icon"></i>UTF-8
+					</label>
+					<label class="mdui-radio mdui-center">
+						<input id="gbk" type="radio" name="group1" checked/>
+						<i class="mdui-radio-icon"></i>GBK
+					</label>
+				</form>
+			</div>
+		</div>
 
-    <span style="cursor:pointer">
-      <div id="holder" class="dropify-wrapper">
-        <div id="message" class="dropify-message">
-          点击或将文件拖拽到此区域处理
-        </div>
-      </div>
-    </span>
+		<!-- <div class="mdui-bottom-nav mdui-bottom-nav-text-auto mdui-color-brown">
+			<a href="#tab1" class="mdui-ripple mdui-ripple-white mdui-bottom-nav-active">
+				<i class="mdui-icon material-icons">&#xe24d;</i>
+				<label>分析</label>
+			</a>
+			<a href="#tab2" class="mdui-ripple mdui-ripple-white">
+				<i class="mdui-icon material-icons">&#xe8b8;</i>
+				<label>设置</label>
+			</a>
+		</div>
+		<div id="tab1" class="mdui-p-a-1">
+			<div id="holder" class="mdui-valign mdui-hoverable mdui-ripple mdui-shadow-1 mdui-m-a-2 mdui-color-theme mdui-img-rounded" style="height: 200px;">
+				<p class="mdui-center"><i class="mdui-icon material-icons">&#xe226;</i>文件处理区</p>
+			</div>
+			<div class="mdui-m-x-2 mdui-m-y-4">
+				<button class="mdui-btn mdui-ripple mdui-color-orange mdui-btn-raised mdui-float-left" onclick="window.open('https://github.com/NTLx/AneuFiler')"><i class="mdui-icon material-icons">&#xe8fd;</i>帮助</button>
+				<button class="mdui-btn mdui-ripple mdui-color-teal mdui-btn-raised mdui-float-right" onclick="javascript:window.close()"><i class="mdui-icon material-icons">&#xe879;</i>退出</button>
+			</div>
+		</div>
+		<div id="tab2" class="mdui-p-a-3">
+			<div class="mdui-valign mdui-center mdui-p-a-3">
+			<label class="mdui-switch mdui-center">
+				<input id="sample_out" type="checkbox"/>
+				<i class="mdui-switch-icon"></i>
+				<span class="mdui-m-a-1">按样本输出</span>
+			</label>
+			</div>
+			<div class="mdui-valign mdui-center mdui-p-a-3">
+				<label class="mdui-center">选择输出格式</label>
+			</div>
+			<div class="mdui-valign mdui-center" style="width: 140px; height: 40px">
+				<form class="mdui-center mdui-p-a-1">
+					<label class="mdui-radio mdui-center">
+						<input id="utf" type="radio" name="group1"/>
+						<i class="mdui-radio-icon"></i>UTF-8
+					</label>
+					<label class="mdui-radio mdui-center">
+						<input id="gbk" type="radio" name="group1" checked/>
+						<i class="mdui-radio-icon"></i>GBK
+					</label>
+				</form>
+			</div>
+		</div> -->
 
-    <div class="container">
-      <div class="switch-box is-danger">
-        <input id="danger" class="switch-box-input" type="checkbox" />
-        <label for="danger" class="switch-box-slider"></label>
-        <label for="danger" class="switch-box-label">按样本输出</label>
-      </div>
-    </div>
+		<script>
+			// var router = require(path.join(__dirname,'renderer.js'))
+			var $$ = mdui.JQ;
+			var switch_status=0;
+			var out_status=function () {
+				if ($$('#sample_out').is(':checked')) { console.log("Sample split output is on"); mdui.snackbar({ message: '输出将会按样本拆分' }); switch_status=1; }
+				else { console.log("Sample split output is off"); mdui.snackbar({ message: '每个输入文件将只输出一个结果文件' }); switch_status=0; }
+			}
+			$$('#sample_out').on('click', out_status);
+			var Encoding="GBK";
+			var encod_status=function () {
+				if ($$('#utf').is(':checked')) { console.log("Output set UTF-8 Encode"); mdui.snackbar({ message: '输出文件将以 UTF-8 格式编码' }); Encoding="UTF8"; }
+				if ($$('#gbk').is(':checked')) { console.log("Output set UTF-8 Encode"); mdui.snackbar({ message: '输出文件将以 GBK 格式编码' }); Encoding="GBK"; }
+			}
+			$$('#utf').on('click', encod_status);
+			$$('#gbk').on('click', encod_status);
 
-    <div style="text-align:right">
-      <button class="button button1" onclick="window.open('https://github.com/NTLx/AneuFiler')">帮助</button>
-      <button class="button button2" onclick="javascript:window.close()">退出</button>
-    </div>
+			function mOver1(obj){ mdui.snackbar({ message: '进入分析面板', timeout: 1000})}
+			function mOver2(obj){ mdui.snackbar({ message: '进入设置面板', timeout: 1000})}
 
-    <script>
-      var switch_status=0;
-      $(document).ready(function(){
-        $("#danger").on('click', function(){ clickSwitch() });
-        var clickSwitch = function() {
-          if ($("#danger").is(':checked')) {
-            console.log("在ON的状态下");
-            switch_status=1;
-          } else {
-            console.log("在OFF的状态下");
-            switch_status=0;
-          }
-        };
-      });
-      const router = require('./renderer.js')
-      // event: drag file(s) to window
-      const holder = document.getElementById('holder')
-      holder.ondragover = () => {
-        return false;
-      }
-      holder.ondragleave = holder.ondragend = () => {
-        return false;
-      }
-      holder.ondrop = (e) => {
-        e.preventDefault()
-        for (let f of e.dataTransfer.files) {
-          console.log('File(s) you dragged here: ', f.path)
-          router.start(f.path,switch_status);
-          document.getElementById("message").innerHTML = "请在输入文件所在目录内查看输出结果<br>可继续点击或将文件拖拽到此区域处理";
-        }
-        return false;
-      }
+			var path = require('path');
+			var exec = require("child_process").execFile;
+			function start(file_path,Encoding,switch_status) {
+				console.log("Request handler 'start' was called.");
+				var file_log=file_path+".log";
+				var exe_file;
+				if (process.platform === 'darwin') { exe_file = path.join(__dirname,"data_format_darwin_dev"); }
+				if (process.platform === 'win32') { exe_file = path.join(__dirname,"data_format_win32_dev"); }
+				exec(exe_file,[file_path,Encoding,switch_status], function (error, stdout, stderr) {
+					if (error || stderr) {
+						var notice="[WARNING] 输入文件 "+file_path+" 处理有误，请检查日志文件";
+						mdui.snackbar({ message: notice, position: 'left-top' });
+						console.log("error:\n"+error);
+						console.log("stderr:\n"+stderr);
+					}
+					else if (stdout) {
+						var notice="输入文件 "+file_path+" 处理完成";
+						mdui.snackbar({ message: notice });
+						console.log("stdout:\n"+stdout);
+					}
+				});
+			}
 
-      // event: click to open file manager
-      const os = require('os');
-      let default_path=os.homedir();
-      function showOpenDialogHandler() {
-        var options = {
-          defaultPath: default_path,
-          filters: [
-            { name: 'RawData', extensions: ['txt','csv'] }
-          ],
-          properties: ['openFile']
-        }
-        dialog.showOpenDialog(options, (fileNames) => {
-          // fileNames is an array that contains all the selected
-          if (!fileNames[0]) {
-            console.log("No file selected");
-            document.getElementById("message").innerHTML = "未选择任何文件，可继续选择";
-            return;
-          } else {
-            console.log("Select file: "+fileNames[0]);
-            router.start(fileNames[0],switch_status);
-            document.getElementById("message").innerHTML = "请在输入文件所在目录内查看输出结果<br>可继续点击或将文件拖拽到此区域处理";
-          }
-        });
-      }
-      const {dialog} = require('electron').remote;
-      const fileManagerBtn = document.getElementById('holder')
-      fileManagerBtn.addEventListener('click', showOpenDialogHandler)
-    </script>
-  </body>
+			// event: drag file(s) to window
+			const holder = document.getElementById('holder');
+			holder.ondragover = () => { return false; }
+			holder.ondragleave = holder.ondragend = () => { return false; }
+			holder.ondrop = (e) => {
+				e.preventDefault()
+				for (let f of e.dataTransfer.files) {
+					console.log('File(s) you dragged here: ', f.path)
+					start(f.path,Encoding,switch_status);
+				}
+				return false;
+			}
+
+			// event: click to open file manager
+			const os = require('os');
+			let default_path=os.homedir();
+			function showOpenDialogHandler() {
+			var options = {
+				defaultPath: default_path,
+				filters: [
+				{ name: 'RawData', extensions: ['txt','csv'] }
+				],
+				properties: ['openFile']
+			}
+			dialog.showOpenDialog(options, (fileNames) => {
+				// fileNames is an array that contains all the selected
+				// but multi selection was not function yet
+				if (!fileNames[0]) {
+					console.log("No file selected");
+					mdui.snackbar({ message: '未选择任何文件' });
+					return;
+				} else {
+					console.log("Select file: "+fileNames[0]);
+					start(fileNames[0],Encoding,switch_status);
+				}
+			});
+			}
+			const {dialog} = require('electron').remote;
+			const fileManagerBtn = document.getElementById('holder')
+			fileManagerBtn.addEventListener('click', showOpenDialogHandler)
+		</script>
+	</body>
 </html>

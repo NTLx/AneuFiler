@@ -7,13 +7,13 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 600,
-    height: 280,
+    width: 800,
+    height: 400,
     autoHideMenuBar: true,
     frame: true,
     transparent: false,
     resizable: true,
-    alwaysOnTop: false, // [true] has bad experience on windows
+    alwaysOnTop: false, // [true] had bad experience on windows
     webPreferences: {
       nodeIntegration: true
     }

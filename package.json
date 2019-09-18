@@ -1,7 +1,7 @@
 {
   "name": "aneufiler",
   "author": "NTLx",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "AneuFiler",
   "license": "GPL-3.0",
   "repository": "https://github.com/Cubicise-Medical/G020.git",
@@ -38,7 +38,7 @@
       "target": [
         "dmg"
       ],
-      "icon": "build/Icon.icns"
+      "icon": "icons/Icon.icns"
     },
     "dmg": {
       "title": "AneuFiler",
@@ -50,5 +50,8 @@
         "nsis"
       ]
     }
+  },
+  "dependencies": {
+    "mdui": "^0.4.3"
   }
 }
