@@ -73,6 +73,8 @@
 
 > 输出文件夹不会改变。
 
+为兼容 `Excel` ，默认输出编码格式为 `GBK` ；为获得更广泛的兼容性，可手动修改为 `UTF-8` 。
+
 ## 反馈
 
 如在本软件的使用过程中有任何意见或建议，欢迎 [提出](https://github.com/NTLx/AneuFiler/issues/new/choose)，也可以 [查看留言](https://github.com/NTLx/AneuFiler/issues) 。
