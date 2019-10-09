@@ -33,22 +33,24 @@
       "buildResources": "build",
       "output": "dist"
     },
-    "mac": {
-      "category": "public.app-category.developer-tools",
-      "target": [
-        "dmg"
-      ],
-      "icon": "icons/Icon.icns"
-    },
     "dmg": {
       "title": "AneuFiler",
       "icon": "build/Icon.icns"
     },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": ["dmg"],
+      "icon": "icons/Icon.icns",
+      "artifactName": "${productName}.v${version}.MacOS.${ext}"
+    },
     "win": {
       "target": [
-        "portable",
-        "nsis"
-      ]
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "artifactName": "${productName}.v${version}.Win_Portable.${ext}"
     }
   },
   "dependencies": {
