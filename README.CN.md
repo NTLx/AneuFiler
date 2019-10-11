@@ -11,9 +11,9 @@
 当前发布版本为 [`v0.0.3`](https://github.com/NTLx/AneuFiler/releases/tag/v0.0.3) ， `Pre-release` 版本的核心算法尚未完善，不建议用于实际生产。
 
 > 版本号发布格式说明：
-> 
+>
 > 版本号以 `.` 符号分割为 3 个区域： v X.Y.Z
-> 
+>
 > - X 表示互不兼容的版本号
 > - Y 表示重大更新版本号（如增加新的重大功能）
 > - Z 表示累积更新、优化、bug修复等版本号
@@ -78,6 +78,14 @@
 ## 反馈
 
 如在本软件的使用过程中有任何意见或建议，欢迎 [提出](https://github.com/NTLx/AneuFiler/issues/new/choose)，也可以 [查看留言](https://github.com/NTLx/AneuFiler/issues) 。
+
+## 更多功能
+
+如果你还想让 `AneuFiler` 支持新特性，请使用 [FeatHub](https://feathub.com/NTLx/AneuFiler) 投票：
+
+[![Feature Requests](https://cloud.githubusercontent.com/assets/390379/10127973/045b3a96-6560-11e5-9b20-31a2032956b2.png)](https://feathub.com/NTLx/AneuFiler)
+
+[![Feature Requests](https://feathub.com/NTLx/AneuFiler?format=svg)](https://feathub.com/NTLx/AneuFiler)
 
 ## 参与
 

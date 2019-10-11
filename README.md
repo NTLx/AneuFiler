@@ -11,9 +11,9 @@
 Current release is [`v0.0.3`](https://github.com/NTLx/AneuFiler/releases/tag/v0.0.3), `Pre-release` was not recommended for actual production.
 
 > Version introduction:
-> 
+>
 > For example: v X.Y.Z
-> 
+>
 > - X: means incompatible version
 > - Y: indicates a major update version number (such as adding a new major feature)
 > - Z: indicates cumulative version, optimization, bug fix, etc.
@@ -75,6 +75,14 @@ Mainly for windows users, the default encode was set to `GBK` so that `Excel` (f
 ## Feedback
 
 Welcome to [open issue](https://github.com/NTLx/AneuFiler/issues/new/choose) on this project to help us make improve for this software, or you can see the [existing issues](https://github.com/NTLx/AneuFiler/issues).
+
+## More Feature
+
+Suggest a new feature by [FeatHub](https://feathub.com/NTLx/AneuFiler)
+
+[![Feature Requests](https://cloud.githubusercontent.com/assets/390379/10127973/045b3a96-6560-11e5-9b20-31a2032956b2.png)](https://feathub.com/NTLx/AneuFiler)
+
+[![Feature Requests](https://feathub.com/NTLx/AneuFiler?format=svg)](https://feathub.com/NTLx/AneuFiler)
 
 ## Participate
 
