@@ -8,7 +8,7 @@
 - 基于 [electron-quick-start](https://github.com/electron/electron-quick-start) 和 [MDUI](https://github.com/zdhxiong/mdui) 项目搭建用户界面
 - 核心算法模块不开源
 
-当前发布版本为 [`v0.0.3`](https://github.com/NTLx/AneuFiler/releases/tag/v0.0.3) ， `Pre-release` 版本的核心算法尚未完善，不建议用于实际生产。
+当前发布版本为 [`v0.1.0`](https://github.com/NTLx/AneuFiler/releases/tag/v0.1.0) ， `Pre-release` 版本的核心算法尚未完善，不建议用于实际生产。
 
 > 版本号发布格式说明：
 >
@@ -20,17 +20,13 @@
 
 ## 软件安装包
 
-目前提供适用于 Windows（64位）和 Mac OS X 系统的发行版。
+目前提供适用于（64位）Windows 和 Mac OS X 系统的发行版。
 
 ### Windows
 
 在 Windows 系统下可直接运行 `Portable` 版程序，无需安装。
 
-[Portable 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.0.3/AneuFiler.v0.0.3.win64.Portable.exe)
-
-也可以使用安装版本：双击软件包，安装后即可使用。
-
-[Installer 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.0.3/AneuFiler.v0.0.3.win64.Installer.exe)
+[Portable 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.1.0/AneuFiler.v0.1.0.Win_Portable.exe)
 
 ### Mac OS
 
@@ -38,7 +34,7 @@
 
 ![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190917162246.png)
 
-[Mac OS 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.0.3/AneuFiler.v0.0.3.macOS.dmg)
+[Mac OS 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.1.0/AneuFiler.v0.1.0.MacOS.dmg)
 
 ## 软件使用
 

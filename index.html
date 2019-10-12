@@ -45,50 +45,6 @@
 			</div>
 		</div>
 
-		<!-- <div class="mdui-bottom-nav mdui-bottom-nav-text-auto mdui-color-brown">
-			<a href="#tab1" class="mdui-ripple mdui-ripple-white mdui-bottom-nav-active">
-				<i class="mdui-icon material-icons">&#xe24d;</i>
-				<label>分析</label>
-			</a>
-			<a href="#tab2" class="mdui-ripple mdui-ripple-white">
-				<i class="mdui-icon material-icons">&#xe8b8;</i>
-				<label>设置</label>
-			</a>
-		</div>
-		<div id="tab1" class="mdui-p-a-1">
-			<div id="holder" class="mdui-valign mdui-hoverable mdui-ripple mdui-shadow-1 mdui-m-a-2 mdui-color-theme mdui-img-rounded" style="height: 200px;">
-				<p class="mdui-center"><i class="mdui-icon material-icons">&#xe226;</i>文件处理区</p>
-			</div>
-			<div class="mdui-m-x-2 mdui-m-y-4">
-				<button class="mdui-btn mdui-ripple mdui-color-orange mdui-btn-raised mdui-float-left" onclick="window.open('https://github.com/NTLx/AneuFiler')"><i class="mdui-icon material-icons">&#xe8fd;</i>帮助</button>
-				<button class="mdui-btn mdui-ripple mdui-color-teal mdui-btn-raised mdui-float-right" onclick="javascript:window.close()"><i class="mdui-icon material-icons">&#xe879;</i>退出</button>
-			</div>
-		</div>
-		<div id="tab2" class="mdui-p-a-3">
-			<div class="mdui-valign mdui-center mdui-p-a-3">
-			<label class="mdui-switch mdui-center">
-				<input id="sample_out" type="checkbox"/>
-				<i class="mdui-switch-icon"></i>
-				<span class="mdui-m-a-1">按样本输出</span>
-			</label>
-			</div>
-			<div class="mdui-valign mdui-center mdui-p-a-3">
-				<label class="mdui-center">选择输出格式</label>
-			</div>
-			<div class="mdui-valign mdui-center" style="width: 140px; height: 40px">
-				<form class="mdui-center mdui-p-a-1">
-					<label class="mdui-radio mdui-center">
-						<input id="utf" type="radio" name="group1"/>
-						<i class="mdui-radio-icon"></i>UTF-8
-					</label>
-					<label class="mdui-radio mdui-center">
-						<input id="gbk" type="radio" name="group1" checked/>
-						<i class="mdui-radio-icon"></i>GBK
-					</label>
-				</form>
-			</div>
-		</div> -->
-
 		<script>
 			// var router = require(path.join(__dirname,'renderer.js'))
 			var $$ = mdui.JQ;
@@ -115,11 +71,11 @@
 				console.log("Request handler 'start' was called.");
 				var file_log=file_path+".log";
 				var exe_file;
-				if (process.platform === 'darwin') { exe_file = path.join(__dirname,"data_format_darwin_dev"); }
-				if (process.platform === 'win32') { exe_file = path.join(__dirname,"data_format_win32_dev"); }
-				exec(exe_file,[file_path,Encoding,switch_status], function (error, stdout, stderr) {
+				if (process.platform === 'darwin') { exe_file = path.join(__dirname,"data_process"); }
+				if (process.platform === 'win32') { exe_file = path.join(__dirname,"data_process_win.exe"); }
+				exec(exe_file,['-i',file_path,'-e',Encoding,'-s',switch_status], function (error, stdout, stderr) {
 					if (error || stderr) {
-						var notice="[WARNING] 输入文件 "+file_path+" 处理有误，请检查日志文件";
+						var notice="[WARNING] 输入文件 "+file_path+" 处理有误";
 						mdui.snackbar({ message: notice, position: 'left-top' });
 						console.log("error:\n"+error);
 						console.log("stderr:\n"+stderr);

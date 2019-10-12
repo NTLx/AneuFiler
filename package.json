@@ -1,7 +1,7 @@
 {
   "name": "aneufiler",
   "author": "NTLx",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "AneuFiler",
   "license": "GPL-3.0",
   "repository": "https://github.com/Cubicise-Medical/G020.git",
@@ -21,8 +21,8 @@
     "appId": "AneuFiler.app",
     "productName": "AneuFiler",
     "files": [
-      "data_format_darwin_dev",
-      "data_format_win32_dev",
+      "data_process",
+      "data_process_win.exe",
       "main.js",
       "index.html",
       "renderer.js",
