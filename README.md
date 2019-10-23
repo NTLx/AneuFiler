@@ -28,6 +28,8 @@ Suitable for (x64 platform) Windows and Mac OS X.
 
 [Download Portable for win](https://github.com/NTLx/AneuFiler/releases/download/v0.1.1/AneuFiler.v0.1.1.Win_Portable.exe)
 
+[Download mirror](https://gitee.com/lx3325360/AneuFiler/releases/v0.1.1) for China user.
+
 ### Mac OS
 
 Move app to `Application` :

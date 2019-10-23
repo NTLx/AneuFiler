@@ -28,6 +28,8 @@
 
 [Portable 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.1.1/AneuFiler.v0.1.1.Win_Portable.exe)
 
+若以上连接效果不佳，请尝试使用 [下载镜像](https://gitee.com/lx3325360/AneuFiler/releases/v0.1.1)
+
 ### Mac OS
 
 在 Mac OS X 系统下，双击安装包，将软件包移动至 `应用程序` 文件夹内即可使用：
