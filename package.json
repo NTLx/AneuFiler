@@ -47,7 +47,7 @@
       "target": [
         {
           "target": "portable",
-          "arch": ["x64"]
+          "arch": ["ia32"]
         }
       ],
       "artifactName": "${productName}.v${version}.Win_Portable.${ext}"

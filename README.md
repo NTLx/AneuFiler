@@ -20,7 +20,9 @@ Current release is [`v0.1.1`](https://github.com/NTLx/AneuFiler/releases/tag/v0.
 
 ## Installation
 
-Suitable for (x64 platform) Windows and Mac OS X.
+Suitable for Mac OS X (x64 platform) and Windows.
+
+> The package for Windows is ia32, will be functional both x86 and x64 platform.
 
 ### Windows
 

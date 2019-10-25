@@ -20,7 +20,9 @@
 
 ## 软件安装包
 
-目前提供适用于（64位）Windows 和 Mac OS X 系统的发行版。
+目前提供适用于 Mac OS X（64位）和 Windows 系统的发行版。
+
+> Windows 版软件为 32 位，可在 32 位和 64 位 Windows 系统上运行。
 
 ### Windows
 
