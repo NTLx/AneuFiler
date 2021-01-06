@@ -56,5 +56,6 @@
   },
   "dependencies": {
     "mdui": "^1.0.1"
+
   }
 }
