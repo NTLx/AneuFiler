@@ -1,3 +1,4 @@
+
 const {app, BrowserWindow} = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -15,7 +16,9 @@ function createWindow () {
     resizable: true,
     alwaysOnTop: false, // [true] had bad experience on windows
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation:false,
+      enableRemoteModule:true //ensure renderer.js can be used normally require('electron').remote
     }
   })
 

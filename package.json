@@ -7,7 +7,8 @@
   "repository": "https://github.com/Cubicise-Medical/G020.git",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist":"electron-builder --win --ia32"
   },
   "keywords": [
     "Electron",
@@ -15,7 +16,7 @@
     "AneuFiler"
   ],
   "devDependencies": {
-    "electron": "^6.0.9"
+    "electron": "^11.1.1"
   },
   "build": {
     "appId": "AneuFiler.app",
@@ -54,6 +55,6 @@
     }
   },
   "dependencies": {
-    "mdui": "^0.4.3"
+    "mdui": "^1.0.1"
   }
 }
