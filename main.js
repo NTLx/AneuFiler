@@ -1,3 +1,10 @@
+/*
+ * @Author: whf
+ * @Date: 2021-01-06 10:01:40
+ * @LastEditTime: 2021-01-06 14:38:11
+ * @FilePath: \AneuFiler\main.js
+ */
+
 const {app, BrowserWindow} = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -15,7 +22,9 @@ function createWindow () {
     resizable: true,
     alwaysOnTop: false, // [true] had bad experience on windows
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation:false,//slove the alarm problem
+      enableRemoteModule:true //ensure renderer.js can be used normally require('electron').remote
     }
   })
 
