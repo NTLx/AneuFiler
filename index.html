@@ -36,7 +36,7 @@
 					<i class="mdui-icon material-icons">&#xe8fd;</i>帮助
 				</button>
 				<button
-					class="mdui-btn mdui-ripple mdui-color-teal mdui-btn-raised mdui-float-right"
+					class="mdui-btn mdui-ripple mdui-color-teal mdui-btn-raised mdui-float-right" id="prompt"
 					mdui-dialog="{target:'#closed'}"
 				>
 					<i class="mdui-icon material-icons">&#xe879;</i>退出
@@ -63,6 +63,13 @@
 					<input id="sample_out" type="checkbox" />
 					<i class="mdui-switch-icon"></i>
 					<span class="mdui-m-a-1">按样本输出</span>
+				</label>
+			</div>
+			<div class="mdui-valign mdui-center mdui-p-a-3">
+				<label class="mdui-switch mdui-center">
+					<input id="closebox" type="checkbox"/>
+					<i class="mdui-switch-icon"></i>
+					<span class="mdui-m-a-1">关闭退出提示窗口</span>
 				</label>
 			</div>
 			<div class="mdui-valign mdui-center mdui-p-a-3">
@@ -95,7 +102,29 @@
 					switch_status = 0;
 				}
 			};
+			var box_status= function(){
+				if($("#closebox").is(":checked")){
+					console.log("The exit prompt is closed");
+					mdui.snackbar({ message: "关闭退出提示框" });
+					closeBox()
+				}else {
+					console.log("The exit prompt is opend")
+					mdui.snackbar({ message: "打开退出提示框" });
+					openBox()
+				}
+			}
 			$("#sample_out").on("click", out_status);
+			$("#closebox").on("click",box_status)
+			function closeBox(){
+				const prompt = document.getElementById('prompt')
+				prompt.removeAttribute('mdui-dialog')
+				prompt.setAttribute('onclick','javascript:window.close()')
+			}
+			function openBox(){
+				const prompt = document.getElementById('prompt')
+				prompt.removeAttribute('onclick')
+				prompt.setAttribute('mdui-dialog','{target:"#closed"}')
+			}
 			var Encoding = "GBK";
 			var encod_status = function () {
 				if ($("#utf").is(":checked")) {
