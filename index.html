@@ -36,7 +36,8 @@
 					<i class="mdui-icon material-icons">&#xe8fd;</i>帮助
 				</button>
 				<button
-					class="mdui-btn mdui-ripple mdui-color-teal mdui-btn-raised mdui-float-right" id="prompt"
+					class="mdui-btn mdui-ripple mdui-color-teal mdui-btn-raised mdui-float-right"
+					id="prompt"
 					mdui-dialog="{target:'#closed'}"
 				>
 					<i class="mdui-icon material-icons">&#xe879;</i>退出
@@ -67,7 +68,7 @@
 			</div>
 			<div class="mdui-valign mdui-center mdui-p-a-3">
 				<label class="mdui-switch mdui-center">
-					<input id="closebox" type="checkbox"/>
+					<input id="closebox" type="checkbox" />
 					<i class="mdui-switch-icon"></i>
 					<span class="mdui-m-a-1">关闭退出提示窗口</span>
 				</label>
@@ -102,28 +103,28 @@
 					switch_status = 0;
 				}
 			};
-			var box_status= function(){
-				if($("#closebox").is(":checked")){
+			var box_status = function () {
+				if ($("#closebox").is(":checked")) {
 					console.log("The exit prompt is closed");
 					mdui.snackbar({ message: "关闭退出提示框" });
-					closeBox()
-				}else {
-					console.log("The exit prompt is opend")
+					closeBox();
+				} else {
+					console.log("The exit prompt is opend");
 					mdui.snackbar({ message: "打开退出提示框" });
-					openBox()
+					openBox();
 				}
-			}
+			};
 			$("#sample_out").on("click", out_status);
-			$("#closebox").on("click",box_status)
-			function closeBox(){
-				const prompt = document.getElementById('prompt')
-				prompt.removeAttribute('mdui-dialog')
-				prompt.setAttribute('onclick','javascript:window.close()')
+			$("#closebox").on("click", box_status);
+			function closeBox() {
+				const prompt = document.getElementById("prompt");
+				prompt.removeAttribute("mdui-dialog");
+				prompt.setAttribute("onclick", "javascript:window.close()");
 			}
-			function openBox(){
-				const prompt = document.getElementById('prompt')
-				prompt.removeAttribute('onclick')
-				prompt.setAttribute('mdui-dialog','{target:"#closed"}')
+			function openBox() {
+				const prompt = document.getElementById("prompt");
+				prompt.removeAttribute("onclick");
+				prompt.setAttribute("mdui-dialog", '{target:"#closed"}');
 			}
 			var Encoding = "GBK";
 			var encod_status = function () {
@@ -209,12 +210,12 @@
 					.showOpenDialog(options)
 					.then((result) => {
 						console.log("Select file" + result.filePaths);
-						console.log(result.filePaths)
-						if(!result.filePaths[0]){
+						console.log(result.filePaths);
+						if (!result.filePaths[0]) {
 							console.log("No file selected");
-					mdui.snackbar({ message: '未选择任何文件' });
-							return
-						}else{
+							mdui.snackbar({ message: "未选择任何文件" });
+							return;
+						} else {
 							start(result.filePaths, Encoding, switch_status);
 						}
 					})
@@ -222,7 +223,7 @@
 						console.log(err);
 						console.log("No file selected");
 					});
-			}	
+			}
 		</script>
 	</body>
 </html>
