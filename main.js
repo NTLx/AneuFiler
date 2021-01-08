@@ -1,7 +1,7 @@
 /*
  * @Author: whf
  * @Date: 2021-01-06 10:01:40
- * @LastEditTime: 2021-01-08 13:21:02
+ * @LastEditTime: 2021-01-08 14:04:16
  * @FilePath: \AneuFiler\main.js
  */
 
@@ -32,7 +32,7 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () { mainWindow = null })
