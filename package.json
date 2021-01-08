@@ -22,8 +22,8 @@
     "appId": "AneuFiler.app",
     "productName": "AneuFiler",
     "files": [
-      "data_process",
-      "data_process_win.exe",
+      "analysis.mac",
+      "analysis.exe",
       "main.js",
       "index.html",
       "renderer.js",
