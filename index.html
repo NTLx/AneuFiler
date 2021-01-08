@@ -43,7 +43,7 @@
 				</button>
 				<div class="mdui-dialog" id="closed">
 					<div class="mdui-dialog-title">你确定要退出该窗口吗？</div>
-					<div class="mdui-dialog-content">您将会丢失你的所有数据！</div>
+					<div class="mdui-dialog-content"></div>
 					<div class="mdui-dialog-actions">
 						<button class="mdui-btn mdui-ripple" mdui-dialog-close>取消</button>
 						<button
@@ -133,7 +133,7 @@
 					Encoding = "UTF8";
 				}
 				if ($("#gbk").is(":checked")) {
-					console.log("Output set UTF-8 Encode");
+					console.log("Output set GBK Encode");
 					mdui.snackbar({ message: "输出文件将以 GBK 格式编码" });
 					Encoding = "GBK";
 				}
@@ -193,7 +193,6 @@
 				}
 				return false;
 			};
-
 			// event: click to open file manager
 			const os = require("os");
 			let default_path = os.homedir();
@@ -210,13 +209,20 @@
 					.showOpenDialog(options)
 					.then((result) => {
 						console.log("Select file" + result.filePaths);
-						start(result.filePaths, Encoding, switch_status);
+						console.log(result.filePaths)
+						if(!result.filePaths[0]){
+							console.log("No file selected");
+					mdui.snackbar({ message: '未选择任何文件' });
+							return
+						}else{
+							start(result.filePaths, Encoding, switch_status);
+						}
 					})
 					.catch((err) => {
 						console.log(err);
 						console.log("No file selected");
 					});
-			}
+			}	
 		</script>
 	</body>
 </html>
