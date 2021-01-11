@@ -8,7 +8,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist":"electron-builder --win --ia32"
+    "dist": "electron-builder --win --ia32"
   },
   "keywords": [
     "Electron",
@@ -40,7 +40,9 @@
     },
     "mac": {
       "category": "public.app-category.developer-tools",
-      "target": ["dmg"],
+      "target": [
+        "dmg"
+      ],
       "icon": "icons/Icon.icns",
       "artifactName": "${productName}.v${version}.MacOS.${ext}"
     },
@@ -48,7 +50,9 @@
       "target": [
         {
           "target": "portable",
-          "arch": ["ia32"]
+          "arch": [
+            "ia32"
+          ]
         }
       ],
       "artifactName": "${productName}.v${version}.Win_Portable.${ext}"
