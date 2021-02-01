@@ -7,9 +7,9 @@
 
 > An electron-vue project of AneuFiler
 
-`AneuFiler` 专门用于“21、18、13和性染色体倍型检测试剂盒（荧光 PCR -毛细管电泳法）”产生数据的分析：
+`AneuFiler` 专门用于 “21、18、13 和性染色体倍型检测试剂盒（荧光 PCR - 毛细管电泳法）” 产生数据的分析：
 
-- 使用[Electon-vue](https://simulatedgreg.gitbooks.io/electron-vue/content/cn/)进行跨平台开发
+- 使用 [Electon-vue](https://simulatedgreg.gitbooks.io/electron-vue/content/cn/) 进行跨平台开发
 - 核心算法模块不开源
 ## 软件使用
 
@@ -17,7 +17,7 @@
 
 ![main window](https://cdn.jsdelivr.net/gh/Letmeouted/PicGO/Pic/Snipaste_2021-02-01_12-10-23.png)
 
-将一个或多个文件（下机数据，用默认格式导出）拖拽至 `文件处理区` 即可；也可以点击提示区域，然后选择需要处理的文件。
+将一个或多个文件（下机数据，用默认格式导出）拖拽至 ` 文件处理区 ` 即可；也可以点击提示区域，然后选择需要处理的文件。
 
 > - 仅支持 `txt` 或 `csv` 格式的输入文件；
 > - 点击方式添加文件时，一次只能选择一个文件进行处理。
@@ -28,11 +28,11 @@
 
 ### 查看帮助文档
 
-可点击主界面的橙色 `帮助` 按钮查看帮助文档。
+可点击主界面的橙色 ` 帮助 ` 按钮查看帮助文档。
 
 ### 退出程序
 
-点击主界面的红色 `退出` 按钮即可退出程序。
+点击主界面的红色 ` 退出 ` 按钮即可退出程序。
 
 ### 设置
 
@@ -40,7 +40,7 @@
 
 ![each sample output](https://cdn.jsdelivr.net/gh/Letmeouted/PicGO/Pic/Snipaste_2021-02-01_12-14-26.png)
 
-可将绿色开关 `按样本输出` 关闭：针对每一个输入文件会将结果输出到唯一一个结果文件中。
+可将绿色开关 ` 按样本输出 ` 关闭：针对每一个输入文件会将结果输出到唯一一个结果文件中。
 
 > 输出文件夹不会改变。
 
@@ -55,7 +55,7 @@
 
 ## 版本
 
-该软件另有 [Electron + mdui](https://github.com/NTLx/AneuFiler) 的版本,有需要的可以前往下载使用。
+该软件另有 [Electron + mdui](https://github.com/NTLx/AneuFiler) 的版本, 有需要的可以前往下载使用。
 ## 反馈
 
 如在本软件的使用过程中有任何意见或建议，欢迎 [提出](https://github.com/NTLx/AneuFiler/issues/new/choose)，也可以 [查看留言](https://github.com/NTLx/AneuFiler/issues) 。
