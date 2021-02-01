@@ -54,7 +54,7 @@
 
 ## Other Release
 
-该软件另有 [Electron + mdui](https://github.com/NTLx/AneuFiler) 的版本
+该软件另有 [Electron + mdui](https://github.com/NTLx/AneuFiler) 的版本,有需要的可以前往下载使用。
 ## 反馈
 
 如在本软件的使用过程中有任何意见或建议，欢迎 [提出](https://github.com/NTLx/AneuFiler/issues/new/choose)，也可以 [查看留言](https://github.com/NTLx/AneuFiler/issues) 。
