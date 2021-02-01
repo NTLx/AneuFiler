@@ -3,9 +3,10 @@
  * @Email: 1002726239@qq.com
  * @FilePath: \VueAnenuFiler\README.md
 -->
-# Aneufilervue
+# AneuFilerVue
 
 > An electron-vue project of AneuFiler
+
 `AneuFiler` 专门用于“21、18、13和性染色体倍型检测试剂盒（荧光PCR-毛细管电泳法）”产生数据的分析：
 
 - 使用[Electon-vue](https://simulatedgreg.gitbooks.io/electron-vue/content/cn/)进行跨平台开发
@@ -52,7 +53,7 @@
 
 关于界面是一些有关软件的说明以及软件的使用方法。如有不懂，可以进入该页面进行查看。
 
-## Other Release
+## 版本
 
 该软件另有 [Electron + mdui](https://github.com/NTLx/AneuFiler) 的版本,有需要的可以前往下载使用。
 ## 反馈
