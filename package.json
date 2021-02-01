@@ -22,6 +22,14 @@
     "unit": "karma start test/unit/karma.conf.js",
     "postinstall": "npm run lint:fix"
   },
+  "keywords": [
+    "Electron",
+    "Vue",
+    "Element-ui",
+    "less",
+    "Data Analysis",
+    "AneuFiler"
+  ],
   "build": {
     "productName": "AneuFilerVue",
     "appId": "AneuFilerVue.app",
