@@ -7,7 +7,7 @@
 
 > An electron-vue project of AneuFiler
 
-`AneuFiler` 专门用于“21、18、13和性染色体倍型检测试剂盒（荧光PCR-毛细管电泳法）”产生数据的分析：
+`AneuFiler` 专门用于“21、18、13和性染色体倍型检测试剂盒（荧光 PCR -毛细管电泳法）”产生数据的分析：
 
 - 使用[Electon-vue](https://simulatedgreg.gitbooks.io/electron-vue/content/cn/)进行跨平台开发
 - 核心算法模块不开源
