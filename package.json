@@ -23,7 +23,7 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "aneufilervue",
+    "productName": "AneuFilerVue",
     "appId": "AneuFilerVue.app",
     "directories": {
       "output": "build"
@@ -60,7 +60,8 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/icon.icns",
+      "artifactName": "${productName}.v${version}.MacOS.${ext}"
     },
     "win": {
       "icon": "build/icons/icon.png",
@@ -71,7 +72,8 @@
             "ia32"
           ]
         }
-      ]
+      ],
+      "artifactName":"${productName}.v${version}.Win_Portable.${ext}"
     },
     "linux": {
       "icon": "build/icons"
