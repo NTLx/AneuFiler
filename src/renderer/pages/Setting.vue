@@ -1,12 +1,12 @@
 <!--
  * @Author: Letmeouted
  * @Email: 1002726239@qq.com
- * @FilePath: \AneuFilerVue\src\renderer\pages\Setting.vue
+ * @FilePath: \VueAnenuFiler\src\renderer\pages\Setting.vue
 -->
 <template>
   <div>
     <div class="view-title">
-      AneuFiler设置区 - <i class="el-icon-document"></i>
+      AneuFiler设置区  <i class="el-icon-document"></i>
     </div>
     <div class="setting">
       <el-switch
