@@ -15,6 +15,13 @@
         <i class="el-icon-minus" @click="minimizeWindow"></i>
         <i class="el-icon-close" @click="closeWindow"></i>
       </div>
+      <div class="image">
+        <el-image
+          style="width: 140px; height: 40px"
+          :src="url"
+          @click="open('https://github.com/NTLx/AneuFiler/tree/vue')"
+        ></el-image>
+      </div>
       <el-row style="padding-top: 22px" class="main-content">
         <el-col :span="12" class="side-bar-menu">
           <el-menu
@@ -44,6 +51,9 @@
           </el-menu>
         </el-col>
       </el-row>
+      <div class="back">
+        <el-button type="danger" icon="el-icon-back" size="small" onclick="javascript:window.close()" round>退出</el-button>
+      </div>
     </el-aside>
     <el-main>
       <keep-alive>
@@ -59,7 +69,8 @@ export default {
     return {
       version: '0.0.1',
       activeIndex: '1',
-      defaultOpenIndex: []
+      defaultOpenIndex: [],
+      url: '../../../static/image1.png'
     }
   },
   created () {
@@ -84,6 +95,9 @@ export default {
     },
     closeWindow () {
       remote.getCurrentWindow().close()
+    },
+    open (link) {
+      this.$electron.shell.openExternal(link)
     },
     goTo (path) {
       this.$router.replace(path)
@@ -154,6 +168,9 @@ export default {
       }
     }
   }
+  .image {
+    margin-top: 30px;
+  }
   .side-bar-menu {
     position: fixed;
     height: 100vh;
@@ -164,7 +181,7 @@ export default {
       border-right: none;
       width: 170px;
       position: relative;
-      top: 50%;
+      top: 30%;
       transform: translateY(-50%);
     }
   }
@@ -173,6 +190,12 @@ export default {
   }
   .router-link-active {
     text-decoration: none;
+  }
+  .back{
+    position: absolute;
+    text-align: center;
+    left: 30px;
+    bottom: 30px;
   }
 }
 .el-main {
