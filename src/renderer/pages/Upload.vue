@@ -1,12 +1,12 @@
 <!--
  * @Author: Letmeouted
  * @Email: 1002726239@qq.com
- * @FilePath: \AneuFilerVue\src\renderer\pages\Upload.vue
+ * @FilePath: \VueAnenuFiler\src\renderer\pages\Upload.vue
 -->
 <template>
   <el-row>
     <el-col>
-      <div class="view-title">文件处理区-<i class="el-icon-s-order"></i></div>
+      <div class="view-title">文件处理区  <i class="el-icon-s-order"></i></div>
       <div class="upload">
         <el-upload
           class="upload-demo"
@@ -23,29 +23,10 @@
           <div class="el-upload__tip" slot="tip">
             只能上传
             <span class="font"> txt / csv </span>
-            文件
+            文件<br/>
             <span class="font">(上传文件之前请查看上传文件命名格式要求：不能含有空格，特殊符号，中文)</span>
           </div>
         </el-upload>
-      </div>
-
-      <div class="function">
-        <el-button
-          type="warning"
-          icon="el-icon-chat-line-square"
-          class="help"
-          onclick="window.open('https://github.com/NTLx/AneuFiler')"
-          round
-          >帮助</el-button
-        >
-        <el-button
-          type="danger"
-          icon="el-icon-back"
-          class="quit"
-          onclick="javascript:window.close()"
-          round
-          >退出</el-button
-        >
       </div>
     </el-col>
   </el-row>
@@ -208,6 +189,8 @@ export default {
   .el-upload-dragger {
     text-align: center;
     background-color: #3f3c37 !important;
+    width: 600px;
+    height: 200px;
     i {
       color: #eee;
     }
