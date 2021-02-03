@@ -1,13 +1,15 @@
 <!--
  * @Author: Letmeouted
  * @Email: 1002726239@qq.com
- * @FilePath: \AneuFilerVue\src\renderer\layouts\Main.vue
+ * @FilePath: \VueAnenuFiler\src\renderer\layouts\Main.vue
 -->
 <template>
   <el-container>
     <el-aside width="160px">
       <div class="fake-title-bar">
-        <div class="fake-title-bar__title">AneuFiler - {{ version }}</div>
+        <div class="fake-title-bar__title" v-if="os !== 'darwin'">
+          AneuFiler - {{ version }}
+        </div>
       </div>
       <div class="handle-bar" v-if="os !== 'darwin'">
         <i class="el-icon-minus" @click="minimizeWindow"></i>
@@ -140,7 +142,7 @@ export default {
       margin-left: 5px;
     }
     .el-icon-minus {
-      color:#eee;
+      color: #eee;
       &:hover {
         color: #409eff;
       }
@@ -161,6 +163,9 @@ export default {
     .el-menu {
       border-right: none;
       width: 170px;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
   a {
@@ -173,8 +178,20 @@ export default {
 .el-main {
   height: 100vh;
 }
-::-webkit-scrollbar{width:8px;height:8px}
-::-webkit-scrollbar-thumb{background:#61a8df;-webkit-transition:.3s;transition:.3s;border-radius: 4px;}
-::-webkit-scrollbar-thumb:hover{background-color:#37dace}
-::-webkit-scrollbar-thumb:active{background-color:#17bbaf}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #61a8df;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #37dace;
+}
+::-webkit-scrollbar-thumb:active {
+  background-color: #17bbaf;
+}
 </style>
