@@ -1,11 +1,11 @@
 <!--
  * @Author: Letmeouted
  * @Email: 1002726239@qq.com
- * @FilePath: \AneuFilerVue\src\renderer\pages\Info.vue
+ * @FilePath: \VueAnenuFiler\src\renderer\pages\Info.vue
 -->
 <template>
   <div>
-    <div class="view-title">关于软件-<i class="el-icon-info"></i></div>
+    <div class="view-title">关于软件  <i class="el-icon-info"></i></div>
     <div class="about">
       <p class="declare">软件说明:</p>
       <p class="info">
@@ -63,7 +63,6 @@ export default {
   overflow: hidden;
   box-sizing: border-box;
   width: 100%;
-  border: 1px solid #6f6f6f;
   .declare {
     font-size: 20px;
   }
