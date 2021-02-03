@@ -56,10 +56,10 @@ export default {
   color: #eee;
   font-size: 20px;
   text-align: center;
-  margin: 10px auto;
+  margin: 35px auto;
 }
 .about {
-  color: #eee;
+  color: 	#DCDCDC;
   overflow: hidden;
   box-sizing: border-box;
   width: 100%;
