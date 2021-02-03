@@ -1,7 +1,7 @@
 /*
  * @Author: Letmeouted
  * @Email: 1002726239@qq.com
- * @FilePath: \AneuFilerVue\src\main\index.js
+ * @FilePath: \VueAnenuFiler\src\main\index.js
  */
 
 'use strict'
@@ -29,8 +29,6 @@ function createWindow () {
     height: 450,
     useContentSize: true,
     width: 800,
-    maxHeight: 450,
-    maxWidth: 800,
     frame: false
   })
 
