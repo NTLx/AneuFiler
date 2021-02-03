@@ -178,9 +178,8 @@ export default {
   color: #eee;
   font-size: 20px;
   text-align: center;
-  margin: 10px auto;
+  margin: 35px auto;
 }
-
 .upload {
   text-align: center;
 }
@@ -199,20 +198,11 @@ export default {
     }
   }
   .el-upload__tip {
-    color: #eee !important;
     font-size: 15px;
+    	color:#708090;
   }
-  
-}
-.function {
-  margin-top: 20px;
-  .help {
-    position: relative;
-    left: 90px;
-  }
-  .quit {
-    position: relative;
-    left: 300px;
-  }
+  .font{
+    color:	#708090;
+  } 
 }
 </style>
