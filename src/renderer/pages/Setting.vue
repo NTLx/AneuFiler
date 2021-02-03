@@ -118,7 +118,7 @@ export default {
   color: #eee;
   font-size: 20px;
   text-align: center;
-  margin: 10px auto;
+  margin: 35px auto;
 }
 .setting {
   text-align: center;
