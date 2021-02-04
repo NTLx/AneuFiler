@@ -29,7 +29,12 @@ function createWindow () {
     height: 450,
     useContentSize: true,
     width: 800,
-    frame: false
+    frame: false,
+    webPreferences: {
+      nodeIntegration: true,
+      enableRemoteModule: true, // open remote
+      contextIsolation: false // slove the alarm problem
+    }
   })
 
   mainWindow.loadURL(winURL)
