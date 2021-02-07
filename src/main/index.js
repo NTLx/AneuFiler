@@ -29,14 +29,13 @@ function createWindow () {
     height: 450,
     useContentSize: true,
     width: 800,
-    frame: false,
+    frame: process.platform === 'darwin',
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true, // open remote
       contextIsolation: false // slove the alarm problem
     }
   })
-
   mainWindow.loadURL(winURL)
   // Open dev tools initially when in development mode
   if (process.env.NODE_ENV === 'development') {
