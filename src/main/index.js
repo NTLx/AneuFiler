@@ -30,6 +30,7 @@ function createWindow () {
     useContentSize: true,
     width: 800,
     frame: process.platform === 'darwin',
+    show: false,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true, // open remote
@@ -48,6 +49,9 @@ function createWindow () {
   }
   mainWindow.on('closed', () => {
     mainWindow = null
+  })
+  mainWindow.on('ready-to-show', () => {
+    mainWindow.show()
   })
 }
 
