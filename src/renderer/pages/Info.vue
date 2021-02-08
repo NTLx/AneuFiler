@@ -5,48 +5,69 @@
 -->
 <template>
   <div>
-    <div class="view-title">关于软件  <i class="el-icon-info"></i></div>
+    <div class="view-title">关于软件 <i class="el-icon-info"></i></div>
     <div class="about">
-      <p class="declare">软件说明:</p>
-      <p class="info">
+      <h2>帮助文档</h2>
+      <p>本文将会介绍AneuFiler软件的使用方法及一些注意事项</p>
+
+      <h3>关于AneuFiler</h3>
+      <p>
         AneuFiler专门用于“21、18、13和性染色体倍型检测试剂盒（荧光PCR-毛细管电泳法）”产生数据的分析。
       </p>
-      <p class="hint">软件使用方法:</p>
-      <p class="methods">
-        1.
-        将一个或多个文件（下机数据，用默认格式导出）拖拽至分析面板中的文件处理区
-        即可；也可以点击提示区域，然后选择需要处理的文件。
-      </p>
-      <ul>
-        <li>仅支持 txt 或 csv 格式的输入文件；</li>
 
-        <li>点击方式添加文件时，一次只能选择一个文件进行处理。</li>
+      <h3>文件要求</h3>
+      <p>文件的要求如下：</p>
+      <ul>
+        <li>文件必须为txt或csv格式</li>
+        <li>文件命名要求：不能含有空格、特殊符号、中文</li>
       </ul>
-      <p class="methods">
-        2.默认针对每一个输入文件都会按照样本名拆分输出结果到输出文件夹中。<br />
+
+      <h3>使用方法</h3>
+
+      <h5>导入文件</h5>
+      <p>导入文件有两种方式：</p>
+      <ol>
+        <li>拖拽到指定区域</li>
+        <li>点击文件处理区下面的矩形区域</li>
+      </ol>
+
+      <h5>设置面板</h5>
+      <p>输出结果设置：</p>
+      <p>
+        1、默认针对每一个输入文件都会按照样本名拆分输出结果到输出文件夹中。<br />
         输出文件夹位于每个输入文件相同的目录下。
       </p>
-      <p class="methods">
-        3.可将绿色开关（按样本输出）关闭：关闭后针对每一个输入文件会将结果输出到唯一
+
+      <p>
+        2、绿色开关（按样本输出）可以关闭：关闭后针对每一个输入文件会将结果输出到唯一
         一个结果文件中。
       </p>
       <ul>
         <li>输出文件夹不会改变。</li>
       </ul>
-      <p class="methods">
-        4.为兼容 Excel ，默认输出编码格式为 GBK
+      <p>
+        3、为兼容 Excel ，默认输出编码格式为 GBK
         ；为获得更广泛的兼容性，可手动修改为 UTF-8 。
+      </p>
+      <h3>联系</h3>
+      <p>
+        如遇软件使用上的问题，请联系
+        <a @click="openExternal('developer')" class="url">晶准开发人员</a
+        >。同时，也欢迎你提出宝贵的意见。
+      </p>
+      <p>
+        问题提交地址：
+        <a @click="openExternal('issues')" class="url">问题提交链接</a>
       </p>
     </div>
   </div>
 </template>
 
 <script>
+import { openExternal } from '../assets/js/openExternal'
 export default {
-  data () {
-    return {
-
-    }
+  methods: {
+    openExternal
   }
 }
 </script>
@@ -59,26 +80,13 @@ export default {
   margin: 35px auto;
 }
 .about {
-  color: 	#DCDCDC;
+  color: #dcdcdc;
   overflow: hidden;
   box-sizing: border-box;
   width: 100%;
-  .declare {
-    font-size: 20px;
-  }
-  .info {
-    font-size: 15px !important;
-    text-indent: 2em;
-  }
-  .hint {
-    font-size: 20px;
-  }
-  .methods {
-    font-size: 15px !important;
-    text-indent: 2em;
-  }
-  li {
-    font-size: 15px;
+  text-align: left;
+  .url{
+    color:#47a6f0
   }
 }
 </style>
