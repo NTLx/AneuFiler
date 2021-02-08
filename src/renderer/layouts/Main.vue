@@ -58,8 +58,7 @@
           size="small"
           onclick="javascript:window.close()"
           round
-          >退出</el-button
-        >
+          >退出</el-button>
       </div>
     </el-aside>
     <el-main>
