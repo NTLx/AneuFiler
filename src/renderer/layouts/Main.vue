@@ -18,7 +18,7 @@
       <div class="image">
         <el-image
           style="width: 140px; height: 40px"
-          :src="url"
+          :src="require('../../../static/image1.png')"
           @click="open('https://github.com/NTLx/AneuFiler/tree/vue')"
         ></el-image>
       </div>
@@ -52,7 +52,14 @@
         </el-col>
       </el-row>
       <div class="back">
-        <el-button type="danger" icon="el-icon-back" size="small" onclick="javascript:window.close()" round>退出</el-button>
+        <el-button
+          type="danger"
+          icon="el-icon-back"
+          size="small"
+          onclick="javascript:window.close()"
+          round
+          >退出</el-button
+        >
       </div>
     </el-aside>
     <el-main>
@@ -69,8 +76,7 @@ export default {
     return {
       version: '0.0.1',
       activeIndex: '1',
-      defaultOpenIndex: [],
-      url: '../../../static/image1.png'
+      defaultOpenIndex: []
     }
   },
   created () {
@@ -191,7 +197,7 @@ export default {
   .router-link-active {
     text-decoration: none;
   }
-  .back{
+  .back {
     position: absolute;
     text-align: center;
     left: 30px;
