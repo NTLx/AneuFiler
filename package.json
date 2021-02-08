@@ -39,7 +39,8 @@
     "files": [
       "dist/electron/**/*",
       "analysis.exe",
-      "analysis.mac"
+      "analysis.mac",
+      "image1.png"
     ],
     "asar": false,
     "extraResources": [
@@ -50,6 +51,10 @@
       {
         "from": "./static/analysis.mac",
         "to": "./analysis.mac"
+      },
+      {
+        "from":"./static/image1.png",
+        "to":"./image1.png"
       }
     ],
     "dmg": {
