@@ -86,7 +86,7 @@ export default {
       var exefile
       var oldUrl1 = path.join(__dirname, '../../../static/analysis.mac')
       var oldUrl2 = path.join(__dirname, '../../../static/analysis.exe')
-      var newUrl1 = path.join(process.cwd(), '/resources/analysis.mac')
+      var newUrl1 = path.join(process.cwd(), '/Applications/AneuFilerVue.app/Contents/Resources/analysis.mac')
       var newUrl2 = path.join(process.cwd(), '/resources/analysis.exe')
       fs.stat(oldUrl1, (err) => {
         if (err) {
@@ -103,7 +103,7 @@ export default {
               ['-i', file.path, '-e', Encoding, '-s', switchstatus],
               (error, stdout, stderr) => {
                 if (error || stderr) {
-                  const notice = '[WARNING] 输入文件 ' + file.path + ' 处理有误'// eslint-disable-line no-unused-vars
+                  const notice = '[WARNING] 输入文件 ' + file.path + ' 处理有误'
                   this.$message({
                     showClose: true,
                     message: notice,
@@ -114,8 +114,7 @@ export default {
                   console.log('error:\n' + error)
                   console.log('stderr:\n' + stderr)
                 } else if (stdout) {
-                  const notice = '输入文件 ' + file.path +
-                    ' 处理完成'
+                  const notice = '输入文件 ' + file.path + '处理完成'
                   this.$message({
                     showClose: true,
                     message: notice,
@@ -142,7 +141,7 @@ export default {
               ['-i', file.path, '-e', Encoding, '-s', switchstatus],
               (error, stdout, stderr) => {
                 if (error || stderr) {
-                  const notice = '[WARNING] 输入文件 ' + file.path + ' 处理有误'// eslint-disable-line no-unused-vars
+                  const notice = '[WARNING] 输入文件 ' + file.path + ' 处理有误'
                   this.$message({
                     showClose: true,
                     message: notice,
@@ -153,7 +152,7 @@ export default {
                   console.log('error:\n' + error)
                   console.log('stderr:\n' + stderr)
                 } else if (stdout) {
-                  const notice = '输入文件 ' + file.path + ' 处理完成'
+                  const notice = '输入文件 ' + file.path + '处理完成'
                   this.$message({
                     showClose: true,
                     message: notice,
