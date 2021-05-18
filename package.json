@@ -1,11 +1,7 @@
 {
   "name": "aneufiler",
   "author": "NTLx",
-<<<<<<< HEAD
-  "version": "0.1.3",
-=======
-  "version": "0.1.2",
->>>>>>> master
+  "version": "0.1.4",
   "description": "AneuFiler",
   "license": "GPL-3.0",
   "repository": "https://github.com/Cubicise-Medical/G020.git",
