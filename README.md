@@ -8,7 +8,7 @@
 - Based on [electron-quick-start](https://github.com/electron/electron-quick-start) and [MDUI](https://github.com/zdhxiong/mdui) project
 - core algorithm was not open source
 
-Current release is [`v0.1.4`](https://github.com/NTLx/AneuFiler/releases/tag/v0.1.4), `Pre-release` was not recommended for actual production.
+Current release is [`v0.2.0`](https://github.com/NTLx/AneuFiler/releases/tag/v0.2.0), `Pre-release` was not recommended for actual production.
 
 > Version introduction:
 >
@@ -28,9 +28,9 @@ Suitable for Mac OS X (x64 platform) and Windows.
 
 `Portable` package can run without installation.
 
-[Download Portable for win](https://github.com/NTLx/AneuFiler/releases/download/v0.1.4/AneuFiler.v0.1.4.Win_Portable.exe)
+[Download Portable for win](https://github.com/NTLx/AneuFiler/releases/download/v0.2.0/AneuFiler.v0.2.0.Win_Portable.exe)
 
-[Download mirror](https://gitee.com/lx3325360/AneuFiler/releases/v0.1.4) for China user.
+[Download mirror](https://gitee.com/lx3325360/AneuFiler/releases/v0.2.0) for China user.
 
 ### Mac OS
 
@@ -38,7 +38,7 @@ Move app to `Application` :
 
 ![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190917162246.png)
 
-[Download for Mac OS](https://github.com/NTLx/AneuFiler/releases/download/v0.1.4/AneuFiler.v0.1.4.MacOS.dmg)
+[Download for Mac OS](https://github.com/NTLx/AneuFiler/releases/download/v0.2.0/AneuFiler.v0.2.0.MacOS.dmg)
 
 ## Usage
 

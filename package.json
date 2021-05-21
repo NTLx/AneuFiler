@@ -1,7 +1,7 @@
 {
   "name": "aneufiler",
   "author": "NTLx",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "AneuFiler",
   "license": "GPL-3.0",
   "repository": "https://github.com/Cubicise-Medical/G020.git",
@@ -59,6 +59,7 @@
     }
   },
   "dependencies": {
-    "mdui": "^1.0.1"
+    "mdui": "^1.0.1",
+    "screenlog": "^0.3.0"
   }
 }
