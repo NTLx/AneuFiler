@@ -178,13 +178,10 @@
 			if (file_path.constructor === Array) {
 				file_name = file_path[0].trim()
 				fileName = file_name.substring(file_name.lastIndexOf('\\') + 1)
-				document.getElementById('restore').innerHTML += "*******************************" + '<br/>' + "当前处理文件名：" + fileName + '<br/>' + '*******************************' + '<br/>';
 			} else {
 				file_name = file_path.trim()
 				fileName = file_name.substring(file_name.lastIndexOf('\\') + 1)
-				document.getElementById('restore').innerHTML += "*******************************" + '<br/>' + "当前处理文件名：" + fileName + '<br/>' + '*******************************' + '<br/>';
 			}
-
 			var exe_file;
 			if (process.platform === "darwin") {
 				exe_file = path.join(__dirname, "analysis.mac");
@@ -200,17 +197,14 @@
 						var notice = "[WARNING] 输入文件 " + file_path + " 处理有误"
 						mdui.snackbar({ message: notice, position: "left-top" })
 						console.log("error:\n" + error)
-						console.log("stderr:\n" + stderr)
-						document.getElementById('restderr').innerHTML += "*******************************" + "<br/>" + "当前处理文件名：" + fileName + '<br/>' + "错误提示信息：" + error + '<br/>' + "报警提示信息：" + stderr + '<br/>' + '*******************************' + '<br/>'
-					} else if (stdout) {
-						if(stdout===''){
+						console.log("stderr:\n" + stderr)	
+						document.getElementById('restderr').innerHTML += "*******************************" + "<br/>" + "当前处理文件名：" + fileName + '<br/>' + "错误提示信息：" + error + '<br/>' + "报错提示信息：" + stderr + '<br/>' + '*******************************' + '<br/>'
 						document.getElementById('restore').innerHTML += "*******************************"+'<br/>'+"当前处理文件名："+fileName+'<br/>'+'*******************************'+'<br/>'
-						}else{
+					} else if (stdout) {
 						var notice = "输入文件 " + file_path + " 处理完成"
 						mdui.snackbar({ message: notice })
 						console.log("stdout:\n" + stdout)
 						document.getElementById('restore').innerHTML += "*******************************" + '<br/>' + "当前处理文件名：" + fileName + '<br/>' + "处理文件耗时：" + stdout + '<br/>' + '*******************************' + '<br/>'
-						}
 					}
 				}
 			);
