@@ -30,7 +30,7 @@ Suitable for Mac OS X (x64 platform) and Windows.
 
 [Download Portable for win](https://github.com/NTLx/AneuFiler/releases/download/v0.2.0/AneuFiler.v0.2.0.Win_Portable.exe)
 
-> [Download mirror](http://cloud.cubicise.com:10081/s/8GRKCowfwqoLji8) for China user.
+> [Download mirror](http://cloud.cubicise.com:10081/s/yRdWpmNkiMMpRtq) for China user.
 
 ### Mac OS
 
@@ -40,7 +40,7 @@ Move app to `Application` :
 
 [Download for Mac OS](https://github.com/NTLx/AneuFiler/releases/download/v0.2.0/AneuFiler.v0.2.0.MacOS.dmg)
 
-> [Download mirror](http://cloud.cubicise.com:10081/s/bxbwwpG6NwkaN76) for China user.
+> [Download mirror](http://cloud.cubicise.com:10081/s/sWapR877m26Jfoc) for China user.
 
 ## Usage
 
