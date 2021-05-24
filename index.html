@@ -197,9 +197,9 @@
 						var notice = "[WARNING] 输入文件 " + file_path + " 处理有误"
 						mdui.snackbar({ message: notice, position: "left-top" })
 						console.log("error:\n" + error)
-						console.log("stderr:\n" + stderr)	
+						console.log("stderr:\n" + stderr)
 						document.getElementById('restderr').innerHTML += "*******************************" + "<br/>" + "当前处理文件名：" + fileName + '<br/>' + "错误提示信息：" + error + '<br/>' + "报错提示信息：" + stderr + '<br/>' + '*******************************' + '<br/>'
-						document.getElementById('restore').innerHTML += "*******************************"+'<br/>'+"当前处理文件名："+fileName+'<br/>'+'*******************************'+'<br/>'
+						document.getElementById('restore').innerHTML += "*******************************" + '<br/>' + "当前处理文件名：" + fileName + '<br/>' + '*******************************' + '<br/>'
 					} else if (stdout) {
 						var notice = "输入文件 " + file_path + " 处理完成"
 						mdui.snackbar({ message: notice })
@@ -266,19 +266,76 @@
 			font-size: 16px;
 			margin-top: 16px;
 		}
+
 		.result1 {
 			margin-top: 16px;
 			height: 200px;
-			overflow-y: auto;
+			overflow-y:auto;
+			overflow-x: hidden;
 			padding-left: 36px;
 			padding-right: 36px;
+			transition: all .5s;
 		}
+
 		.result2 {
 			margin-top: 16px;
 			height: 200px;
 			overflow-y: auto;
 			padding-left: 36px;
 			padding-right: 36px;
+		}
+		@media (min-height: 410px) {
+			.result1 {
+				height: 200px;
+			}
+			.result2 {
+				height: 200px;
+			}
+		}
+		@media (min-height: 460px) {
+			.result1 {
+				height: 320px;
+			}
+			.result2 {
+				height: 320px;
+			}
+		}
+		@media (min-height: 500px) {
+			.result1 {
+				height: 360px;
+			}
+			.result2 {
+				height: 360px;
+			}
+		}
+		@media (min-height:600px){
+			.result1 {
+				height: 460px;
+			}
+		}
+		@media (min-height: 700px) {
+			.result1 {
+				height: 560px;
+			}
+			.result2 {
+				height: 560px;
+			}
+		}
+		@media (min-height:850px){
+			.result1{
+				height: 710px;
+			}
+			.result2{
+				height: 710px;
+			}
+		}
+		@media (min-height: 1000px) {
+			.result1 {
+				height: 860px;
+			}
+			.result2 {
+				height: 860px;
+			}
 		}
 	</style>
 </body>
