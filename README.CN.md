@@ -30,7 +30,7 @@
 
 [Portable 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.2.0/AneuFiler.v0.2.0.Win_Portable.exe)
 
-若以上连接效果不佳，请尝试使用 [下载镜像](https://gitee.com/lx3325360/AneuFiler/releases/v0.2.0)
+> 若以上连接效果不佳，请尝试使用 [下载镜像](http://cloud.cubicise.com:10081/s/yRdWpmNkiMMpRtq)
 
 ### Mac OS
 
@@ -39,6 +39,8 @@
 ![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190917162246.png)
 
 [Mac OS 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.2.0/AneuFiler.v0.2.0.MacOS.dmg)
+
+> 若以上连接效果不佳，请尝试使用 [下载镜像](http://cloud.cubicise.com:10081/s/sWapR877m26Jfoc)
 
 ## 软件使用
 

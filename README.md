@@ -30,7 +30,7 @@ Suitable for Mac OS X (x64 platform) and Windows.
 
 [Download Portable for win](https://github.com/NTLx/AneuFiler/releases/download/v0.2.0/AneuFiler.v0.2.0.Win_Portable.exe)
 
-[Download mirror](https://gitee.com/lx3325360/AneuFiler/releases/v0.2.0) for China user.
+> [Download mirror](http://cloud.cubicise.com:10081/s/8GRKCowfwqoLji8) for China user.
 
 ### Mac OS
 
@@ -39,6 +39,8 @@ Move app to `Application` :
 ![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190917162246.png)
 
 [Download for Mac OS](https://github.com/NTLx/AneuFiler/releases/download/v0.2.0/AneuFiler.v0.2.0.MacOS.dmg)
+
+> [Download mirror](http://cloud.cubicise.com:10081/s/bxbwwpG6NwkaN76) for China user.
 
 ## Usage
 
