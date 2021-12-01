@@ -102,6 +102,7 @@
 		</div>
 	</div>
 	<script>
+		
 		var $ = mdui.$;
 		var switch_status = 0;
 		var out_status = function () {
@@ -167,16 +168,19 @@
 			mdui.snackbar({ message: "进入异常输出面板", timeout: 1000 })
 		}
 		var runningLogMessage= document.getElementById('restore').innerHTML
-		console.log(runningLogMessage)
+		// console.log(runningLogMessage)
 		if(runningLogMessage === ""){
 			document.getElementById('restore').innerHTML += "<p style='text-align:center'>目前无任何信息输出！请上传您需要处理的文件</p>"
 		}
 		var errorLogMessage = document.getElementById('restderr').innerHTML
-		console.log(errorLogMessage)
+		// console.log(errorLogMessage)
 		if(errorLogMessage ===""){
 			document.getElementById('restderr').innerHTML += "<p style='text-align:center'>目前无任何错误日志输出！</p>"
 		}
 		var path = require("path");
+		var log =require('electron-log');
+		log.transports.console.level = 'silly';
+		log.transports.file.file = 'C:/AneuFiler/renderer.log'
 		var exec = require("child_process").execFile;
 		function start(file_path, Encoding, switch_status) {
 			console.log("Request handler 'start' was called.");
@@ -202,24 +206,39 @@
 					if (error || stderr) {
 						var notice = "[WARNING] 输入文件 " + file_path + " 处理有误"
 						mdui.snackbar({ message: notice, position: "left-top" })
-						console.log("error:\n" + error)
-						console.log("stderr:\n" + stderr)
-						console.log("测试stderr:"+stderr.split(".")+"</br>")
-						document.getElementById('restore').innerHTML=""
-						document.getElementById('restderr').innerHTML=''
+						// console.log("error:\n" + error)
+						// console.log("stderr:\n" + stderr)
+						
+						log.warn("当前处理文件名为："+fileName+"\n报错提示：\n"+ stderr)
+						if(error!==null){
+							log.error("当前处理文件名为："+fileName+"\n错误提示：\n"+ error)
+						}
+						if(document.getElementById('restore').innerHTML === '<p style="text-align:center">目前无任何信息输出！请上传您需要处理的文件</p>'){
+							document.getElementById('restore').innerHTML =""
+						}
+						if(document.getElementById('restderr').innerHTML === '<p style="text-align:center">目前无任何错误日志输出！</p>'){
+							document.getElementById('restderr').innerHTML =" "
+						}
 						document.getElementById('restderr').innerHTML += "*******************************" + "<br/>" + "<b style='color:#67c23a'>当前处理文件名：</b>" + fileName + '<br/>' + "<b style='color:#f56c6c'>错误提示信息：</b>" + error + '<br/>' + "<b style='color:#ebb563'>报错提示信息：</b>" +'<br/>'+ "<div style=''>"+stderr+"</div>" + '<br/>' + '*******************************' + '<br/>'
 						document.getElementById('restore').innerHTML += "*******************************" + '<br/>' + "<b style='color:#67c23a'>当前处理文件名：</b>" + fileName + '<br/>' + '*******************************' + '<br/>'
 					} else if (stdout) {
-						var notice = "输入文件 " + file_path + " 处理完成"
-						mdui.snackbar({ message: notice })
-						console.log("stdout:\n" + stdout)
-						document.getElementById('restore').innerHTML=""
+						setTimeout(function(){
+							var notice = "输入文件 " + file_path + " 处理完成";
+							mdui.snackbar({
+								message: notice
+							})
+						},5000)
+						if(document.getElementById('restore').innerHTML ==='<p style="text-align:center">目前无任何信息输出！请上传您需要处理的文件</p>'){
+							document.getElementById('restore').innerHTML =""
+						}
+						// console.log("stdout:\n" + stdout)
+						log.info("当前处理文件名为："+fileName+"\n处理文件耗时：\n"+stdout,"color:green")
+
 						document.getElementById('restore').innerHTML += "*******************************" + '<br/>' + "<b style='color:#67c23a'>当前处理文件名：</b>" + fileName + '<br/>' + "<b style='color:#67c23a'>处理文件耗时：</b>" + stdout + '<br/>' + '*******************************' + '<br/>'
 					}
 				}
 			);
 		}
-		// 如果 error 或者stderr 等于"",
 		// event: drag file(s) to window
 		const holder = document.getElementById("holder");
 		holder.ondragover = () => {
