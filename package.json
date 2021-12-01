@@ -16,7 +16,8 @@
     "AneuFiler"
   ],
   "devDependencies": {
-    "electron": "^11.1.1"
+    "electron": "^11.1.1",
+    "electron-builder": "^22.13.1"
   },
   "build": {
     "appId": "AneuFiler.app",
