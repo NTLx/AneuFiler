@@ -178,9 +178,6 @@
 			document.getElementById('restderr').innerHTML += "<p style='text-align:center'>目前无任何错误日志输出！</p>"
 		}
 		var path = require("path");
-		var log =require('electron-log');
-		log.transports.console.level = 'silly';
-		log.transports.file.file = 'C:/AneuFiler/renderer.log'
 		var exec = require("child_process").execFile;
 		function start(file_path, Encoding, switch_status) {
 			console.log("Request handler 'start' was called.");
