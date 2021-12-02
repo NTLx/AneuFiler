@@ -6,7 +6,7 @@
  */
 
 const {app, BrowserWindow,globalShortcut} = require('electron')
-const log = require('elctron-log')
+const log = require('electron-log')
 const path = require('path')
 const url = require('url')
 const ipc =require('electron').ipcMain
