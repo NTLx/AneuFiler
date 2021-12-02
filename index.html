@@ -222,7 +222,7 @@
 						// 	document.getElementById('restderr').innerHTML =" "
 						// }
 						// document.getElementById('restderr').innerHTML += asterisk + "<br/>" + "<b style='color:#67c23a'>当前处理文件名：</b>" + fileName + '<br/>' + "<b style='color:#f56c6c'>错误提示信息：</b>" + error + '<br/>' + "<b style='color:#ebb563'>报错提示信息：</b>" +'<br/>'+ "<div style=''>"+stderr+"</div>" + '<br/>' + asterisk + '<br/>'
-						document.getElementById('restore').innerHTML = '<div style="text-align:center">'+asterisk + '<br/>' + "<b style='color:#67c23a'>当前处理文件名：</b>" + fileName + '<br/>' + asterisk + '<br/></div>'
+						document.getElementById('restore').innerHTML = asterisk + '<br/>' + "<b style='color:#da242a'>当前处理文件名：</b>" + fileName + '<br/>' + asterisk + '<br/>'
 					} else if (stdout) {
 						setTimeout(function () {
 							var notice = "输入文件 " + file_path + " 处理完成";
