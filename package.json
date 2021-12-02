@@ -1,5 +1,5 @@
 {
-  "name": "aneufiler",
+  "name": "Aneufiler",
   "author": "NTLx",
   "version": "0.3.0",
   "description": "AneuFiler",
@@ -61,9 +61,9 @@
     }
   },
   "dependencies": {
-    "mdui": "^1.0.1",
-    "screenlog": "^0.3.0",
     "electron-find": "^1.0.7",
-    "electron-log": "^4.4.1"
+    "electron-log": "^4.4.1",
+    "mdui": "^1.0.1",
+    "screenlog": "^0.3.0"
   }
 }
