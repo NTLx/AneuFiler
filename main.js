@@ -72,12 +72,18 @@ ipc.on('tab3',()=>{
         }
       })
     })
+    newwin.on('blur',()=>{
+      globalShortcut.unregister('CommandOrControl+F')
+    })
   }
 })
 
 app.on('ready', function() { createWindow() })
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function () { app.quit() })
+app.on('window-all-closed', function () { 
+  app.quit()
+  globalShortcut.unregister('CommandOrControl+F')
+ })
 
 app.on('activate', function () { if (mainWindow === null) createWindow() })
