@@ -8,7 +8,7 @@
 - 基于 [electron-quick-start](https://github.com/electron/electron-quick-start) 和 [MDUI](https://github.com/zdhxiong/mdui) 项目搭建用户界面
 - 核心算法模块不开源
 
-当前发布版本为 [`v0.2.0`](https://github.com/NTLx/AneuFiler/releases/tag/v0.2.0) ， `Pre-release` 版本的核心算法尚未完善，不建议用于实际生产。
+当前发布版本为 [`v0.3.0`](https://github.com/NTLx/AneuFiler/releases/tag/v0.3.0) ， `Pre-release` 版本的核心算法尚未完善，不建议用于实际生产。
 
 > 版本号发布格式说明：
 >
@@ -28,7 +28,7 @@
 
 在 Windows 系统下可直接运行 `Portable` 版程序，无需安装。
 
-[Portable 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.2.0/AneuFiler.v0.2.0.Win_Portable.exe)
+[Portable 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.3.0/AneuFiler.v0.3.0.Win_Portable.exe)
 
 > 若以上连接效果不佳，请尝试使用 [下载镜像](http://cloud.cubicise.com:10081/s/yRdWpmNkiMMpRtq)
 
@@ -38,7 +38,7 @@
 
 ![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190917162246.png)
 
-[Mac OS 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.2.0/AneuFiler.v0.2.0.MacOS.dmg)
+[Mac OS 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.3.0/AneuFiler.v0.3.0.MacOS.dmg)
 
 > 若以上连接效果不佳，请尝试使用 [下载镜像](http://cloud.cubicise.com:10081/s/sWapR877m26Jfoc)
 
@@ -46,7 +46,7 @@
 
 ### 程序主窗口
 
-![main window](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190918134715.png)
+![main window](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/mainWindow.png)
 
 将一个或多个文件（下机数据，用默认格式导出）拖拽至 `文件处理区` 即可；也可以点击提示区域，然后选择需要处理的文件。
 
@@ -69,13 +69,25 @@
 
 设置面板如图：
 
-![each sample output](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190918135907.png)
+![each sample output](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/setting.png)
 
 可将红色开关 `按样本输出` 关闭：针对每一个输入文件会将结果输出到唯一一个结果文件中。
 
 > 输出文件夹不会改变。
 
 为兼容 `Excel` ，默认输出编码格式为 `GBK` ；为获得更广泛的兼容性，可手动修改为 `UTF-8` 。
+
+### 日志
+
+日志面板如图：
+
+![log](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/log.png)
+### 程序运行日志窗口
+
+程序运行日志窗口如图:
+
+![new window](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/newWindow.png)
+
 
 ## 反馈
 

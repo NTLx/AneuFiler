@@ -11,15 +11,14 @@
 
 <body class="mdui-theme-primary-indigo mdui-bottom-nav-fixed">
 	<div class="mdui-tab mdui-tab-centered mdui-tab-full-width" mdui-tab>
-		<a href="#tab1" class="mdui-ripple mdui-tab-active" onmousedown="mOver1(this)"><i id="tab1_icon"
-				class="mdui-icon material-icons">&#xe24d;</i></a>
-		<a href="#tab2" class="mdui-ripple" onmousedown="mOver2(this)"><i id="tab2_icon"
-				class="mdui-icon material-icons">&#xe8b8;</i></a>
+		<a href="#tab1" class="mdui-ripple mdui-tab-active" onmousedown="mOver1(this)">
+			<i id="tab1_icon" class="mdui-icon material-icons">&#xe24d;</i>
+		</a>
+		<a href="#tab2" class="mdui-ripple" onmousedown="mOver2(this)">
+			<i id="tab2_icon" class="mdui-icon material-icons">&#xe8b8;</i>
+		</a>
 		<a href="#tab3" class="mdui-ripple" onmousedown="mOver3(this)">
 			<i id="tab3_icon" class="mdui-icon material-icons">&#xe616;</i>
-		</a>
-		<a href="#tab4" class="mdui-ripple" onmousedown="mOver4(this)">
-			<i id="tab4_icon" class="mdui-icon material-icons">&#xe000;</i>
 		</a>
 	</div>
 	<div id="tab1" class="mdui-p-a-1">
@@ -91,20 +90,18 @@
 	</div>
 	<div id="tab3" class="mdui-p-a-1">
 		<div class="layout">
-			<div class="mdui-col-xs-12  panel">运行时信息</div>
-			<div id="restore" class="mdui-col-xs-12 result2">
-			</div>
+			<div class="mdui-col-xs-12  panel">日志信息</div>
+			<div id="restore" class="mdui-col-xs-12 result2"></div>
 		</div>
 	</div>
-	<div id="tab4" class="mdui-p-a-1">
+	<!-- <div id="tab4" class="mdui-p-a-1">
 		<div class="layout">
 			<div class="mdui-col-xs-12 panel">文件处理有误信息</div>
-			<div id="restderr" class="mdui-col-xs-12 result1">
-			</div>
-
+			<div id="restderr" class="mdui-col-xs-12 result1"></div>
 		</div>
-	</div>
+	</div> -->
 	<script>
+
 		var $ = mdui.$;
 		var switch_status = 0;
 		var out_status = function () {
@@ -164,13 +161,23 @@
 			mdui.snackbar({ message: "进入设置面板", timeout: 1000 });
 		}
 		function mOver3(obj) {
-			mdui.snackbar({ message: "进入运行面板", timeout: 1000 })
+			mdui.snackbar({ message: "进入日志面板", timeout: 1000 })
 		}
-		function mOver4(obj) {
-			mdui.snackbar({ message: "进入异常输出面板", timeout: 1000 })
+		// function mOver4(obj) {
+		// 	mdui.snackbar({ message: "进入异常输出面板", timeout: 1000 })
+		// }
+		var runningLogMessage = document.getElementById('restore').innerHTML
+		if (runningLogMessage === "") {
+			document.getElementById('restore').innerHTML += "<p style='text-align:center'>所有日志信息全部位于程序运行日志窗口中</p>"
 		}
-
+		// var errorLogMessage = document.getElementById('restderr').innerHTML
+		// if(errorLogMessage ===""){
+		// 	document.getElementById('restderr').innerHTML += "<p style='text-align:center'>目前无任何错误日志输出！</p>"
+		// }
 		var path = require("path");
+		var log = require('electron-log')
+		log.transports.console.level = 'silly';
+		// log.transports.file.file = 'C:/AneuFiler/renderer.log'
 		var exec = require("child_process").execFile;
 		function start(file_path, Encoding, switch_status) {
 			console.log("Request handler 'start' was called.");
@@ -195,16 +202,41 @@
 				function (error, stdout, stderr) {
 					if (error || stderr) {
 						var notice = "[WARNING] 输入文件 " + file_path + " 处理有误"
-						mdui.snackbar({ message: notice, position: "left-top" })
-						console.log("error:\n" + error)
-						console.log("stderr:\n" + stderr)
-						document.getElementById('restderr').innerHTML += "*******************************" + "<br/>" + "当前处理文件名：" + fileName + '<br/>' + "错误提示信息：" + error + '<br/>' + "报错提示信息：" + stderr + '<br/>' + '*******************************' + '<br/>'
-						document.getElementById('restore').innerHTML += "*******************************" + '<br/>' + "当前处理文件名：" + fileName + '<br/>' + '*******************************' + '<br/>'
+						mdui.snackbar({
+							message: notice,
+							position: "left-top",
+							onClick: function () {
+								ipc.send('tab3');
+							}
+						})
+						console.warn("stderr:\n" + stderr)
+						const asterisk = "********************************************\n"
+						log.warn("\n" + asterisk + "当前处理文件名为：" + fileName + "\n报错提示：\n" + stderr + asterisk)
+						if (error !== null) {
+							log.error("\n" + asterisk + "当前处理文件名为：" + fileName + "\n错误提示：\n" + error + asterisk)
+						}
+						if (document.getElementById('restore').innerHTML === '<p style="text-align:center">所有日志信息全部位于程序运行日志窗口中</p>') {
+							document.getElementById('restore').innerHTML = ""
+						}
+						// if(document.getElementById('restderr').innerHTML === '<p style="text-align:center">目前无任何错误日志输出！</p>'){
+						// 	document.getElementById('restderr').innerHTML =" "
+						// }
+						// document.getElementById('restderr').innerHTML += asterisk + "<br/>" + "<b style='color:#67c23a'>当前处理文件名：</b>" + fileName + '<br/>' + "<b style='color:#f56c6c'>错误提示信息：</b>" + error + '<br/>' + "<b style='color:#ebb563'>报错提示信息：</b>" +'<br/>'+ "<div style=''>"+stderr+"</div>" + '<br/>' + asterisk + '<br/>'
+						document.getElementById('restore').innerHTML = asterisk + '<br/>' + "<b style='color:#da242a'>当前处理文件名：</b>" + fileName + '<br/>' + asterisk + '<br/>'
 					} else if (stdout) {
-						var notice = "输入文件 " + file_path + " 处理完成"
-						mdui.snackbar({ message: notice })
-						console.log("stdout:\n" + stdout)
-						document.getElementById('restore').innerHTML += "*******************************" + '<br/>' + "当前处理文件名：" + fileName + '<br/>' + "处理文件耗时：" + stdout + '<br/>' + '*******************************' + '<br/>'
+						setTimeout(function () {
+							var notice = "输入文件 " + file_path + " 处理完成";
+							mdui.snackbar({
+								message: notice
+							})
+						}, 5000)
+						const asterisk = "********************************************\n"
+						if (document.getElementById('restore').innerHTML === '<p style="text-align:center">所有日志信息全部位于程序运行日志窗口中</p>') {
+							document.getElementById('restore').innerHTML = ""
+						}
+
+						log.info("\n" + asterisk + "当前处理文件名为：" + fileName + "\n处理文件耗时：\n" + stdout + asterisk)
+						document.getElementById('restore').innerHTML = asterisk + '<br/>' + "<b style='color:#67c23a'>当前处理文件名：</b>" + fileName + '<br/>' + "<b style='color:#67c23a'>处理文件耗时：</b>" + stdout + '<br/>' + asterisk + '<br/>'
 					}
 				}
 			);
@@ -255,18 +287,29 @@
 					console.log("No file selected");
 				});
 		}
+		const tab3 = document.querySelector("#tab3_icon")
+		const ipc = require('electron').ipcRenderer
+		tab3.onclick = () => {
+			ipc.send('tab3');
+		}
+		// const remote = require('electron').remote;
+		// const FindInPage = require('electron-find').FindInPage;
+
+		// let findInPage = new FindInPage(remote.getCurrentWebContents());
+
+		// ipc.on('on-find', (e, args) => {
+		// 	findInPage.openFindWindow()
+		// })
 	</script>
 	<style>
 		.body {
 			overflow-x: hidden;
 		}
-
 		.panel {
 			text-align: center;
 			font-size: 16px;
 			margin-top: 16px;
 		}
-
 		.result1 {
 			margin-top: 16px;
 			height: 200px;
@@ -284,55 +327,46 @@
 			padding-left: 36px;
 			padding-right: 36px;
 		}
+
 		@media (min-height: 410px) {
-			.result1 {
-				height: 200px;
-			}
 			.result2 {
 				height: 200px;
 			}
 		}
+
 		@media (min-height: 460px) {
-			.result1 {
-				height: 320px;
-			}
 			.result2 {
 				height: 320px;
 			}
 		}
 		@media (min-height: 500px) {
-			.result1 {
-				height: 360px;
-			}
 			.result2 {
 				height: 360px;
 			}
 		}
-		@media (min-height:600px){
-			.result1 {
+
+		@media (min-height:600px) {
+			.result2 {
 				height: 460px;
 			}
+
 		}
+
 		@media (min-height: 700px) {
-			.result1 {
-				height: 560px;
-			}
+
 			.result2 {
 				height: 560px;
 			}
 		}
-		@media (min-height:850px){
-			.result1{
-				height: 710px;
-			}
-			.result2{
+
+		@media (min-height:850px) {
+
+			.result2 {
 				height: 710px;
 			}
 		}
+
 		@media (min-height: 1000px) {
-			.result1 {
-				height: 860px;
-			}
 			.result2 {
 				height: 860px;
 			}

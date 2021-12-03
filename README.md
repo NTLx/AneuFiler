@@ -8,7 +8,7 @@
 - Based on [electron-quick-start](https://github.com/electron/electron-quick-start) and [MDUI](https://github.com/zdhxiong/mdui) project
 - core algorithm was not open source
 
-Current release is [`v0.2.0`](https://github.com/NTLx/AneuFiler/releases/tag/v0.2.0), `Pre-release` was not recommended for actual production.
+Current release is [`v0.3.0`](https://github.com/NTLx/AneuFiler/releases/tag/v0.3.0), `Pre-release` was not recommended for actual production.
 
 > Version introduction:
 >
@@ -28,7 +28,7 @@ Suitable for Mac OS X (x64 platform) and Windows.
 
 `Portable` package can run without installation.
 
-[Download Portable for win](https://github.com/NTLx/AneuFiler/releases/download/v0.2.0/AneuFiler.v0.2.0.Win_Portable.exe)
+[Download Portable for win](https://github.com/NTLx/AneuFiler/releases/download/v0.3.0/AneuFiler.v0.3.0.Win_Portable.exe)
 
 > [Download mirror](http://cloud.cubicise.com:10081/s/yRdWpmNkiMMpRtq) for China user.
 
@@ -38,7 +38,7 @@ Move app to `Application` :
 
 ![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190917162246.png)
 
-[Download for Mac OS](https://github.com/NTLx/AneuFiler/releases/download/v0.2.0/AneuFiler.v0.2.0.MacOS.dmg)
+[Download for Mac OS](https://github.com/NTLx/AneuFiler/releases/download/v0.3.0/AneuFiler.v0.3.0.MacOS.dmg)
 
 > [Download mirror](http://cloud.cubicise.com:10081/s/sWapR877m26Jfoc) for China user.
 
@@ -46,7 +46,7 @@ Move app to `Application` :
 
 ## Main window
 
-![main window](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190918134715.png)
+![main window](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/mainWindow.png)
 
 Drag file(s) to process region (means `文件处理区`), or just click this region to select a file.
 
@@ -66,7 +66,7 @@ Press the blue button `退出` could exit the software.
 
 Several settings was offered in `设置面板` , defalut settings should be like this:
 
-![each sample output](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190918135907.png)
+![each sample output](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/setting.png)
 
 Switch the button `按样本输出` to grey (deactivate) will generate one result file according to one input file.
 
@@ -74,6 +74,16 @@ Switch the button `按样本输出` to grey (deactivate) will generate one resul
 
 Mainly for windows users, the default encode was set to `GBK` so that `Excel` (from Microsoft Office) could be display rightfully. If you need ~~far~~ more widely used encode format, you can change `选择输出格式` to switch encode from `GBK` to `UTF-8` .
 
+### Log
+
+The log panel is as shown
+
+![log](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/log.png)
+### Program running log window
+
+The program run log window is shown in the figure
+
+![new window](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/newWindow.png)
 ## Feedback
 
 Welcome to [open issue](https://github.com/NTLx/AneuFiler/issues/new/choose) on this project to help us make improve for this software, or you can see the [existing issues](https://github.com/NTLx/AneuFiler/issues).
