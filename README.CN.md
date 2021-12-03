@@ -46,7 +46,7 @@
 
 ### 程序主窗口
 
-![main window](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/Screen Shot 2021-12-03 at 10.52.06 AM.png)
+![main window](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/mainWindow.png)
 
 将一个或多个文件（下机数据，用默认格式导出）拖拽至 `文件处理区` 即可；也可以点击提示区域，然后选择需要处理的文件。
 
@@ -69,7 +69,7 @@
 
 设置面板如图：
 
-![each sample output](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190918135907.png)
+![each sample output](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/setting.png)
 
 可将红色开关 `按样本输出` 关闭：针对每一个输入文件会将结果输出到唯一一个结果文件中。
 
@@ -81,8 +81,12 @@
 
 日志面板如图：
 
-
+![log](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/log.png)
 ### 程序运行日志窗口
+
+程序运行日志窗口如图:
+
+![new window](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/newWindow.png)
 
 
 ## 反馈
