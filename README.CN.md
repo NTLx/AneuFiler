@@ -46,7 +46,7 @@
 
 ### 程序主窗口
 
-![main window](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190918134715.png)
+![main window](https://cdn.jsdelivr.net/gh/Letmeouted/PicominiPC/img/Screen Shot 2021-12-03 at 10.52.06 AM.png)
 
 将一个或多个文件（下机数据，用默认格式导出）拖拽至 `文件处理区` 即可；也可以点击提示区域，然后选择需要处理的文件。
 
@@ -76,6 +76,14 @@
 > 输出文件夹不会改变。
 
 为兼容 `Excel` ，默认输出编码格式为 `GBK` ；为获得更广泛的兼容性，可手动修改为 `UTF-8` 。
+
+### 日志
+
+日志面板如图：
+
+
+### 程序运行日志窗口
+
 
 ## 反馈
 
