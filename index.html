@@ -94,12 +94,6 @@
 			<div id="restore" class="mdui-col-xs-12 result2"></div>
 		</div>
 	</div>
-	<!-- <div id="tab4" class="mdui-p-a-1">
-		<div class="layout">
-			<div class="mdui-col-xs-12 panel">文件处理有误信息</div>
-			<div id="restderr" class="mdui-col-xs-12 result1"></div>
-		</div>
-	</div> -->
 	<script>
 
 		var $ = mdui.$;
@@ -163,21 +157,27 @@
 		function mOver3(obj) {
 			mdui.snackbar({ message: "进入日志面板", timeout: 1000 })
 		}
-		// function mOver4(obj) {
-		// 	mdui.snackbar({ message: "进入异常输出面板", timeout: 1000 })
-		// }
+		// child_process.execFile method
 		var runningLogMessage = document.getElementById('restore').innerHTML
 		if (runningLogMessage === "") {
 			document.getElementById('restore').innerHTML += "<p style='text-align:center'>所有日志信息全部位于程序运行日志窗口中</p>"
 		}
-		// var errorLogMessage = document.getElementById('restderr').innerHTML
-		// if(errorLogMessage ===""){
-		// 	document.getElementById('restderr').innerHTML += "<p style='text-align:center'>目前无任何错误日志输出！</p>"
-		// }
 		var path = require("path");
-		var log = require('electron-log')
+		var log = require('electron-log');
+		const fs = require('fs')
 		log.transports.console.level = 'silly';
-		// log.transports.file.file = 'C:/AneuFiler/renderer.log'
+		var nowdate = new Date();
+		const { remote } = require('electron');
+		const app = remote.app;
+		// console.log(app.getPath('userData'));
+		var filepath = path.join(app.getPath("temp"))
+		console.log(filepath)
+		var nowdate_str = nowdate.getFullYear() + "-" + (nowdate.getMonth() + 1) + "-" + nowdate.getDate()
+		var filename = "AneuFiler.log"
+		log.transports.file.resolvePath = () => path.join(filepath, filename)
+		console.log(log.transports.file.resolvePath)
+		// const content = fs.readFileSync(log.transports.file.resolvePath)
+		// console.log(content)
 		var exec = require("child_process").execFile;
 		function start(file_path, Encoding, switch_status) {
 			console.log("Request handler 'start' was called.");
@@ -210,19 +210,14 @@
 							}
 						})
 						console.warn("stderr:\n" + stderr)
-						const asterisk = "********************************************\n"
-						log.warn("\n" + asterisk + "当前处理文件名为：" + fileName + "\n报错提示：\n" + stderr + asterisk)
+						 log.warn("\n" + "当前处理文件名为：" + fileName + "\n报错提示：\n" + stderr)
 						if (error !== null) {
-							log.error("\n" + asterisk + "当前处理文件名为：" + fileName + "\n错误提示：\n" + error + asterisk)
+							log.error("\n"+ "当前处理文件名为：" + fileName + "\n错误提示：\n" + error )
 						}
 						if (document.getElementById('restore').innerHTML === '<p style="text-align:center">所有日志信息全部位于程序运行日志窗口中</p>') {
 							document.getElementById('restore').innerHTML = ""
 						}
-						// if(document.getElementById('restderr').innerHTML === '<p style="text-align:center">目前无任何错误日志输出！</p>'){
-						// 	document.getElementById('restderr').innerHTML =" "
-						// }
-						// document.getElementById('restderr').innerHTML += asterisk + "<br/>" + "<b style='color:#67c23a'>当前处理文件名：</b>" + fileName + '<br/>' + "<b style='color:#f56c6c'>错误提示信息：</b>" + error + '<br/>' + "<b style='color:#ebb563'>报错提示信息：</b>" +'<br/>'+ "<div style=''>"+stderr+"</div>" + '<br/>' + asterisk + '<br/>'
-						document.getElementById('restore').innerHTML = asterisk + '<br/>' + "<b style='color:#da242a'>当前处理文件名：</b>" + fileName + '<br/>' + asterisk + '<br/>'
+						document.getElementById('restore').innerHTML = '<br/>' + "<b style='color:#da242a'>当前处理文件名：</b>" + fileName + '<br/>'
 					} else if (stdout) {
 						setTimeout(function () {
 							var notice = "输入文件 " + file_path + " 处理完成";
@@ -230,13 +225,13 @@
 								message: notice
 							})
 						}, 5000)
-						const asterisk = "********************************************\n"
 						if (document.getElementById('restore').innerHTML === '<p style="text-align:center">所有日志信息全部位于程序运行日志窗口中</p>') {
 							document.getElementById('restore').innerHTML = ""
 						}
-
-						log.info("\n" + asterisk + "当前处理文件名为：" + fileName + "\n处理文件耗时：\n" + stdout + asterisk)
-						document.getElementById('restore').innerHTML = asterisk + '<br/>' + "<b style='color:#67c23a'>当前处理文件名：</b>" + fileName + '<br/>' + "<b style='color:#67c23a'>处理文件耗时：</b>" + stdout + '<br/>' + asterisk + '<br/>'
+						log.info("\n" + "当前处理文件名为：" + fileName + "\n处理文件耗时：\n" + stdout)
+						
+						document.getElementById('restore').innerHTML ='<br/>' + "<b style='color:#67c23a'>当前处理文件名：</b>" + fileName + '<br/>' + "<b style='color:#67c23a'>处理文件耗时：</b>" + stdout + '<br/>'
+						
 					}
 				}
 			);
@@ -305,15 +300,17 @@
 		.body {
 			overflow-x: hidden;
 		}
+
 		.panel {
 			text-align: center;
 			font-size: 16px;
 			margin-top: 16px;
 		}
+
 		.result1 {
 			margin-top: 16px;
 			height: 200px;
-			overflow-y:auto;
+			overflow-y: auto;
 			overflow-x: hidden;
 			padding-left: 36px;
 			padding-right: 36px;
@@ -339,6 +336,7 @@
 				height: 320px;
 			}
 		}
+
 		@media (min-height: 500px) {
 			.result2 {
 				height: 360px;
