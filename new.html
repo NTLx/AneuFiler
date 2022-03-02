@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: code everything
+ * @Author: Letmeouted
+ * @Date: 2021-12-02 11:15:23
+ * @LastEditors: Letmeouted
+ * @LastEditTime: 2022-03-02 16:10:06
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,13 +13,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="node_modules/screenlog/dist/screenlog.min.js"></script>
+    <script src="node_modules/mdui/dist/js/mdui.min.js"></script>
     <link rel="stylesheet" href="node_modules/mdui/dist/css/mdui.min.css" />
     <title>程序运行日志</title>
 </head>
 
 <body>
-    <button onclick="down();" class="mdui-fab mdui-fab-mini mdui-fab-fixed mdui-ripple ">
+    <button  onclick="up()" class="mdui-fab mdui-fab-mini mdui-fab-fixed mdui-ripple uptop">
+        <i class="mdui-icon material-icons">&#xe5d8;</i>
+    </button>
+    <button  onclick="down();" class="mdui-fab mdui-fab-mini mdui-fab-fixed mdui-ripple ">
         <i class="mdui-icon material-icons">&#xe5db;</i>
+    </button>
+    <button  onclick="download()"
+        class="mdui-fab mdui-fab-mini mdui-fab-fixed mdui-ripple download">
+        <i class="mdui-icon material-icons">&#xe2c4;</i>
     </button>
     <i class="mdui-icon material-icons mdui-center">&#xe0d8;</i>
     <div id="test" style="overflow-y: auto;height: 90vh;">
@@ -23,16 +38,93 @@
     var log = require('electron-log');
     log.transports.console.level = 'silly';
     const fs = require('fs')
-    const content = fs.readFileSync(log.transports.file.getFile().path)
-    const message = document.getElementById('test')
-    message.innerText = content.toString()
+    const path = require('path')
+    const { remote } = require('electron');
+    const app = remote.app;
+    // const content = fs.readFileSync(log.transports.file.getFile().path)
+    var nowdate = new Date();
+    var filepath = path.join(app.getPath("temp"))
+    console.log(filepath)
+    var nowdate_str = nowdate.getFullYear() + "-" + (nowdate.getMonth() + 1) + "-" + nowdate.getDate()
+    var filename = "AneuFiler.log"
+    console.log(path.join(filepath, filename))
+    log.transports.file.resolvePath = () => path.join(filepath, filename)
+    const content = fs.readFileSync(path.join(filepath, filename))
+    var array = content.toString().split("\n")
+    console.log(array)
+    var reg1 = RegExp(/warn/)
+    var reg2 = RegExp(/info/)
+    // var reg3 = RegExp(//)
+    // var reg4 = RegExp(/当前/)
+    // var reg5 = RegExp(/2022-/);
+    // var reg6 = RegExp(/#/)
+
+    // var message1 = document.getElementById('csvName')
+    // var message2 = document.getElementById('time')
+    // var message3 = document.getElementById('localtime')
+    var message = document.getElementById('test')
+    for (var i = 0; i < array.length; i++) {
+        if (array[i].match(reg1)) {
+            array[i] = "<p style='color:#FF5722;text-align:center'>" + array[i] + "</p>"
+        } else if (array[i].match(reg2)) {
+            array[i] = "<p style='color:#4CAF50;text-align:center'>" + array[i] + "</p>"
+        } else {
+            array[i] = "<p style='margin:10px'>" + array[i] + "</p>"
+        }
+        message.innerHTML += array[i].toString()
+    }
+
+    // message.innerText = content.toString()
+    // console.log(content.toString().split("\n"))
+    // var array = content.toString().split("\n")
+    // var message = document.getElementById('test')
+    // var reg1 = RegExp(/warn/)
+    // var reg2 = RegExp(/info/)
+    // var reg3 = RegExp(/#/)
+    // var reg4 = RegExp(/耗时/)
+    // var reg5 = RegExp(/当前/)
+    // var reg6 = RegExp(/报错提示/)
+    // var reg7 = RegExp(/Use/)
+    // var reg8 = RegExp(/**/)
+    // array.forEach((element, i) => {
+
+    //     if ( element.match(reg2) ||element.match(reg3) || element.match(reg4) ||element.match(reg8) ) {
+    //         element = "<p style='color:#4CAF50'>" + element + "</p>"
+    //          message.innerHTML += element
+    //     }
+    //     if (element.match(reg1) || element.match(reg6)||element.match(reg7)){
+    //         element = "<p style='color:#FF5722'>" + element + "</p>"
+    //          message.innerHTML += element
+    //     }
+    //     // if (element.match(reg8)){
+    //     //     element = "<p>"+element+"</p>"
+    //     //     message.innerHTML += element
+    //     // }
+    //     if (element.match(reg5)) {
+    //         element = "<p>"+element+"</p>"
+    //         message.innerHTML += element
+    //     }
+
+    // });
     const ipc = require('electron').ipcRenderer
-    const remote = require('electron').remote;
+    // const remote1 = require('electron').remote;
     const FindInPage = require('electron-find').FindInPage;
     let findInPage = new FindInPage(remote.getCurrentWebContents());
     ipc.on('on-find', (e, args) => {
         findInPage.openFindWindow()
     })
+    // var win1 = remote.getCurrentWindow();
+    // console.log(win1)
+    function download() {
+        var filePath = path.join(filepath, filename);//需要下载文件的路径
+        var win = remote.getCurrentWindow();
+        win.webContents.downloadURL(filePath);
+        // mac 版本
+        // win.webContents.downloadURL("file:///"+filePath)
+        console.log(filePath)
+        // console.log(win.webContents.downloadURL(filePath))
+    }
+        // downloadFile(path.join(filepath, filename))
 </script>
 <script type="text/javascript">
     function down() {
@@ -41,10 +133,24 @@
         div.scrollTop = div.scrollHeight
         console.log(div.scrollTop)
     }
+    function up() {
+        const div1 = document.getElementById('test')
+        div1.scrollTop = 0
+    }
+    
 </script>
+
 <style>
     body {
         overflow: hidden;
+    }
+
+    .uptop {
+        margin-bottom: 50px;
+    }
+
+    .download {
+        margin-bottom: 160px;
     }
 </style>
 
