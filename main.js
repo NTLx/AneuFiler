@@ -1,7 +1,7 @@
 /*
  * @Author: whf
  * @Date: 2021-01-06 10:01:40
- * @LastEditTime: 2022-03-02 11:30:04
+ * @LastEditTime: 2022-03-15 10:13:34
  * @FilePath: \AneuFiler\main.js
  */
 
@@ -67,16 +67,6 @@ ipc.on('tab3',()=>{
     newwin.loadURL(path.join("file:",__dirname,'new.html'));
     newwin.on('closed',()=>{
       newwin=null;
-      const { app } = require('electron');
-      var filepath = path.join(app.getPath("temp"))
-      var filename = "AneuFiler.log"
-      fs.unlink(path.join(filepath, filename),function (err) {
-        if (err) {
-            console.log("An error ocurred updating the file" + err.message)
-            return
-        }
-        console.log("File succesfully deleted")
-      })
     })
     newwin.on('focus',()=>{
       globalShortcut.register('CommandOrControl+F',function(){
@@ -95,6 +85,16 @@ app.on('ready', function() { createWindow() })
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () { 
+  const { app } = require('electron');
+      var filepath = path.join(app.getPath("temp"))
+      var filename = "AneuFiler.log"
+      fs.unlink(path.join(filepath, filename),function (err) {
+        if (err) {
+            console.log("An error ocurred updating the file" + err.message)
+            return
+        }
+        console.log("File succesfully deleted")
+      })
   app.quit()
   globalShortcut.unregister('CommandOrControl+F')
  })
