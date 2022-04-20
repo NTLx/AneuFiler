@@ -90,8 +90,20 @@
 	</div>
 	<div id="tab3" class="mdui-p-a-1">
 		<div class="layout">
-			<div class="mdui-col-xs-12  panel">日志信息</div>
-			<div id="restore" class="mdui-col-xs-12 result2"></div>
+			<!-- <div class="mdui-col-xs-12  panel">日志信息</div> -->
+			<!-- <div id="restore" class="mdui-col-xs-12 result2"></div> -->
+			<button onclick="up()" class="mdui-fab mdui-fab-mini mdui-fab-fixed mdui-ripple uptop">
+				<i class="mdui-icon material-icons">&#xe5d8;</i>
+			</button>
+			<button onclick="down();" class="mdui-fab mdui-fab-mini mdui-fab-fixed mdui-ripple ">
+				<i class="mdui-icon material-icons">&#xe5db;</i>
+			</button>
+			<button onclick="download()" class="mdui-fab mdui-fab-mini mdui-fab-fixed mdui-ripple download">
+				<i class="mdui-icon material-icons">&#xe2c4;</i>
+			</button>
+			<i class="mdui-icon material-icons mdui-center">&#xe0d8;</i>
+			<div id="test" style="overflow-y: auto;height: 85vh;">
+			</div>
 		</div>
 	</div>
 	<script>
@@ -158,17 +170,18 @@
 			mdui.snackbar({ message: "进入日志面板", timeout: 1000 })
 		}
 		// child_process.execFile method
-		var runningLogMessage = document.getElementById('restore').innerHTML
-		if (runningLogMessage === "") {
-			document.getElementById('restore').innerHTML += "<p style='text-align:center'>所有日志信息全部位于程序运行日志窗口中</p>"
-		}
+		// var runningLogMessage = document.getElementById('restore').innerHTML
+		// if (runningLogMessage === "") {
+		// 	document.getElementById('restore').innerHTML += "<p style='text-align:center'>所有日志信息全部位于程序运行日志窗口中</p>"
+		// }
+
 		var path = require("path");
 		var log = require('electron-log');
 		const fs = require('fs')
 		log.transports.console.level = 'silly';
 		var nowdate = new Date();
-		const { remote } = require('electron');
-		const app = remote.app;
+		var { remote } = require('electron');
+		var app = remote.app;
 		// console.log(app.getPath('userData'));
 		var filepath = path.join(app.getPath("temp"))
 		console.log(filepath)
@@ -210,14 +223,14 @@
 							}
 						})
 						console.warn("stderr:\n" + stderr)
-						 log.warn("\n" + "当前处理文件名为：" + fileName + "\n报错提示：\n" + stderr)
+						log.warn("\n" + "当前处理文件名为：" + fileName + "\n报错提示：\n" + stderr)
 						if (error !== null) {
-							log.error("\n"+ "当前处理文件名为：" + fileName + "\n错误提示：\n" + error )
+							log.error("\n" + "当前处理文件名为：" + fileName + "\n错误提示：\n" + error)
 						}
-						if (document.getElementById('restore').innerHTML === '<p style="text-align:center">所有日志信息全部位于程序运行日志窗口中</p>') {
-							document.getElementById('restore').innerHTML = ""
-						}
-						document.getElementById('restore').innerHTML = '<br/>' + "<b style='color:#da242a'>当前处理文件名：</b>" + fileName + '<br/>'
+						// if (document.getElementById('restore').innerHTML === '<p style="text-align:center">所有日志信息全部位于程序运行日志窗口中</p>') {
+						// 	document.getElementById('restore').innerHTML = ""
+						// }
+						// document.getElementById('restore').innerHTML = '<br/>' + "<b style='color:#da242a'>当前处理文件名：</b>" + fileName + '<br/>'
 					} else if (stdout) {
 						setTimeout(function () {
 							var notice = "输入文件 " + file_path + " 处理完成";
@@ -225,13 +238,13 @@
 								message: notice
 							})
 						}, 5000)
-						if (document.getElementById('restore').innerHTML === '<p style="text-align:center">所有日志信息全部位于程序运行日志窗口中</p>') {
-							document.getElementById('restore').innerHTML = ""
-						}
+						// if (document.getElementById('restore').innerHTML === '<p style="text-align:center">所有日志信息全部位于程序运行日志窗口中</p>') {
+						// 	document.getElementById('restore').innerHTML = ""
+						// }
 						log.info("\n" + "当前处理文件名为：" + fileName + "\n处理文件耗时：\n" + stdout)
-						
-						document.getElementById('restore').innerHTML ='<br/>' + "<b style='color:#67c23a'>当前处理文件名：</b>" + fileName + '<br/>' + "<b style='color:#67c23a'>处理文件耗时：</b>" + stdout + '<br/>'
-						
+
+						// document.getElementById('restore').innerHTML ='<br/>' + "<b style='color:#67c23a'>当前处理文件名：</b>" + fileName + '<br/>' + "<b style='color:#67c23a'>处理文件耗时：</b>" + stdout + '<br/>'
+
 					}
 				}
 			);
@@ -278,24 +291,80 @@
 					}
 				})
 				.catch((err) => {
-					console.log(err);
+					// console.log(err);
 					console.log("No file selected");
 				});
 		}
 		const tab3 = document.querySelector("#tab3_icon")
 		const ipc = require('electron').ipcRenderer
 		tab3.onclick = () => {
-			ipc.send('tab3');
+			var content = fs.readFileSync(path.join(filepath, filename))
+			var array = content.toString().split("\n")
+			console.log(array)
+			var array2 = array
+			console.log(array2)
+			var reg1 = RegExp(/warn/)
+			var reg2 = RegExp(/info/)
+			var message = document.getElementById('test')
+			message.innerHTML = ""
+			for (var i = 0; i < array.length; i++) {
+				if (array[i].match(reg1)) {
+					array[i] = "<p style='color:#FF5722;text-align:center'>" + array[i] + "</p>"
+					// console.log(array[1])
+				} else if (array[i].match(reg2)) {
+					array[i] = "<p style='color:#4CAF50;text-align:center'>" + array[i] + "</p>"
+				} else {
+					array[i] = "<p style='margin:10px'>" + array[i] + "</p>"
+				}
+				// console.log(message.innerHTML)
+				message.innerHTML += array[i].toString()
+			}
+			const ipc = require('electron').ipcRenderer
+			// const remote1 = require('electron').remote;
+			const FindInPage = require('electron-find').FindInPage;
+			let findInPage = new FindInPage(remote.getCurrentWebContents());
+			ipc.on('on-find', (e, args) => {
+				findInPage.openFindWindow()
+			})
 		}
-		// const remote = require('electron').remote;
-		// const FindInPage = require('electron-find').FindInPage;
 
-		// let findInPage = new FindInPage(remote.getCurrentWebContents());
-
-		// ipc.on('on-find', (e, args) => {
-		// 	findInPage.openFindWindow()
-		// })
 	</script>
+	<script type="text/javascript">
+		function download() {
+			var filePath = path.join(filepath, filename);//需要下载文件的路径
+			var win = remote.getCurrentWindow();
+			win.webContents.downloadURL(filePath);
+			// mac 版本
+			// win.webContents.downloadURL("file:///"+filePath)
+			console.log(filePath)
+			// console.log(win.webContents.downloadURL(filePath))
+		}
+		function down() {
+			const div = document.getElementById('test')
+			console.log(div.scrollHeight)
+			div.scrollTop = div.scrollHeight
+			console.log(div.scrollTop)
+		}
+		function up() {
+			const div1 = document.getElementById('test')
+			div1.scrollTop = 0
+		}
+
+	</script>
+
+	<style>
+		body {
+			overflow: hidden;
+		}
+
+		.uptop {
+			margin-bottom: 50px;
+		}
+
+		.download {
+			margin-bottom: 160px;
+		}
+	</style>
 	<style>
 		.body {
 			overflow-x: hidden;
