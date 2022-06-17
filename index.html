@@ -101,7 +101,7 @@
 			<button onclick="download()" class="mdui-fab mdui-fab-mini mdui-fab-fixed mdui-ripple download">
 				<i class="mdui-icon material-icons">&#xe2c4;</i>
 			</button>
-			<i class="mdui-icon material-icons mdui-center">&#xe0d8;</i>
+			<!-- <i class="mdui-icon material-icons mdui-center">&#xe0d8;</i> -->
 			<div id="test" style="overflow-y: auto;height: 85vh;">
 			</div>
 		</div>
@@ -218,9 +218,9 @@
 						mdui.snackbar({
 							message: notice,
 							position: "left-top",
-							onClick: function () {
-								ipc.send('tab3');
-							}
+							// onClick: function () {
+							// 	ipc.send('tab3');
+							// }
 						})
 						console.warn("stderr:\n" + stderr)
 						log.warn("\n" + "当前处理文件名为：" + fileName + "\n报错提示：\n" + stderr)
@@ -300,9 +300,7 @@
 		tab3.onclick = () => {
 			var content = fs.readFileSync(path.join(filepath, filename))
 			var array = content.toString().split("\n")
-			console.log(array)
-			var array2 = array
-			console.log(array2)
+			// console.log(array)
 			var reg1 = RegExp(/warn/)
 			var reg2 = RegExp(/info/)
 			var message = document.getElementById('test')
