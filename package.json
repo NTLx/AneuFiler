@@ -1,22 +1,27 @@
 {
   "name": "Aneufiler",
   "author": "NTLx",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "AneuFiler",
   "license": "GPL-3.0",
   "repository": "https://github.com/Cubicise-Medical/G020.git",
+  "homepage": "index.html",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --win --ia32"
+    "dist": "electron-builder --win --ia32",
+    "dist-linux": "electron-builder --linux --ia32"
   },
   "keywords": [
     "Electron",
     "Data Analysis",
     "AneuFiler"
   ],
+  "author":{
+    "email": "huafeng.wang@cubicise.com"
+  },
   "devDependencies": {
-    "electron": "^15.5.5",
+    "electron": "^13.6.6",
     "electron-builder": "^22.13.1"
   },
   "build": {
@@ -25,6 +30,7 @@
     "files": [
       "analysis.mac",
       "analysis.exe",
+      "analysis",
       "main.js",
       "index.html",
       "renderer.js",
@@ -58,7 +64,15 @@
         }
       ],
       "artifactName": "${productName}.v${version}.Win_Portable.${ext}"
-    }
+    },
+    "linux": {
+      "icon": "tmp.iconset/icon_128X128.png",
+      "category":"Network",
+      "target": [
+              "deb"
+        ],
+        "artifactName":"${productName}.v${version}.${ext}"
+      }
   },
   "dependencies": {
     "electron-find": "^1.0.7",
