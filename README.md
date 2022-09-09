@@ -8,7 +8,7 @@
 - Based on [electron-quick-start](https://github.com/electron/electron-quick-start) and [MDUI](https://github.com/zdhxiong/mdui) project
 - core algorithm was not open source
 
-Current release is [`v0.3.0`](https://github.com/NTLx/AneuFiler/releases/tag/v0.3.1), `Pre-release` was not recommended for actual production.
+Current release is [`v0.3.2`](https://github.com/NTLx/AneuFiler/releases/tag/v0.3.2), `Pre-release` was not recommended for actual production.
 
 > Version introduction:
 >
@@ -28,7 +28,7 @@ Suitable for Mac OS X (x64 platform) and Windows.
 
 `Portable` package can run without installation.
 
-[Download Portable for win](https://github.com/NTLx/AneuFiler/releases/download/v0.3.1/AneuFiler.v0.3.1.Win_Portable.exe)
+[Download Portable for win](https://github.com/NTLx/AneuFiler/releases/download/v0.3.2/AneuFiler.v0.3.2.Win_Portable.exe)
 
 > [Download mirror](http://cloud.cubicise.com:10081/s/yRdWpmNkiMMpRtq) for China user.
 
@@ -38,7 +38,7 @@ Move app to `Application` :
 
 ![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190917162246.png)
 
-[Download for Mac OS](https://github.com/NTLx/AneuFiler/releases/download/v0.3.1/AneuFiler.v0.3.1.MacOS.dmg)
+[Download for Mac OS](https://github.com/NTLx/AneuFiler/releases/download/v0.3.2/AneuFiler.v0.3.2.MacOS.dmg)
 
 > [Download mirror](http://cloud.cubicise.com:10081/s/sWapR877m26Jfoc) for China user.
 
