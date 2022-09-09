@@ -34,11 +34,11 @@
 
 ### Mac OS
 
-在 Mac Ov0\.3\.1S X 系统下，双击安装包，将软件包移动至 `应用程序` 文件夹内即可使用：
+在 Mac OS X 系统下，双击安装包，将软件包移动至 `应用程序` 文件夹内即可使用：
 
 ![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190917162246.png)
 
-[Mac OS 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.3.2/AneuFiler.v0.3.2.MacOS.dmg)
+[Mac OS 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.3.1/AneuFiler.v0.3.1.MacOS.dmg)
 
 > 若以上连接效果不佳，请尝试使用 [下载镜像](http://cloud.cubicise.com:10081/s/sWapR877m26Jfoc)
 

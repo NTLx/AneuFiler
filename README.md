@@ -38,7 +38,7 @@ Move app to `Application` :
 
 ![darwin install](https://lx-public-pic.oss-cn-shanghai.aliyuncs.com/PicGo/20190917162246.png)
 
-[Download for Mac OS](https://github.com/NTLx/AneuFiler/releases/download/v0.3.2/AneuFiler.v0.3.2.MacOS.dmg)
+[Download for Mac OS](https://github.com/NTLx/AneuFiler/releases/download/v0.3.1/AneuFiler.v0.3.1.MacOS.dmg)
 
 > [Download mirror](http://cloud.cubicise.com:10081/s/sWapR877m26Jfoc) for China user.
 
