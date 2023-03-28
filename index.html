@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>AneuFiler</title>
 	<script src="node_modules/mdui/dist/js/mdui.min.js"></script>
-	<script src="node_modules/screenlog/dist/screenlog.min.js"></script>
 	<link rel="stylesheet" href="node_modules/mdui/dist/css/mdui.min.css" />
 </head>
 
@@ -311,7 +310,87 @@
 		}
 		function sampleFileStart(file_path1){
 			var path = require("path")
-
+			var fs = require("fs")
+        	var xlsx = require("node-xlsx")
+        	var sampleSheets = xlsx.parse(file_path1[0])
+        	var sampleSheetsData = sampleSheets[0].data
+        	var sampleLineData = []
+        	var newSampleLineData = []
+			for(var j=1;j<sampleSheetsData.length;j++){
+          		sampleLineData.push(sampleSheetsData[j])
+          		console.log("sampleLineData",sampleLineData)
+        	}
+			var displaySampleData = document.getElementById("tableContent")
+        	displaySampleData.innerHTML=`<tr width="100%">
+				<th>样本编号</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>年龄</th>
+				<th>关系</th>
+				<th>备注</th>
+				<th>送检医师</th>
+				<th>采样日期</th>
+				<th>接收日期</th>
+				<th>报告日期</th>
+				<th>样本类型</th>
+				<th>21三体</th>
+				<th>18三体</th>
+				<th>13三体</th>
+				<th>性染色体</th>
+				<th>结果描述</th>
+                </tr>`
+				sampleLineData.forEach(function(item,index){
+					var leftSlash ='/'
+					if (sampleLineData[index][0] == ' ' || sampleLineData[index][0] == undefined) {
+                  			sampleLineData[index][0] = leftSlash
+              		}
+					if (sampleLineData[index][1] == ' ' || sampleLineData[index][1] == undefined) {
+                  			sampleLineData[index][1] = leftSlash
+              		}
+					if (sampleLineData[index][2] == ' ' || sampleLineData[index][2] == undefined) {
+                  			sampleLineData[index][2] = leftSlash
+              		}
+              		if (sampleLineData[index][3] == ' ' || sampleLineData[index][3] == undefined) {
+              		    sampleLineData[index][3] = leftSlash
+              		}
+              		if (sampleLineData[index][4] == ' ' || sampleLineData[index][4] == undefined) {
+              		    sampleLineData[index][4] = leftSlash
+              		}
+					if (sampleLineData[index][5] == ' ' || sampleLineData[index][5] == undefined) {
+              		    sampleLineData[index][5] = leftSlash
+              		}
+					if (sampleLineData[index][6] == ' ' || sampleLineData[index][6] == undefined) {
+              		    sampleLineData[index][6] = leftSlash
+              		}
+              		if (sampleLineData[index][7] == ' ' || sampleLineData[index][7] == undefined) {
+              		    sampleLineData[index][7] = leftSlash
+              		}
+              		if (sampleLineData[index][8] == ' ' || sampleLineData[index][8] == undefined) {
+              		    sampleLineData[index][8] = leftSlash
+              		}
+					if (sampleLineData[index][9] == ' ' || sampleLineData[index][9] == undefined) {
+              		    sampleLineData[index][9] = leftSlash
+              		}
+					if (sampleLineData[index][10] == ' ' || sampleLineData[index][10] == undefined) {
+              		    sampleLineData[index][10] = leftSlash
+              		}
+					  if (sampleLineData[index][11] == ' ' || sampleLineData[index][11] == undefined) {
+              		    sampleLineData[index][11] = leftSlash
+              		}
+              		if (sampleLineData[index][12] == '/' || sampleLineData[index][12] == undefined) {
+              		    sampleLineData[index][12] = ''
+              		}
+					  if (sampleLineData[index][13] == '/' || sampleLineData[index][13] == undefined) {
+              		    sampleLineData[index][13] = ''
+              		}
+              		if (sampleLineData[index][14] == ' ' || sampleLineData[index][14] == undefined) {
+              		    sampleLineData[index][14] = leftSlash
+              		}
+              		if (sampleLineData[index][15] == ' ' || sampleLineData[index][15] == undefined) {
+              		    sampleLineData[index][15] = leftSlash
+              		}
+					displaySampleData.innerHTML += "<tr><td>" + sampleLineData[index][0] + "</td><td>" + sampleLineData[index][1] + "</td><td>" + sampleLineData[index][2] + "</td><td>" + sampleLineData[index][3] + "</td><td>" + sampleLineData[index][4] + "</td><td>" + sampleLineData[index][5] + "</td><td>" + sampleLineData[index][6] + "</td><td>" + sampleLineData[index][7] + "</td><td>" + sampleLineData[index][8] + "</td><td>" + sampleLineData[index][9] + "</td><td>" + sampleLineData[index][10] + "</td><td>" + sampleLineData[index][11] +"</td><td>" + sampleLineData[index][12] +"</td><td>" + sampleLineData[index][13] + "</td><td>" + sampleLineData[index][14] +"</td><td>" + sampleLineData[index][15] +"</td></tr>"
+				})	
 		}
 		// event: drag file(s) to window
 		const holder = document.getElementById("holder");
