@@ -1,6 +1,8 @@
 {
   "name": "Aneufiler",
-  "author": "NTLx",
+  "author": {
+    "email": "huafeng.wang@cubicise.com"
+  },
   "version": "0.3.2",
   "description": "AneuFiler",
   "license": "GPL-3.0",
@@ -17,9 +19,6 @@
     "Data Analysis",
     "AneuFiler"
   ],
-  "author":{
-    "email": "huafeng.wang@cubicise.com"
-  },
   "devDependencies": {
     "electron": "^13.6.6",
     "electron-builder": "^22.13.1"
@@ -67,17 +66,17 @@
     },
     "linux": {
       "icon": "tmp.iconset/icon_128X128.png",
-      "category":"Network",
+      "category": "Network",
       "target": [
-              "deb"
-        ],
-        "artifactName":"${productName}.v${version}.${ext}"
-      }
+        "deb"
+      ],
+      "artifactName": "${productName}.v${version}.${ext}"
+    }
   },
   "dependencies": {
     "electron-find": "^1.0.7",
     "electron-log": "^4.4.1",
     "mdui": "^1.0.1",
-    "screenlog": "^0.3.0"
+    "node-xlsx": "^0.21.0"
   }
 }
