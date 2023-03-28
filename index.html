@@ -3,6 +3,7 @@
 
 <head>
 	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>AneuFiler</title>
 	<script src="node_modules/mdui/dist/js/mdui.min.js"></script>
 	<script src="node_modules/screenlog/dist/screenlog.min.js"></script>
@@ -14,6 +15,9 @@
 		<a href="#tab1" class="mdui-ripple mdui-tab-active" onmousedown="mOver1(this)">
 			<i id="tab1_icon" class="mdui-icon material-icons">&#xe24d;</i>
 		</a>
+		<a href="#tab4" class="mdui-ripple" onmousedown="mOver4(this)">
+			<i id="tab4_icon" class="mdui-icon material-icons">&#xe865;</i>
+		   </a>
 		<a href="#tab2" class="mdui-ripple" onmousedown="mOver2(this)">
 			<i id="tab2_icon" class="mdui-icon material-icons">&#xe8b8;</i>
 		</a>
@@ -57,19 +61,52 @@
 
 		</div>
 	</div>
+	<div id="tab4" class="mdui-p-a-1">
+		<div style="overflow-y: auto;height: 80vh;">
+		  <button id="addUploadSample" class="mdui-btn mdui-ripple mdui-color-orange mdui-btn-raised">上传样本数据</button>
+		  <p style="text-align: center;font-weight: bold;">样本信息数据</p>
+		  <table border="1" id="tableContent" style="white-space: nowrap;text-align:center;">
+			  <tr width="100%">
+				<th>样本编号</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>年龄</th>
+				<th>关系</th>
+				<th>备注</th>
+				<th>送检医师</th>
+				<th>采样日期</th>
+				<th>接收日期</th>
+				<th>报告日期</th>
+				<th>样本类型</th>
+				<th>21三体</th>
+				<th>18三体</th>
+				<th>13三体</th>
+				<th>性染色体</th>
+				<th>结果描述</th>
+			  </tr>
+		  </table>
+		</div>
+	</div>
 	<div id="tab2" class="mdui-p-a-3">
-		<div class="mdui-valign mdui-center mdui-p-a-3">
+		<div class="mdui-valign mdui-col-xs-4 mdui-center mdui-p-a-3">
 			<label class="mdui-switch mdui-center">
 				<input id="sample_out" type="checkbox" />
 				<i class="mdui-switch-icon"></i>
 				<span class="mdui-m-a-1">按样本输出</span>
 			</label>
 		</div>
-		<div class="mdui-valign mdui-center mdui-p-a-3">
+		<div class="mdui-valign mdui-col-xs-4 mdui-center mdui-p-a-3">
 			<label class="mdui-switch mdui-center">
 				<input id="closebox" type="checkbox" />
 				<i class="mdui-switch-icon"></i>
 				<span class="mdui-m-a-1">关闭退出提示窗口</span>
+			</label>
+		</div>
+		<div class="mdui-valign  mdui-col-xs-4 mdui-center mdui-p-a-3">
+			<label class="mdui-switch mdui-center">
+				<input id="report" type="checkbox" />
+				<i class="mdui-switch-icon"></i>
+				<span class="mdui-m-a-1">输出项目报告</span>
 			</label>
 		</div>
 		<div class="mdui-valign mdui-center mdui-p-a-3">
@@ -110,15 +147,30 @@
 
 		var $ = mdui.$;
 		var switch_status = 0;
+		var outputReportStatus = 0
 		var out_status = function () {
 			if ($("#sample_out").is(":checked")) {
 				console.log("Sample split output is on");
 				mdui.snackbar({ message: "输出将会按样本拆分" });
 				switch_status = 1;
+				
 			} else {
 				console.log("Sample split output is off");
 				mdui.snackbar({ message: "每个输入文件将只输出一个结果文件" });
 				switch_status = 0;
+			}
+		};
+		var outputReport_status = function () {
+			if ($("#report").is(":checked")) {
+				console.log("打开输出项目报告");
+				mdui.snackbar({ message: "打开输出项目报告" });
+				outputReportStatus = 1;
+				var tab4 = document.querySelector("#tab4_icon")
+                tab4.click()
+			} else {
+				console.log("关闭输出项目报告");
+				mdui.snackbar({ message: "关闭输出项目报告" });
+				outputReportStatus = 0;
 			}
 		};
 		var box_status = function () {
@@ -132,6 +184,7 @@
 				openBox();
 			}
 		};
+		$("#report").on("click", outputReport_status);
 		$("#sample_out").on("click", out_status);
 		$("#closebox").on("click", box_status);
 		function closeBox() {
@@ -169,6 +222,9 @@
 		function mOver3(obj) {
 			mdui.snackbar({ message: "进入日志面板", timeout: 1000 })
 		}
+		function mOver4(obj) {
+        	mdui.snackbar({ message:"进入出报告面板", timeout:1000 })
+      	}
 		// child_process.execFile method
 		// var runningLogMessage = document.getElementById('restore').innerHTML
 		// if (runningLogMessage === "") {
@@ -192,9 +248,10 @@
 		// const content = fs.readFileSync(log.transports.file.resolvePath)
 		// console.log(content)
 		var exec = require("child_process").execFile;
+	
 		function start(file_path, Encoding, switch_status) {
-			console.log("Request handler 'start' was called.");
-			console.log(file_path)
+				console.log("Request handler 'start' was called.");
+				console.log(file_path)
 			if (file_path.constructor === Array) {
 				file_name = file_path[0].trim()
 				fileName = file_name.substring(file_name.lastIndexOf('\\') + 1)
@@ -212,7 +269,7 @@
 			if (process.platform === "win32") {
 				exe_file = path.join(__dirname, "analysis.exe");
 			}
-			exec(
+				exec(
 				exe_file,
 				["-i", file_path, "-e", Encoding, "-s", switch_status],
 				function (error, stdout, stderr) {
@@ -251,6 +308,10 @@
 					}
 				}
 			);
+		}
+		function sampleFileStart(file_path1){
+			var path = require("path")
+
 		}
 		// event: drag file(s) to window
 		const holder = document.getElementById("holder");
@@ -298,6 +359,27 @@
 					console.log("No file selected");
 				});
 		}
+		var uploadSample = document.getElementById("addUploadSample")
+      	uploadSample.addEventListener("click",showUploadSampleDialog);
+      	function showUploadSampleDialog(){
+      	  var options= {
+      	    defaultPath:default_path,
+      	    filters:[{name:"RawData",extensions:["xlsx","xls"]}],
+      	    properties:["openFile"]
+      	  }
+      	  dialog.showOpenDialog(options).then((result)=>{
+      	    console.log("Now Select sample file"+result.filePaths)
+      	    if(!result.filePaths[0]){
+      	      console.log("No sample file selected")
+      	      mdui.snackbar({message:"未选择样本文件"})
+      	      return
+      	    }else{
+      	      sampleFileStart(result.filePaths)
+      	    }
+      	  }).catch((err)=>{
+      	    console.log("err",err)
+      	  })
+      	}
 		const tab3 = document.querySelector("#tab3_icon")
 		const ipc = require('electron').ipcRenderer
 		tab3.onclick = () => {
