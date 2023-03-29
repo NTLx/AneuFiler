@@ -66,22 +66,31 @@
 		  <p style="text-align: center;font-weight: bold;">样本信息数据</p>
 		  <table border="1" id="tableContent" style="white-space: nowrap;text-align:center;">
 			  <tr width="100%">
-				<th>样本编号</th>
-				<th>姓名</th>
+				<th>母亲样本编号</th>
+				<th>胎儿样本编号</th>
+				<th>母亲样本名</th>
+				<th>胎儿样本名</th>
 				<th>性别</th>
 				<th>年龄</th>
-				<th>关系</th>
-				<th>备注</th>
+				<th>与胎儿关系</th>
+				<th>与母亲关系</th>
+				<th>母亲样本备注</th>
+				<th>胎儿样本备注</th>
 				<th>送检医师</th>
 				<th>采样日期</th>
 				<th>接收日期</th>
 				<th>报告日期</th>
-				<th>样本类型</th>
-				<th>21三体</th>
-				<th>18三体</th>
-				<th>13三体</th>
-				<th>性染色体</th>
-				<th>结果描述</th>
+				<th>母亲样本类型</th>
+				<th>胎儿样本类型</th>
+				<th>母亲21三体</th>
+				<th>胎儿21三体</th>
+				<th>母亲18三体</th>
+				<th>胎儿18三体</th>
+				<th>母亲13三体</th>
+				<th>胎儿13三体</th>
+				<th>母亲性染色体</th>
+				<th>胎儿性染色体</th>
+				<th>报告结果描述</th>
 			  </tr>
 		  </table>
 		</div>
@@ -322,22 +331,31 @@
         	}
 			var displaySampleData = document.getElementById("tableContent")
         	displaySampleData.innerHTML=`<tr width="100%">
-				<th>样本编号</th>
-				<th>姓名</th>
+				<th>母亲样本编号</th>
+				<th>胎儿样本编号</th>
+				<th>母亲样本名</th>
+				<th>胎儿样本名</th>
 				<th>性别</th>
 				<th>年龄</th>
-				<th>关系</th>
-				<th>备注</th>
+				<th>与胎儿关系</th>
+				<th>与母亲关系</th>
+				<th>母亲样本备注</th>
+				<th>胎儿样本备注</th>
 				<th>送检医师</th>
 				<th>采样日期</th>
 				<th>接收日期</th>
 				<th>报告日期</th>
-				<th>样本类型</th>
-				<th>21三体</th>
-				<th>18三体</th>
-				<th>13三体</th>
-				<th>性染色体</th>
-				<th>结果描述</th>
+				<th>母亲样本类型</th>
+				<th>胎儿样本类型</th>
+				<th>母亲21三体</th>
+				<th>胎儿21三体</th>
+				<th>母亲18三体</th>
+				<th>胎儿18三体</th>
+				<th>母亲13三体</th>
+				<th>胎儿13三体</th>
+				<th>母亲性染色体</th>
+				<th>胎儿性染色体</th>
+				<th>报告结果描述</th>
                 </tr>`
 				sampleLineData.forEach(function(item,index){
 					var leftSlash ='/'
@@ -377,10 +395,10 @@
 					  if (sampleLineData[index][11] == ' ' || sampleLineData[index][11] == undefined) {
               		    sampleLineData[index][11] = leftSlash
               		}
-              		if (sampleLineData[index][12] == '/' || sampleLineData[index][12] == undefined) {
+              		if (sampleLineData[index][12] == ' ' || sampleLineData[index][12] == undefined) {
               		    sampleLineData[index][12] = ''
               		}
-					  if (sampleLineData[index][13] == '/' || sampleLineData[index][13] == undefined) {
+					  if (sampleLineData[index][13] == ' ' || sampleLineData[index][13] == undefined) {
               		    sampleLineData[index][13] = ''
               		}
               		if (sampleLineData[index][14] == ' ' || sampleLineData[index][14] == undefined) {
@@ -389,8 +407,36 @@
               		if (sampleLineData[index][15] == ' ' || sampleLineData[index][15] == undefined) {
               		    sampleLineData[index][15] = leftSlash
               		}
-					displaySampleData.innerHTML += "<tr><td>" + sampleLineData[index][0] + "</td><td>" + sampleLineData[index][1] + "</td><td>" + sampleLineData[index][2] + "</td><td>" + sampleLineData[index][3] + "</td><td>" + sampleLineData[index][4] + "</td><td>" + sampleLineData[index][5] + "</td><td>" + sampleLineData[index][6] + "</td><td>" + sampleLineData[index][7] + "</td><td>" + sampleLineData[index][8] + "</td><td>" + sampleLineData[index][9] + "</td><td>" + sampleLineData[index][10] + "</td><td>" + sampleLineData[index][11] +"</td><td>" + sampleLineData[index][12] +"</td><td>" + sampleLineData[index][13] + "</td><td>" + sampleLineData[index][14] +"</td><td>" + sampleLineData[index][15] +"</td></tr>"
-				})	
+					if (sampleLineData[index][16] == ' ' || sampleLineData[index][16] == undefined) {
+              		    sampleLineData[index][16] = leftSlash
+              		}
+					if (sampleLineData[index][17] == ' ' || sampleLineData[index][17] == undefined) {
+              		    sampleLineData[index][17] = leftSlash
+              		}
+					if (sampleLineData[index][18] == ' ' || sampleLineData[index][18] == undefined) {
+              		    sampleLineData[index][18] = leftSlash
+              		}
+					if (sampleLineData[index][19] == ' ' || sampleLineData[index][19] == undefined) {
+              		    sampleLineData[index][19] = leftSlash
+              		}
+					if (sampleLineData[index][20] == ' ' || sampleLineData[index][20] == undefined) {
+              		    sampleLineData[index][20] = leftSlash
+              		}
+					if (sampleLineData[index][21] == ' ' || sampleLineData[index][21] == undefined) {
+              		    sampleLineData[index][21] = leftSlash
+              		}
+					if (sampleLineData[index][22] == ' ' || sampleLineData[index][22] == undefined) {
+              		    sampleLineData[index][22] = leftSlash
+              		}
+					if (sampleLineData[index][23] == ' ' || sampleLineData[index][23] == undefined) {
+              		    sampleLineData[index][23] = leftSlash
+              		}
+					if (sampleLineData[index][24] == ' ' || sampleLineData[index][24] == undefined) {
+              		    sampleLineData[index][24] = leftSlash
+              		}
+					displaySampleData.innerHTML += "<tr><td>" + sampleLineData[index][0] + "</td><td>" + sampleLineData[index][1] + "</td><td>" + sampleLineData[index][2] + "</td><td>" + sampleLineData[index][3] + "</td><td>" + sampleLineData[index][4] + "</td><td>" + sampleLineData[index][5] + "</td><td>" + sampleLineData[index][6] + "</td><td>" + sampleLineData[index][7] + "</td><td>" + sampleLineData[index][8] + "</td><td>" + sampleLineData[index][9] + "</td><td>" + sampleLineData[index][10] + "</td><td>" + sampleLineData[index][11] +"</td><td>" + sampleLineData[index][12] +"</td><td>" + sampleLineData[index][13] + "</td><td>" + sampleLineData[index][14] +"</td><td>" + sampleLineData[index][15] +"</td><td>" + sampleLineData[index][16]+"</td><td>" + sampleLineData[index][17]+"</td><td>" + sampleLineData[index][18]+"</td><td>" + sampleLineData[index][19]+"</td><td>" + sampleLineData[index][20]+"</td><td>" + sampleLineData[index][21]+"</td><td>" + sampleLineData[index][22]+"</td><td>" + sampleLineData[index][23]+"</td><td>" + sampleLineData[index][24]+"</td></tr>"
+				
+			})	
 		}
 		// event: drag file(s) to window
 		const holder = document.getElementById("holder");
