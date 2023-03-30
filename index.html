@@ -448,7 +448,40 @@
 					if (sampleLineData[index][24] == ' ' || sampleLineData[index][24] == undefined) {
               		    sampleLineData[index][24] = leftSlash
               		}
-					displaySampleData.innerHTML += "<tr><td>" + sampleLineData[index][0] + "</td><td>" + sampleLineData[index][1] + "</td><td>" + sampleLineData[index][2] + "</td><td>" + sampleLineData[index][3] + "</td><td>" + sampleLineData[index][4] + "</td><td>" + sampleLineData[index][5] + "</td><td>" + sampleLineData[index][6] + "</td><td>" + sampleLineData[index][7] + "</td><td>" + sampleLineData[index][8] + "</td><td>" + sampleLineData[index][9] + "</td><td>" + sampleLineData[index][10] + "</td><td>" + sampleLineData[index][11] +"</td><td>" + sampleLineData[index][12] +"</td><td>" + sampleLineData[index][13] + "</td><td>" + sampleLineData[index][14] +"</td><td>" + sampleLineData[index][15] +"</td><td>" + sampleLineData[index][16]+"</td><td>" + sampleLineData[index][17]+"</td><td>" + sampleLineData[index][18]+"</td><td>" + sampleLineData[index][19]+"</td><td>" + sampleLineData[index][20]+"</td><td>" + sampleLineData[index][21]+"</td><td>" + sampleLineData[index][22]+"</td><td>" + sampleLineData[index][23]+"</td><td>" + sampleLineData[index][24]+"</td></tr>"
+					// 报告日期
+					var reportDateTime = sampleLineData[index][13]
+					//日期格式转换
+					function formatDate1(numb, format="年",format1="月",format2="日") {
+						let time = new Date((numb - 1) * 24 * 3600000 + 1)
+						time.setYear(time.getFullYear() - 70)
+						let year = time.getFullYear() + ''
+						let month = time.getMonth() + 1 + ''
+						let date = time.getDate() + ''
+						if(format && format.length === 1) {
+						    return year + format + (month < 10 ? '0' + month : month) + format1 + (date < 10 ? '0' + date : date)+format2
+						}
+						return year+(month < 10 ? '0' + month : month)+(date < 10 ? '0' + date : date)
+					}
+					//采样日期
+					var samplingDate = sampleLineData[index][11]
+					function formatDate2(numb, format="-") {
+						let time = new Date((numb - 1) * 24 * 3600000 + 1)
+						time.setYear(time.getFullYear() - 70)
+						let year = time.getFullYear() + ''
+						let month = time.getMonth() + 1 + ''
+						let date = time.getDate() + ''
+						if(format && format.length === 1) {
+						    return year + format + (month < 10 ? '0' + month : month) + format +(date < 10 ? '0' + date : date)
+						}
+						return year+(month < 10 ? '0' + month : month)+(date < 10 ? '0' + date : date)
+					}
+					//接收日期
+					var ReceiveDate = sampleLineData[index][12]
+					//调用日期格式转换方法
+					var newReportDate=formatDate1(reportDateTime)
+					var newSamplingDate = formatDate2(samplingDate)
+					var newReceiveDate = formatDate2(ReceiveDate)
+					displaySampleData.innerHTML += "<tr><td>" + sampleLineData[index][0] + "</td><td>" + sampleLineData[index][1] + "</td><td>" + sampleLineData[index][2] + "</td><td>" + sampleLineData[index][3] + "</td><td>" + sampleLineData[index][4] + "</td><td>" + sampleLineData[index][5] + "</td><td>" + sampleLineData[index][6] + "</td><td>" + sampleLineData[index][7] + "</td><td>" + sampleLineData[index][8] + "</td><td>" + sampleLineData[index][9] + "</td><td>" + sampleLineData[index][10] + "</td><td>" + newSamplingDate +"</td><td>" + newReceiveDate +"</td><td>" + newReportDate + "</td><td>" + sampleLineData[index][14] +"</td><td>" + sampleLineData[index][15] +"</td><td>" + sampleLineData[index][16]+"</td><td>" + sampleLineData[index][17]+"</td><td>" + sampleLineData[index][18]+"</td><td>" + sampleLineData[index][19]+"</td><td>" + sampleLineData[index][20]+"</td><td>" + sampleLineData[index][21]+"</td><td>" + sampleLineData[index][22]+"</td><td>" + sampleLineData[index][23]+"</td><td>" + sampleLineData[index][24]+"</td></tr>"
 					var officegen = require("officegen");
 					var fs = require("fs");
 					
@@ -511,9 +544,7 @@
 					footer2.addText(addressNameNumber,{font_size:9,font_face:"Times New Roman"})
 					footer2.addText(addressNameHao,{font_size:9})
 					footer2.addText("                                   报告日期：",{font_size:9,bold:true})
-					console.log("111")
-					footer2.addText(sampleLineData[index][13],{font_size:9,font_face:"Times New Roman"})
-					console.log("222")
+					footer2.addText(newReportDate,{font_size:9,font_face:"Times New Roman"})
 					//var tows = ['id', 'provinceZh', 'leaderZh', 'cityZh', 'cityEn'];//创建一个和表头对应且名称与数据库字段对应数据，便于循环取出数据
 					var pObj = docx.createP({ align: "center" }); // 创建行 设置居中 大标题
 					pObj.addText("QF-PCR", {
@@ -586,7 +617,7 @@
 					    },
 					    {
 					      type: "text",
-					      val: sampleLineData[index][11],
+					      val: newSamplingDate,
 					      opt: { font_size: 10.5,font_face:"Times New Roman"},
 					    },
 					    {
@@ -596,7 +627,7 @@
 					    },
 					    {
 					      type: "text",
-					      val: sampleLineData[index][12],
+					      val: newReceiveDate,
 					      opt: { font_size: 10.5,font_face:"Times New Roman"},
 					    },
 					  ],
