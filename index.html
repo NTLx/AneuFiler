@@ -321,10 +321,24 @@
 			var path = require("path")
 			var fs = require("fs")
         	var xlsx = require("node-xlsx")
+			var sampleFileNamePath =file_path1[0].trim()
+			console.log(sampleFileNamePath)
+        	var sampleFileName = sampleFileNamePath.substring(sampleFileNamePath.lastIndexOf("\\")+1)
+        	console.log("sampleFileName",sampleFileName)
+        	var sampleFileNameCurrentPath = sampleFileNamePath.substring(0,sampleFileNamePath.lastIndexOf("\\")+1)
+        	console.log("sampleFileNameCurrentPath",sampleFileNameCurrentPath)
+        	log.info("\n"+"当前处理文件名："+sampleFileName+"\n"+"成功传入输入样本数据文件")
         	var sampleSheets = xlsx.parse(file_path1[0])
         	var sampleSheetsData = sampleSheets[0].data
         	var sampleLineData = []
         	var newSampleLineData = []
+			var outFileName =[]
+			var outFileNamePath=[]
+			// var docx = []
+			// var header1 =[]
+			// var header2= []
+			// var reportDateTime=[]
+			// var footer2=[]
 			for(var j=1;j<sampleSheetsData.length;j++){
           		sampleLineData.push(sampleSheetsData[j])
           		console.log("sampleLineData",sampleLineData)
@@ -384,16 +398,16 @@
               		    sampleLineData[index][7] = leftSlash
               		}
               		if (sampleLineData[index][8] == ' ' || sampleLineData[index][8] == undefined) {
-              		    sampleLineData[index][8] = leftSlash
+              		    sampleLineData[index][8] = ''
               		}
 					if (sampleLineData[index][9] == ' ' || sampleLineData[index][9] == undefined) {
-              		    sampleLineData[index][9] = leftSlash
+              		    sampleLineData[index][9] = ''
               		}
 					if (sampleLineData[index][10] == ' ' || sampleLineData[index][10] == undefined) {
-              		    sampleLineData[index][10] = leftSlash
+              		    sampleLineData[index][10] = ''
               		}
 					  if (sampleLineData[index][11] == ' ' || sampleLineData[index][11] == undefined) {
-              		    sampleLineData[index][11] = leftSlash
+              		    sampleLineData[index][11] = ''
               		}
               		if (sampleLineData[index][12] == ' ' || sampleLineData[index][12] == undefined) {
               		    sampleLineData[index][12] = ''
@@ -435,8 +449,1021 @@
               		    sampleLineData[index][24] = leftSlash
               		}
 					displaySampleData.innerHTML += "<tr><td>" + sampleLineData[index][0] + "</td><td>" + sampleLineData[index][1] + "</td><td>" + sampleLineData[index][2] + "</td><td>" + sampleLineData[index][3] + "</td><td>" + sampleLineData[index][4] + "</td><td>" + sampleLineData[index][5] + "</td><td>" + sampleLineData[index][6] + "</td><td>" + sampleLineData[index][7] + "</td><td>" + sampleLineData[index][8] + "</td><td>" + sampleLineData[index][9] + "</td><td>" + sampleLineData[index][10] + "</td><td>" + sampleLineData[index][11] +"</td><td>" + sampleLineData[index][12] +"</td><td>" + sampleLineData[index][13] + "</td><td>" + sampleLineData[index][14] +"</td><td>" + sampleLineData[index][15] +"</td><td>" + sampleLineData[index][16]+"</td><td>" + sampleLineData[index][17]+"</td><td>" + sampleLineData[index][18]+"</td><td>" + sampleLineData[index][19]+"</td><td>" + sampleLineData[index][20]+"</td><td>" + sampleLineData[index][21]+"</td><td>" + sampleLineData[index][22]+"</td><td>" + sampleLineData[index][23]+"</td><td>" + sampleLineData[index][24]+"</td></tr>"
-				
-			})	
+					var officegen = require("officegen");
+					var fs = require("fs");
+					
+					docx = officegen({
+					  type: "docx",
+					  pageMargins: {
+					    top: 141,
+					    bottom: 850,
+					    left: 908,
+					    right: 908,
+					  },
+					  columns:"1"
+					}); //word
+
+					docx.on("finalize", function (written) {
+					  console.log(
+					    "Finish to create Word file.\nTotal bytes created: " + written + "\n"
+					  );
+					});
+
+					docx.on("error", function (err) {
+					  console.log(err);
+					});
+					var header1 = docx.getHeader().createP();
+					var header2 = docx.getHeader().createP({ align: "right", superscript: true, subscript: true });
+					// var pObj = docx.createP()
+					var pic = path.join(__dirname,"./hunanjiahui.png")
+					console.log("pic",pic)
+					header1.addImage(path.join(__dirname,"./hunanjiahui.png"), {
+					  cx: 685,
+					  cy: 75,
+					  underline:true,
+					  color:"ff0000"
+					});
+					header2.addText("家系编号:", { font_size: 10.5,line_height:200});
+					var footer = docx.getFooter().createP();
+					var footer1 = docx.getFooter().createP();
+					var InspectorName = "刘鑫林";
+					var ReviewerName = "曾桥";
+					var chiefPhysicianName = "邬玲仟";
+					var telephone = "0731-84805365";
+					var addressName = "湖南省长沙市开福区湘雅路";
+					var addressNameNumber ="74"
+					var addressNameHao = "号"
+
+					console.log("reportDateTime",reportDateTime)
+					footer.addHorizontalLine()
+					footer1.addText("检测人：",{font_size:9,bold:true})
+					footer1.addText(InspectorName,{font_size:9})
+					footer1.addText("                                            审核人：",{font_size:9,bold:true})
+					footer1.addText(ReviewerName,{font_size:9})
+					footer1.addText("                                                                                      主任医师：",{font_size:9,bold:true})
+					footer1.addText(chiefPhysicianName,{font_size:9})
+					var footer2 = docx.getFooter().createP();
+					// console.log("footer2[index]",footer2[index])
+					footer2.addText("咨询热线：",{font_size:9,bold:true})
+					footer2.addText(telephone,{font_size:9,font_face:"Times New Roman"})
+					footer2.addText("                         地址：",{font_size:9,bold:true})
+					footer2.addText(addressName,{font_size:9})
+					footer2.addText(addressNameNumber,{font_size:9,font_face:"Times New Roman"})
+					footer2.addText(addressNameHao,{font_size:9})
+					footer2.addText("                                   报告日期：",{font_size:9,bold:true})
+					console.log("111")
+					footer2.addText(sampleLineData[index][13],{font_size:9,font_face:"Times New Roman"})
+					console.log("222")
+					//var tows = ['id', 'provinceZh', 'leaderZh', 'cityZh', 'cityEn'];//创建一个和表头对应且名称与数据库字段对应数据，便于循环取出数据
+					var pObj = docx.createP({ align: "center" }); // 创建行 设置居中 大标题
+					pObj.addText("QF-PCR", {
+					  bold: true,
+					  font_size: 18,
+					  font_face:"Times New Roman"
+					}); // 添加文字 设置字体样式 加粗 大小
+					// 母血污染鉴定及快速筛查检测报告
+					pObj.addText("母血污染鉴定及快速筛查检测报告", {
+					  bold: true,
+					  font_size: 18
+					}); 
+					var pObj1 = docx.createP({ align: "left" });
+					pObj1.addText("样本信息", { bold: true, font_size: 12 });
+					var data1 = [
+					  [
+					    {
+					      type: "text",
+					      val: "家系编号： ",
+					      opt: { font_size: 10.5 },
+					    },
+					    {
+					      type: "text",
+					      val: "",
+					      opt: { font_size: 10.5 },
+					    },
+					    {
+					      type: "text",
+					      val: "                                                                                                      送检机构：",
+					      opt: { font_size: 10.5 },
+					    },
+					    {
+					      type: "text",
+					      val: "三亚市妇幼保健院",
+					      opt: { font_size: 10.5 },
+					    },
+					  ],
+					  [
+					    {
+					      type: "text",
+					      val: "检测类型：",
+					      opt: { font_size: 10.5 },
+					    },
+					    {
+					      type: "text",
+					      val: "QF-PCR",
+					      opt: { font_size: 10.5,font_face:"Times New Roman"},
+					    },
+					    {
+					      type: "text",
+					      val: "母血污染鉴定及快速筛查检测",
+					      opt: { font_size: 10.5 },
+					    },
+					    {
+					      type: "text",
+					      val: "                             送检医师：",
+					      opt: { font_size: 10.5 },
+					    },
+					    {
+					      type: "text",
+					      val: sampleLineData[index][10],
+					      opt: { font_size: 10.5 },
+					    },
+					  ],
+					  [
+					    {
+					      type: "text",
+					      val: "采样日期：",
+					      opt: { font_size: 10.5 },
+					    },
+					    {
+					      type: "text",
+					      val: sampleLineData[index][11],
+					      opt: { font_size: 10.5,font_face:"Times New Roman"},
+					    },
+					    {
+					      type: "text",
+					      val: "                                                                                  接收日期：",
+					      opt: { font_size: 10.5 },
+					    },
+					    {
+					      type: "text",
+					      val: sampleLineData[index][12],
+					      opt: { font_size: 10.5,font_face:"Times New Roman"},
+					    },
+					  ],
+					];
+					docx.createByJson(data1);
+					var style = {
+					  "@w:val": "single",
+					  "@w:sz": "4",
+					  "@w:space": "0",
+					  "@w:color": "000000", //黑色
+					};
+					var borderStyle = {
+					  "w:top": style,
+					  "w:bottom": style,
+					  // 'w:left': style2,
+					  // 'w:right': style2,
+					  "w:insideH": style,
+					  // 'w:insideV': style,
+					};
+					var table1 = [
+					  [
+					    {
+					      val: "样本编号",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        // cellColWidth: 42,
+					        cellColWidth: 1200,
+					        b: true,
+					        // sz: '48',
+					        shd: {
+					          fill: "71c3fb",
+					        },
+					        // fontFamily: "Avenir Book"
+					      },
+					    },
+					    {
+					      val: "姓名",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        b: true,
+					        // cellColWidth: 1500,
+					        // b:true,
+					        // color: "A00000",
+					        // align: "right",
+					        shd: {
+					          fill: "71c3fb",
+					        },
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "性别",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        b: true,
+					        shd: {
+					          fill: "71c3fb",
+					        },
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "年龄",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        b: true,
+					        shd: {
+					          fill: "71c3fb",
+					        },
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "关系",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        b: true,
+					        shd: {
+					          fill: "71c3fb",
+					        },
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "样本类型",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        b: true,
+					        shd: {
+					          fill: "71c3fb",
+					        },
+					        cellColWidth: 1800,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "备注",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        b: true,
+					        shd: {
+					          fill: "71c3fb",
+					        },
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					  ],
+					  [
+					    {
+					      val: sampleLineData[index][0],
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					        fontFamily: "Times New Roman"
+					      },
+					    },
+					    {
+					      val: sampleLineData[index][2],
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 1500,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: sampleLineData[index][4],
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: sampleLineData[index][5],
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					        fontFamily: "Times New Roman"
+					      },
+					    },
+					    {
+					      val: sampleLineData[index][6],
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: sampleLineData[index][14],
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 1000,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: sampleLineData[index][8],
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					  ],
+					  [
+					    {
+					      val: sampleLineData[index][1],
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					        fontFamily: "Times New Roman"
+					      },
+					    },
+					    {
+					      val: sampleLineData[index][3],
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 1500,
+					        fixedLayout: true,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: sampleLineData[index][7],
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: sampleLineData[index][15],
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: sampleLineData[index][9],
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        // cellColWidth: 42,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					  ],
+					];
+					var tableStyle1 = {
+					  tableColWidth: 1400,
+					  tableSize: 18,
+					  tableColor: "ada",
+					  tableAlign: "left",
+					  tableVAlign: "center",
+					  //   borders: true,
+					  borderStyle: borderStyle,
+					  //   columns:[{width:1200},{width:1600},{width:100},{width:100},{width:100},{width:1500},{width:100}]
+					};
+					docx.createTable(table1, tableStyle1);
+					var pObj4 = docx.createP();
+					pObj4.addText("");
+					var pObj2 = docx.createP({ align: "left" });
+					pObj2.addText("检测项目", { bold: true, font_size: 12 });
+					var table2 = [
+					  [
+					    {
+					      val: "项目类型",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        // cellColWidth: 42,
+					        cellColWidth: 2500,
+					        b: true,
+					        // sz: '48',
+					        shd: {
+					          fill: "71c3fb",
+					        },
+					        // fontFamily: "Avenir Book"
+					      },
+					    },
+					    {
+					      val: "检测范围",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        b: true,
+					        cellColWidth: 4000,
+					        // b:true,
+					        // color: "A00000",
+					        // align: "right",
+					        shd: {
+					          fill: "71c3fb",
+					        },
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "检测方法",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        b: true,
+					        shd: {
+					          fill: "71c3fb",
+					        },
+					        cellColWidth: 4000,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					  ],
+					  [
+					    {
+					      val: "QF-PCR母血污染鉴定",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 2200,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "13, 18, 21, X, Y染色体",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 3500,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "QF-PCR + 毛细管电泳扫描",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 3000,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					  ],
+					];
+					// var style2 = {
+					//     '@w:val': 'single',
+					//     '@w:sz': '4',
+					//     '@w:space': '0',
+					//     '@w:color': '000000'//黑色
+					//   }
+					// // var style2 ={
+					// //     '@w:val': 'single',
+					// //     '@w:sz': '4',
+					// //     '@w:space': '1',
+					// //     '@w:color': 'FFFFFF'//白色
+					// // }
+					// var borderStyle = {
+					//     'w:top': style2,
+					//     'w:bottom': style2,
+					//     // 'w:left': style2,
+					//     // 'w:right': style2,
+					//     'w:insideH': style2,
+					//     // 'w:insideV': style,
+					//   }
+					var tableStyle2 = {
+					  tableColWidth: 8600,
+					  tableSize: 18,
+					  tableColor: "ada",
+					  tableAlign: "left",
+					  tableVAlign: "center",
+					  //   borders: true,
+					  borderStyle: borderStyle,
+					  //   columns:[{width:1200},{width:1600},{width:100},{width:100},{width:100},{width:1500},{width:100}]
+					};
+					docx.createTable(table2, tableStyle2);
+					var pObj5 = docx.createP();
+					pObj5.addText("");
+					var pObj3 = docx.createP({ align: "left" });
+					pObj3.addText("筛查检测结果", { bold: true, font_size: 12 });
+
+					var table3 = [
+					  [
+					    {
+					      val: "母血污染分析结果",
+					      opts: {
+					        align: "center",
+					        vAlign: "center",
+					        sz: "21",
+					        // cellColWidth: 42,
+					        cellColWidth: 3500,
+					        b: true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "71c3fb",
+					        // },
+					        // fontFamily: "Avenir Book"
+					      },
+					    },
+					    {
+					      val: "胎儿样本未见母体DNA污染",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        gridSpan: 2,
+					        cellColWidth: 7000,
+					        // b:true,
+					        // color: "A00000",
+					        // align: "right",
+					        // shd: {
+					        //   fill: "71c3fb",
+					        // },
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					  ],
+					  [
+					    {
+					      val: "QF-PCR 分析结果",
+					      opts: {
+					        align: "center",
+					        vAlign: "center",
+					        sz: "21",
+					        b: true,
+					        cellColWidth: 2200,
+					        vMerge: "restart",
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "13 三体",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 2600,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "未见三体",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 3200,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					  ],
+					  [
+					    { opts: { vMerge: "continue" } },
+					    {
+					      val: "18 三体",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 2600,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "未见三体",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 3000,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					  ],
+					  [
+					    { opts: { vMerge: "continue" } },
+					    {
+					      val: "21 三体",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 2600,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "未见三体",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 3000,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					  ],
+					  [
+					    { opts: { vMerge: "continue" } },
+					    {
+					      val: "性染色体",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 2600,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					    {
+					      val: "未见异常",
+					      opts: {
+					        align: "left",
+					        vAlign: "center",
+					        sz: "21",
+					        //   b:true,
+					        cellColWidth: 3000,
+					        // b:true,
+					        // sz: '48',
+					        // shd: {
+					        //   fill: "92CDDC",
+					        //   themeFill: "text1",
+					        //   "themeFillTint": "80"
+					        // }
+					      },
+					    },
+					  ],
+					];
+					var tableStyle3 = {
+					  tableColWidth: 8500,
+					  tableSize: 18,
+					  tableColor: "ada",
+					  tableAlign: "left",
+					  tableVAlign: "center",
+					  //   borders: true,
+					  borderStyle: borderStyle,
+					  //   columns:[{width:1200},{width:1600},{width:100},{width:100},{width:100},{width:1500},{width:100}]
+					};
+					docx.createTable(table3, tableStyle3);
+					var pObj6 = docx.createP({ align: "left" });
+					pObj6.addText("结果描述：", { bold: true, font_size: 10.5 });
+					var pObj7 = docx.createP({indentFirstLine:"440"});
+					var blank = "        ";
+					pObj7.addText(sampleLineData[index][24],{font_size: 10.5});
+					var pObj8 = docx.createP();
+					pObj8.addText("");
+					var pObj16 = docx.createP()
+					pObj16.addText("检测方法：",{bold:true,font_size: 10.5})
+					pObj16.addText("DNA",{font_size: 10.5,font_face:"Times New Roman"})
+					pObj16.addText("从样本中抽提并纯化后，采用多重荧光",{font_size: 10.5})
+					pObj16.addText("DNA",{font_size: 10.5,font_face:"Times New Roman"})
+					pObj16.addText("模板进行扩增，扩增产物在遗传分析仪上进行电泳分析。",{font_size: 10.5})
+					// var data2 = [
+					//   [
+					//     {
+					//       type: "text",
+					//       val: "检测方法：",
+					//       opt: { bold: true, font_size: 10.5 },
+					//     },
+					//     {
+					//       type: "text",
+					//       val: "DNA从样本中抽提并纯化后，采用多重荧光PCR对DNA模板进行扩增，扩增产物在遗传分析仪上进行电泳分析。",
+					//       opt: { font_size: 10.5 },
+					//     },
+					//   ],
+					// ];
+					// docx.createByJson(data2);
+					var pObj9 = docx.createP({ align: "left" });
+					pObj9.addText("局限性声明：", { bold: true, font_size: 10.5 });
+					// var pObj10 = docx.createListOfNumbers ();
+					var pObj10 = docx.createP();
+					pObj10.addText(
+					  "1.",{font_size: 10.5,font_face:"Times New Roman"}
+					);
+					pObj10.addText(
+					  "本检测结果仅为筛查结果，不作为产前诊断结果，不单独作为确诊或排除病例的依据，最终结果需要核型分析方法进行确诊。阴性结果不能排除其他染色体三体，其结果的确认应结合临床进行综合判断；",{font_size: 10.5}
+					);
+					var pObj11 = docx.createP();
+					pObj11.addText(
+					  "2.",{font_size: 10.5,font_face:"Times New Roman"}
+					);
+					pObj11.addText(
+					  "本检测仅对",{font_size: 10.5}
+					);
+					pObj11.addText("21",{font_size: 10.5,font_face:"Times New Roman"})
+					pObj11.addText("号，",{font_size: 10.5})
+					pObj11.addText("18",{font_size: 10.5,font_face:"Times New Roman"})
+					pObj11.addText("号，",{font_size: 10.5})
+					pObj11.addText("13",{font_size: 10.5,font_face:"Times New Roman"})
+					pObj11.addText("号及性染色体进行筛查检测，不能排除其他染色体异常。且只能排除染色体数目异常，不能排除染色体结构异常，亦不能排除微小染色体异常或某些基因突变；",{font_size: 10.5})
+					var pObj12 = docx.createP();
+					pObj12.addText("3.",{font_size: 10.5,font_face:"Times New Roman"});
+					pObj12.addText("本检测不能检测",{font_size: 10.5});
+					pObj12.addText("21",{font_size: 10.5,font_face:"Times New Roman"});
+					pObj12.addText("号、",{font_size: 10.5});
+					pObj12.addText("18",{font_size: 10.5,font_face:"Times New Roman"});
+					pObj12.addText("号、",{font_size: 10.5});
+					pObj12.addText("13",{font_size: 10.5,font_face:"Times New Roman"});
+					pObj12.addText("号及性染色体低比例嵌合体现象。",{font_size: 10.5});
+					// 本检测不能检测21号、18号、13号及性染色体低比例嵌合体现象。
+					// word分页
+					docx.putPageBreak();
+					var pObj13 = docx.createP({ align: "left" });
+					pObj13.addText("QF-PCR", { bold: true, font_size: 10.5,font_face:"Times New Roman"});
+					pObj13.addText("毛细管电泳扫描结果：", { bold: true, font_size: 10.5 });
+					
+					outFileName[index] =sampleLineData[index][1]+sampleLineData[index][3]+"Qpcr快检"+"-"+".docx"
+					console.log("outFileName[index]",outFileName[index])
+					outFileNamePath[index] = path.join(sampleFileNameCurrentPath,outFileName[index])
+					console.log("outFileNamePath[index]",outFileNamePath[index])
+					var out = fs.createWriteStream(outFileNamePath[index]); // 文件写入
+					out.on("error", function (err) {
+					  console.log(err);
+					});
+					var result1 = docx.generate(out); // 当前目录生成word
+					console.log("result1", result1);
+
+				})	
 		}
 		// event: drag file(s) to window
 		const holder = document.getElementById("holder");
