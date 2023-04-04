@@ -448,6 +448,150 @@
 					if (sampleLineData[index][24] == ' ' || sampleLineData[index][24] == undefined) {
               		    sampleLineData[index][24] = leftSlash
               		}
+					//   
+					var Result ="本结果提示，胎儿样本未见母体DNA污染，"
+					//判断规则1、染色体都为2,性染色体全都对应XN 报告名含-阴性
+					if(sampleLineData[index][16]=="2"&&sampleLineData[index][17]=="2"&&sampleLineData[index][18]=="2"&&sampleLineData[index][19]=="2"&&sampleLineData[index][20]=="2"&&sampleLineData[index][21]=="2"&&sampleLineData[index][22]=="XN"&&sampleLineData[index][23]=="XN"){
+						var Trisomy13 = "未见三体"
+						var Trisomy18 = "未见三体"
+						var Trisomy21 = "未见三体"
+						var sexChromosome = "未见异常"
+						var Trisomy13Color="000000"
+						var Trisomy18Color="000000"
+						var Trisomy21Color="000000"
+						var sexChromosomeColor = "000000"
+						var reportResult ="未见目标染色体数目异常"
+						var reportResultColor ="000000"
+						var reportOtherResult="，可排除18号、13号、21号三体型。"
+						var simpleReport ="-阴性"
+						
+					}else if(sampleLineData[index][16]=="2"&&sampleLineData[index][17]=="3"&&sampleLineData[index][18]=="2"&&sampleLineData[index][19]=="2"&&sampleLineData[index][20]=="2"&&sampleLineData[index][21]=="2"&&sampleLineData[index][22]=="XN"&&sampleLineData[index][23]=="XN"){
+						//判断规则2、21染色体为3,性染色体全都对应XN 报告名含-T21
+						var Trisomy13 = "未见三体"
+						var Trisomy18 = "未见三体"
+						var Trisomy21 = "提示三体"
+						var Trisomy13Color="000000"
+						var Trisomy18Color="000000"
+						var Trisomy21Color="ff0000"
+						var sexChromosome = "未见异常"
+						var sexChromosomeColor = "000000"
+						var reportResult ="提示21号染色体三体"
+						var reportResultColor ="ff0000"
+						var reportOtherResult="，可排除18号、13号三体型。"
+						var simpleReport ="-T21"
+					}else if(sampleLineData[index][16]=="2"&&sampleLineData[index][17]=="2"&&sampleLineData[index][18]=="2"&&sampleLineData[index][19]=="3"&&sampleLineData[index][20]=="2"&&sampleLineData[index][21]=="2"&&sampleLineData[index][22]=="XN"&&sampleLineData[index][23]=="XN"){
+						//判断规则3、18染色体为3,性染色体全都对应XN 报告名含-T18
+						var Trisomy13 = "未见三体"
+						var Trisomy18 = "提示三体"
+						var Trisomy21 = "未见三体"
+						var Trisomy13Color="000000"
+						var Trisomy18Color="ff0000"
+						var Trisomy21Color="000000"
+						var sexChromosome = "未见异常"
+						var sexChromosomeColor = "000000"
+						var reportResult ="提示18号染色体三体"
+						var reportResultColor ="ff0000"
+						var reportOtherResult="，可排除21号、13号三体型。"
+						var simpleReport ="-T18"
+					}else if(sampleLineData[index][16]=="2"&&sampleLineData[index][17]=="2"&&sampleLineData[index][18]=="2"&&sampleLineData[index][19]=="2"&&sampleLineData[index][20]=="2"&&sampleLineData[index][21]=="3"&&sampleLineData[index][22]=="XN"&&sampleLineData[index][23]=="XN"){
+						//判断规则4、13染色体为3,性染色体全都对应XN 报告名含-T13
+						var Trisomy13 = "提示三体"
+						var Trisomy18 = "未见三体"
+						var Trisomy21 = "未见三体"
+						var Trisomy13Color="ff0000"
+						var Trisomy18Color="000000"
+						var Trisomy21Color="000000"
+						var sexChromosome = "未见异常"
+						var sexChromosomeColor = "000000"
+						var reportResult ="提示13号染色体三体"
+						var reportResultColor ="ff0000"
+						var reportOtherResult="，可排除21号、18号三体型。"
+						var simpleReport ="-T13"
+					}else if(sampleLineData[index][16]=="2"&&sampleLineData[index][17]=="3"&&sampleLineData[index][18]=="2"&&sampleLineData[index][19]=="3"&&sampleLineData[index][20]=="2"&&sampleLineData[index][21]=="3"&&sampleLineData[index][22]=="XN"&&sampleLineData[index][23]=="XXX"){
+						//判断规则5、所有染色体为3,胎儿性染色体为XXX 报告名-三倍体
+						var Trisomy13 = "提示三体"
+						var Trisomy18 = "提示三体"
+						var Trisomy21 = "提示三体"
+						var Trisomy13Color="ff0000"
+						var Trisomy18Color="ff0000"
+						var Trisomy21Color="ff0000"
+						var sexChromosome = "提示XXX"
+						var sexChromosomeColor = "ff0000"
+						var reportResult ="提示三倍体XXX"
+						var reportResultColor ="ff0000"
+						var reportOtherResult="。"
+						var simpleReport ="-三倍体"
+					}else if(sampleLineData[index][16]=="2"&&sampleLineData[index][17]=="3"&&sampleLineData[index][18]=="2"&&sampleLineData[index][19]=="3"&&sampleLineData[index][20]=="2"&&sampleLineData[index][21]=="3"&&sampleLineData[index][22]=="XN"&&sampleLineData[index][23]=="XXY"){
+						//判断规则6、所有染色体为3,胎儿性染色体为XXY 报告名-三倍体
+						var Trisomy13 = "提示三体"
+						var Trisomy18 = "提示三体"
+						var Trisomy21 = "提示三体"
+						var Trisomy13Color="ff0000"
+						var Trisomy18Color="ff0000"
+						var Trisomy21Color="ff0000"
+						var sexChromosome = "提示XXY"
+						var sexChromosomeColor = "ff0000"
+						var reportResult ="提示三倍体XXY"
+						var reportResultColor ="ff0000"
+						var reportOtherResult="。"
+						var simpleReport ="-三倍体"
+					}else if(sampleLineData[index][16]=="2"&&sampleLineData[index][17]=="2"&&sampleLineData[index][18]=="2"&&sampleLineData[index][19]=="2"&&sampleLineData[index][20]=="2"&&sampleLineData[index][21]=="2"&&sampleLineData[index][22]=="XN"&&sampleLineData[index][23]=="性染色体数目异常"&&sampleLineData[index][9]=="未见明显MCC，提示X染色体单体，符合亲缘关系"){
+						//判断规则7、所有染色体为2,胎儿性染色体为性染色体数目异常 报告名-X单体
+						var Trisomy13 = "未见三体"
+						var Trisomy18 = "未见三体"
+						var Trisomy21 = "未见三体"
+						var Trisomy13Color="000000"
+						var Trisomy18Color="000000"
+						var Trisomy21Color="000000"
+						var sexChromosome = "提示X染色体单体"
+						var sexChromosomeColor = "ff0000"
+						var reportResult ="提示X染色体单体"
+						var reportResultColor ="ff0000"
+						var reportOtherResult="，可排除18号、13号、21号三体型。"
+						var simpleReport ="-X单体"
+					}else if(sampleLineData[index][16]=="2"&&sampleLineData[index][17]=="2"&&sampleLineData[index][18]=="2"&&sampleLineData[index][19]=="2"&&sampleLineData[index][20]=="2"&&sampleLineData[index][21]=="2"&&sampleLineData[index][22]=="XN"&&sampleLineData[index][23]=="性染色体数目异常"&&sampleLineData[index][9]=="未见明显MCC，提示XXY，符合亲缘关系"){
+						//判断规则8、所有染色体为2,胎儿性染色体为性染色体数目异常 报告名-XXY
+						var Trisomy13 = "未见三体"
+						var Trisomy18 = "未见三体"
+						var Trisomy21 = "未见三体"
+						var Trisomy13Color="000000"
+						var Trisomy18Color="000000"
+						var Trisomy21Color="000000"
+						var sexChromosome = "提示XXY"
+						var sexChromosomeColor = "ff0000"
+						var reportResult ="提示XXY"
+						var reportResultColor ="ff0000"
+						var reportOtherResult="，可排除18号、13号、21号三体型。"
+						var simpleReport ="-XXY"
+					}else if(sampleLineData[index][16]=="2"&&sampleLineData[index][17]=="2"&&sampleLineData[index][18]=="2"&&sampleLineData[index][19]=="2"&&sampleLineData[index][20]=="2"&&sampleLineData[index][21]=="2"&&sampleLineData[index][22]=="XN"&&sampleLineData[index][23]=="性染色体数目异常"&&sampleLineData[index][9]=="未见明显MCC，提示XXX，符合亲缘关系"){
+						//判断规则9、所有染色体为2,胎儿性染色体为性染色体数目异常 报告名-XXX
+						var Trisomy13 = "未见三体"
+						var Trisomy18 = "未见三体"
+						var Trisomy21 = "未见三体"
+						var Trisomy13Color="000000"
+						var Trisomy18Color="000000"
+						var Trisomy21Color="000000"
+						var sexChromosome = "提示XXX"
+						var sexChromosomeColor = "ff0000"
+						var reportResult ="提示XXX"
+						var reportResultColor ="ff0000"
+						var reportOtherResult="，可排除18号、13号、21号三体型。"
+						var simpleReport ="-XXX"
+					}else if(sampleLineData[index][16]=="2"&&sampleLineData[index][17]=="2"&&sampleLineData[index][18]=="2"&&sampleLineData[index][19]=="2"&&sampleLineData[index][20]=="2"&&sampleLineData[index][21]=="2"&&sampleLineData[index][22]=="XN"&&sampleLineData[index][23]=="性染色体数目异常"&&sampleLineData[index][9]=="未见明显MCC，提示XYY，符合亲缘关系"){
+						//判断规则10、所有染色体为2,胎儿性染色体为性染色体数目异常 报告名-XYY
+						var Trisomy13 = "未见三体"
+						var Trisomy18 = "未见三体"
+						var Trisomy21 = "未见三体"
+						var Trisomy13Color="000000"
+						var Trisomy18Color="000000"
+						var Trisomy21Color="000000"
+						var sexChromosome = "提示XYY"
+						var sexChromosomeColor = "ff0000"
+						var reportResult ="提示XYY"
+						var reportResultColor ="ff0000"
+						var reportOtherResult="，可排除18号、13号、21号三体型。"
+						var simpleReport ="-XYY"
+					}
 					// 报告日期
 					var reportDateTime = sampleLineData[index][13]
 					//日期格式转换
@@ -893,7 +1037,7 @@
 					      },
 					    },
 					    {
-					      val: sampleLineData[index][8],
+					      val: "",
 					      opts: {
 					        align: "left",
 					        vAlign: "center",
@@ -1016,7 +1160,7 @@
 					      },
 					    },
 					    {
-					      val: sampleLineData[index][9],
+					      val: '',
 					      opts: {
 					        align: "left",
 					        vAlign: "center",
@@ -1276,12 +1420,13 @@
 					      },
 					    },
 					    {
-					      val: "未见三体",
+					      val: Trisomy13,
 					      opts: {
 					        align: "left",
 					        vAlign: "center",
 					        sz: "21",
 					        //   b:true,
+							color:Trisomy13Color,
 					        cellColWidth: 3200,
 					        // b:true,
 					        // sz: '48',
@@ -1313,13 +1458,14 @@
 					      },
 					    },
 					    {
-					      val: "未见三体",
+					      val: Trisomy18,
 					      opts: {
 					        align: "left",
 					        vAlign: "center",
 					        sz: "21",
 					        //   b:true,
 					        cellColWidth: 3000,
+							color:Trisomy18Color,
 					        // b:true,
 					        // sz: '48',
 					        // shd: {
@@ -1350,13 +1496,14 @@
 					      },
 					    },
 					    {
-					      val: "未见三体",
+					      val: Trisomy21,
 					      opts: {
 					        align: "left",
 					        vAlign: "center",
 					        sz: "21",
 					        //   b:true,
 					        cellColWidth: 3000,
+							color:Trisomy21Color,
 					        // b:true,
 					        // sz: '48',
 					        // shd: {
@@ -1387,20 +1534,14 @@
 					      },
 					    },
 					    {
-					      val: "未见异常",
+					      val: sexChromosome,
 					      opts: {
 					        align: "left",
 					        vAlign: "center",
 					        sz: "21",
 					        //   b:true,
 					        cellColWidth: 3000,
-					        // b:true,
-					        // sz: '48',
-					        // shd: {
-					        //   fill: "92CDDC",
-					        //   themeFill: "text1",
-					        //   "themeFillTint": "80"
-					        // }
+							color:sexChromosomeColor
 					      },
 					    },
 					  ],
@@ -1419,8 +1560,13 @@
 					var pObj6 = docx.createP({ align: "left" });
 					pObj6.addText("结果描述：", { bold: true, font_size: 10.5 });
 					var pObj7 = docx.createP({indentFirstLine:"440"});
-					var blank = "        ";
-					pObj7.addText(sampleLineData[index][24],{font_size: 10.5});
+					pObj7.addText(Result,{font_size: 10.5});
+					console.log("Result",Result)
+					console.log("reportResult",reportResult)
+					console.log("sexChromosome",sexChromosome)
+					console.log("reportOtherResult",reportOtherResult)
+					pObj7.addText(reportResult,{font_size: 10.5,color:reportResultColor});
+					pObj7.addText(reportOtherResult,{font_size: 10.5});
 					var pObj8 = docx.createP();
 					pObj8.addText("");
 					var pObj16 = docx.createP()
@@ -1483,7 +1629,7 @@
 					pObj13.addText("QF-PCR", { bold: true, font_size: 10.5,font_face:"Times New Roman"});
 					pObj13.addText("毛细管电泳扫描结果：", { bold: true, font_size: 10.5 });
 					
-					outFileName[index] =sampleLineData[index][1]+sampleLineData[index][3]+"Qpcr快检"+"-"+".docx"
+					outFileName[index] =sampleLineData[index][1]+sampleLineData[index][3]+"Qpcr快检"+simpleReport+".docx"
 					console.log("outFileName[index]",outFileName[index])
 					outFileNamePath[index] = path.join(sampleFileNameCurrentPath,outFileName[index])
 					console.log("outFileNamePath[index]",outFileNamePath[index])
