@@ -667,9 +667,7 @@
 					var ReviewerName = "曾桥";
 					var chiefPhysicianName = "邬玲仟";
 					var telephone = "0731-84805365";
-					var addressName = "湖南省长沙市开福区湘雅路";
-					var addressNameNumber ="74"
-					var addressNameHao = "号"
+					var addressName = "湖南省长沙市开福区湘雅路74号";
 
 					console.log("reportDateTime",reportDateTime)
 					footer.addHorizontalLine()
@@ -684,23 +682,17 @@
 					footer2.addText("咨询热线：",{font_size:9,bold:true})
 					footer2.addText(telephone,{font_size:9,font_face:"Times New Roman"})
 					footer2.addText("                         地址：",{font_size:9,bold:true})
-					footer2.addText(addressName,{font_size:9})
-					footer2.addText(addressNameNumber,{font_size:9,font_face:"Times New Roman"})
-					footer2.addText(addressNameHao,{font_size:9})
+					footer2.addText(addressName,{font_size:9,font_face:"Times New Roman",font_face_east:"SimSun"})
 					footer2.addText("                                   报告日期：",{font_size:9,bold:true})
-					footer2.addText(newReportDate,{font_size:9,font_face:"Times New Roman"})
+					footer2.addText(newReportDate,{font_size:9,font_face:"Times New Roman",font_face_east:"SimSun"})
 					//var tows = ['id', 'provinceZh', 'leaderZh', 'cityZh', 'cityEn'];//创建一个和表头对应且名称与数据库字段对应数据，便于循环取出数据
 					var pObj = docx.createP({ align: "center" }); // 创建行 设置居中 大标题
-					pObj.addText("QF-PCR", {
+					pObj.addText("QF-PCR母血污染鉴定及快速筛查检测报告", {
 					  bold: true,
 					  font_size: 18,
-					  font_face:"Times New Roman"
+					  font_face:"Times New Roman",
+					  font_face_east:"SimSun"
 					}); // 添加文字 设置字体样式 加粗 大小
-					// 母血污染鉴定及快速筛查检测报告
-					pObj.addText("母血污染鉴定及快速筛查检测报告", {
-					  bold: true,
-					  font_size: 18
-					}); 
 					var pObj1 = docx.createP({ align: "left" });
 					pObj1.addText("样本信息", { bold: true, font_size: 12 });
 					var data1 = [
@@ -734,13 +726,8 @@
 					    },
 					    {
 					      type: "text",
-					      val: "QF-PCR",
-					      opt: { font_size: 10.5,font_face:"Times New Roman"},
-					    },
-					    {
-					      type: "text",
-					      val: "母血污染鉴定及快速筛查检测",
-					      opt: { font_size: 10.5 },
+					      val: "QF-PCR母血污染鉴定及快速筛查检测",
+					      opt: { font_size: 10.5,font_face:"Times New Roman",font_face_east:"SimSun"},
 					    },
 					    {
 					      type: "text",
@@ -900,7 +887,7 @@
 					        shd: {
 					          fill: "71c3fb",
 					        },
-					        cellColWidth: 1800,
+					        cellColWidth: 2000,
 					        // b:true,
 					        // sz: '48',
 					        // shd: {
@@ -1026,7 +1013,7 @@
 					        vAlign: "center",
 					        sz: "21",
 					        //   b:true,
-					        cellColWidth: 1000,
+					        cellColWidth: 1600,
 					        // b:true,
 					        // sz: '48',
 					        // shd: {
@@ -1034,6 +1021,7 @@
 					        //   themeFill: "text1",
 					        //   "themeFillTint": "80"
 					        // }
+							fontFamily: "Times New Roman"
 					      },
 					    },
 					    {
@@ -1080,7 +1068,7 @@
 					        vAlign: "center",
 					        sz: "21",
 					        //   b:true,
-					        cellColWidth: 1500,
+					        cellColWidth: 1600,
 					        fixedLayout: true,
 					        // b:true,
 					        // sz: '48',
@@ -1269,6 +1257,7 @@
 					        //   themeFill: "text1",
 					        //   "themeFillTint": "80"
 					        // }
+							fontFamily:"Times New Roman"
 					      },
 					    },
 					    {
@@ -1286,6 +1275,7 @@
 					        //   themeFill: "text1",
 					        //   "themeFillTint": "80"
 					        // }
+							fontFamily:"Times New Roman"
 					      },
 					    },
 					    {
@@ -1303,6 +1293,7 @@
 					        //   themeFill: "text1",
 					        //   "themeFillTint": "80"
 					        // }
+							fontFamily:"Times New Roman"
 					      },
 					    },
 					  ],
@@ -1380,12 +1371,13 @@
 					        //   themeFill: "text1",
 					        //   "themeFillTint": "80"
 					        // }
+							fontFamily: "Times New Roman"
 					      },
 					    },
 					  ],
 					  [
 					    {
-					      val: "QF-PCR 分析结果",
+					      val: "QF-PCR分析结果",
 					      opts: {
 					        align: "center",
 					        vAlign: "center",
@@ -1400,10 +1392,11 @@
 					        //   themeFill: "text1",
 					        //   "themeFillTint": "80"
 					        // }
+							fontFamily: "Times New Roman"
 					      },
 					    },
 					    {
-					      val: "13 三体",
+					      val: "13三体",
 					      opts: {
 					        align: "left",
 					        vAlign: "center",
@@ -1417,6 +1410,7 @@
 					        //   themeFill: "text1",
 					        //   "themeFillTint": "80"
 					        // }
+							fontFamily: "Times New Roman"
 					      },
 					    },
 					    {
@@ -1441,7 +1435,7 @@
 					  [
 					    { opts: { vMerge: "continue" } },
 					    {
-					      val: "18 三体",
+					      val: "18三体",
 					      opts: {
 					        align: "left",
 					        vAlign: "center",
@@ -1455,6 +1449,7 @@
 					        //   themeFill: "text1",
 					        //   "themeFillTint": "80"
 					        // }
+							fontFamily: "Times New Roman"
 					      },
 					    },
 					    {
@@ -1479,7 +1474,7 @@
 					  [
 					    { opts: { vMerge: "continue" } },
 					    {
-					      val: "21 三体",
+					      val: "21三体",
 					      opts: {
 					        align: "left",
 					        vAlign: "center",
@@ -1493,6 +1488,7 @@
 					        //   themeFill: "text1",
 					        //   "themeFillTint": "80"
 					        // }
+							fontFamily: "Times New Roman"
 					      },
 					    },
 					    {
@@ -1541,7 +1537,8 @@
 					        sz: "21",
 					        //   b:true,
 					        cellColWidth: 3000,
-							color:sexChromosomeColor
+							color:sexChromosomeColor,
+							fontFamily: "Times New Roman"
 					      },
 					    },
 					  ],
@@ -1560,21 +1557,18 @@
 					var pObj6 = docx.createP({ align: "left" });
 					pObj6.addText("结果描述：", { bold: true, font_size: 10.5 });
 					var pObj7 = docx.createP({indentFirstLine:"440"});
-					pObj7.addText(Result,{font_size: 10.5});
+					pObj7.addText(Result,{font_size: 10.5,font_face:"Times New Roman",font_face_east:"SimSun"});
 					console.log("Result",Result)
 					console.log("reportResult",reportResult)
 					console.log("sexChromosome",sexChromosome)
 					console.log("reportOtherResult",reportOtherResult)
-					pObj7.addText(reportResult,{font_size: 10.5,color:reportResultColor});
-					pObj7.addText(reportOtherResult,{font_size: 10.5});
+					pObj7.addText(reportResult,{font_size: 10.5,color:reportResultColor,font_face:"Times New Roman",font_face_east:"SimSun"});
+					pObj7.addText(reportOtherResult,{font_size: 10.5,font_face:"Times New Roman",font_face_east:"SimSun"});
 					var pObj8 = docx.createP();
 					pObj8.addText("");
 					var pObj16 = docx.createP()
 					pObj16.addText("检测方法：",{bold:true,font_size: 10.5})
-					pObj16.addText("DNA",{font_size: 10.5,font_face:"Times New Roman"})
-					pObj16.addText("从样本中抽提并纯化后，采用多重荧光",{font_size: 10.5})
-					pObj16.addText("DNA",{font_size: 10.5,font_face:"Times New Roman"})
-					pObj16.addText("模板进行扩增，扩增产物在遗传分析仪上进行电泳分析。",{font_size: 10.5})
+					pObj16.addText("DNA从样本中抽提并纯化后，采用多重荧光DNA模板进行扩增，扩增产物在遗传分析仪上进行电泳分析。",{font_size: 10.5,font_face:'Times New Roman',font_face_east:'SimSun'})
 					// var data2 = [
 					//   [
 					//     {
@@ -1594,41 +1588,16 @@
 					pObj9.addText("局限性声明：", { bold: true, font_size: 10.5 });
 					// var pObj10 = docx.createListOfNumbers ();
 					var pObj10 = docx.createP();
-					pObj10.addText(
-					  "1.",{font_size: 10.5,font_face:"Times New Roman"}
-					);
-					pObj10.addText(
-					  "本检测结果仅为筛查结果，不作为产前诊断结果，不单独作为确诊或排除病例的依据，最终结果需要核型分析方法进行确诊。阴性结果不能排除其他染色体三体，其结果的确认应结合临床进行综合判断；",{font_size: 10.5}
-					);
+					pObj10.addText("1.本检测结果仅为筛查结果，不作为产前诊断结果，不单独作为确诊或排除病例的依据，最终结果需要核型分析方法进行确诊。阴性结果不能排除其他染色体三体，其结果的确认应结合临床进行综合判断；",{font_size: 10.5,font_face:'Times New Roman',font_face_east:'SimSun'});
 					var pObj11 = docx.createP();
-					pObj11.addText(
-					  "2.",{font_size: 10.5,font_face:"Times New Roman"}
-					);
-					pObj11.addText(
-					  "本检测仅对",{font_size: 10.5}
-					);
-					pObj11.addText("21",{font_size: 10.5,font_face:"Times New Roman"})
-					pObj11.addText("号，",{font_size: 10.5})
-					pObj11.addText("18",{font_size: 10.5,font_face:"Times New Roman"})
-					pObj11.addText("号，",{font_size: 10.5})
-					pObj11.addText("13",{font_size: 10.5,font_face:"Times New Roman"})
-					pObj11.addText("号及性染色体进行筛查检测，不能排除其他染色体异常。且只能排除染色体数目异常，不能排除染色体结构异常，亦不能排除微小染色体异常或某些基因突变；",{font_size: 10.5})
+					pObj11.addText("2.本检测仅对21号，18号，13号及性染色体进行筛查检测，不能排除其他染色体异常。且只能排除染色体数目异常，不能排除染色体结构异常，亦不能排除微小染色体异常或某些基因突变；",{font_size: 10.5,font_face:'Times New Roman',font_face_east:'SimSun'});
 					var pObj12 = docx.createP();
-					pObj12.addText("3.",{font_size: 10.5,font_face:"Times New Roman"});
-					pObj12.addText("本检测不能检测",{font_size: 10.5});
-					pObj12.addText("21",{font_size: 10.5,font_face:"Times New Roman"});
-					pObj12.addText("号、",{font_size: 10.5});
-					pObj12.addText("18",{font_size: 10.5,font_face:"Times New Roman"});
-					pObj12.addText("号、",{font_size: 10.5});
-					pObj12.addText("13",{font_size: 10.5,font_face:"Times New Roman"});
-					pObj12.addText("号及性染色体低比例嵌合体现象。",{font_size: 10.5});
+					pObj12.addText("3.本检测不能检测21号、18号、13号及性染色体低比例嵌合体现象。",{font_size: 10.5,font_face:"Times New Roman",font_face_east:'SimSun'});
 					// 本检测不能检测21号、18号、13号及性染色体低比例嵌合体现象。
 					// word分页
 					docx.putPageBreak();
 					var pObj13 = docx.createP({ align: "left" });
-					pObj13.addText("QF-PCR", { bold: true, font_size: 10.5,font_face:"Times New Roman"});
-					pObj13.addText("毛细管电泳扫描结果：", { bold: true, font_size: 10.5 });
-					
+					pObj13.addText("QF-PCR毛细管电泳扫描结果：", { bold: true, font_size: 10.5,font_face:"Times New Roman",font_face_east:'SimSun'});
 					outFileName[index] =sampleLineData[index][1]+sampleLineData[index][3]+"Qpcr快检"+simpleReport+".docx"
 					console.log("outFileName[index]",outFileName[index])
 					outFileNamePath[index] = path.join(sampleFileNameCurrentPath,outFileName[index])
