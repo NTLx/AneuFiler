@@ -23,6 +23,18 @@ module.exports = defineConfig({
         productName: "AneuFiler",
         appId: "com.test.app",
         extraResources: [
+          {
+            from: "./src/assets/analysis.exe",
+            to: "./analysis.exe",
+          },
+          {
+            from: "./src/assets/analysis.mac",
+            to: "./analysis.mac",
+          },
+          {
+            from: "./src/assets/analysis",
+            to: "./analysis",
+          }
         ],
         dmg: {
           title: "AneuFiler",
