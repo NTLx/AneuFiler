@@ -130,6 +130,28 @@ export default {
         });
       }
     },
+    handleClick(tab,event){
+      console.log(tab.props.label,event);
+    },
+    // 上传下机数据文件处理之前校验方法
+    beforeAvatarUpload(file1){
+      let extension = file1.name.substring(file.name.lastIndexOf(".")+1);
+      console.log("extension",extension);
+      let extensionList = ["txt","csv"];
+      if(extensionList.indexOf(extension)<0){
+        const formatMessage =
+          "很抱歉，您选择的文件格式不符合要求，请重新选择文件！";
+        ElNotification({
+          showClose: true,
+          message: formatMessage,
+          type: "error",
+          position: "top-right",
+          duration: "0",
+          offset: 60,
+        });
+        return false;
+      }
+    }
   },
 };
 </script>
