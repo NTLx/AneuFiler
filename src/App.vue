@@ -45,6 +45,14 @@
                 >
               </div></el-col
             >
+            <el-col :span="12">
+              <div>
+                <el-button type="primary" @click="downloadSampleTemplate">
+                  <el-icon><Download /></el-icon>
+                  下载样本信息模版文件
+                </el-button>
+              </div>
+            </el-col>
           </el-row>
         </el-tab-pane>
       </el-tabs>
@@ -161,10 +169,23 @@ export default {
         return false;
       }
     },
+    // 跳转帮助文档
     help(){
       const { shell } = window.require("electron");
       shell.openExternal("https://github.com/NTLx/AneuFiler");
     },
+    // 下载样本模版文件
+    downloadSampleTemplate() {
+      var path = require("path");
+      var downloadFile = path.join(
+        process.cwd(),
+        "/resources/sampleDataTemplate.xlsx"
+      );
+      var win = window.require("@electron/remote").getCurrentWindow();
+      win.webContents.downloadURL(downloadFile);
+      console.log("downloadFile", downloadFile);
+    },
+    
   },
 };
 </script>
