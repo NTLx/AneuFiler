@@ -67,16 +67,18 @@
             accept=".xlsx,.xls"
             :on-change="handleChange1"
             :http-request="httpRequest1"
-             :before-upload="beforeSampleInformationUpload"
+            :before-upload="beforeSampleInformationUpload"
           >
-            <el-button type="primary" class="uploadSampleData">上传样本信息数据</el-button>
+            <el-button type="primary" class="uploadSampleData"
+              >上传样本信息数据</el-button
+            >
             <template #tip>
-                <div class="el-upload__tip">
-                  样本信息数据文件后缀格式必须为xlsx/xls
-                </div>
+              <div class="el-upload__tip">
+                样本信息数据文件后缀格式必须为xlsx/xls
+              </div>
             </template>
           </el-upload>
-          <el-table :data="tableData" style="width:100%">
+          <el-table :data="tableData" style="width: 100%">
             <el-table-column type="expand">
               <template #default="props">
                 <div m="18">
@@ -111,6 +113,75 @@
             <el-table-column prop="age" label="年龄" />
           </el-table>
         </el-tab-pane>
+        <el-tab-pane label="设置" name="third" class="setting">
+          <div class="settingPosition">
+            <el-row>
+              <el-col :span="24">
+                <el-divider content-position="left">输出文件设置</el-divider>
+              </el-col>
+            </el-row>
+            <el-row class="fileSetting">
+              <el-col :span="8"
+                ><el-switch
+                  v-model="value1"
+                  class="ml-2"
+                  size="large"
+                  inline-prompt
+                  active-text="开启按样本输出"
+                  active-value="1"
+                  inactive-value="0"
+                  inactive-text="开启按样本输出"
+                  @change="switchReceiveStatus"
+                ></el-switch
+              ></el-col>
+              <el-col :span="16" class="spanPosition">
+                <span>格式：</span>
+                <el-radio-group
+                  v-model="radio1"
+                  class="ml-4"
+                  @change="switchRadio"
+                  size="large"
+                >
+                  <el-radio-button label="GBK">GBK</el-radio-button>
+                  <el-radio-button label="UTF-8">UTF-8</el-radio-button>
+                </el-radio-group>
+              </el-col>
+            </el-row>
+            <el-row class="fileSetting">
+              <el-col :span="24" class="spanPosition">
+                <span>选择输出文件种类：</span>
+                <el-radio-group
+                  v-model="radio2"
+                  @change="switchFileType"
+                  size="large"
+                >
+                  <el-radio-button label="summaryFile"
+                    >结果文件</el-radio-button
+                  >
+                  <el-radio-button label="summaryFileAndReportFile"
+                    >结果文件+报告文件</el-radio-button
+                  >
+                  <el-radio-button label="reportFile">报告文件</el-radio-button>
+                </el-radio-group>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="24">
+                <el-divider content-position="left">报告设置</el-divider>
+              </el-col>
+            </el-row>
+            <el-row class="fileSetting">
+              <el-col :span="24">
+                <el-select v-model="value2" size="large" @change="handleSelectChange">
+                  <el-option v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"></el-option>
+                </el-select>
+              </el-col>
+            </el-row>
+          </div>
+        </el-tab-pane>
       </el-tabs>
     </el-header>
   </el-container>
@@ -126,13 +197,17 @@ export default {
       fileList1: [],
       fileList2: [],
       tableData: [],
+      value1: 0,
+      value2:"default",
+      radio1: "GBK",
+      radio2: "summaryFile",
       showUploadGen: true,
       showSampleInformation: true,
-      uploadParams:{
+      uploadParams: {
         outputFormat: "GBK",
         selectReport: "default",
         FileType: "summaryFile",
-      }
+      },
     };
   },
   methods: {
@@ -246,38 +321,44 @@ export default {
       console.log("downloadFile", downloadFile);
     },
     //上传样本信息文件并生成报告
-    httpRequest1(data1){
+    httpRequest1(data1) {
       var sampleFileName = data1.file.name;
-      console.log("样本文件名：",sampleFileName);
+      console.log("样本文件名：", sampleFileName);
       var sampleFilePath = data1.file.path;
-      console.log("样本文件路径：",sampleFilePath);
-      var path  = require("path");
+      console.log("样本文件路径：", sampleFilePath);
+      var path = require("path");
       var log = window.require("electron-log");
       log.transports.console.level = "silly";
       var app = window.require("@electron/remote").app;
       var logFilePath = path.join(app.getPath("temp"));
       var logFileName = "AneuFiler.log";
-      log.transports.file.resolvePath = ()=>path.join(logFilePath,logFileName);
+      log.transports.file.resolvePath = () =>
+        path.join(logFilePath, logFileName);
       var xlsx = window.require("node-xlsx").default;
-      var sampleFileNameCurrentPath = sampleFilePath.substring(0,sampleFilePath.lastIndexOf("\\")+1);
-      console.log("sampleFileNameCurrentPath",sampleFileNameCurrentPath);
-      log.info( "\n" +
+      var sampleFileNameCurrentPath = sampleFilePath.substring(
+        0,
+        sampleFilePath.lastIndexOf("\\") + 1
+      );
+      console.log("sampleFileNameCurrentPath", sampleFileNameCurrentPath);
+      log.info(
+        "\n" +
           "当前处理文件名：" +
           sampleFileName +
           "\n" +
-          "成功传入输入样本数据文件")
-      var sampleSheets = xlsx.parse(sampleFilePath)
+          "成功传入输入样本数据文件"
+      );
+      var sampleSheets = xlsx.parse(sampleFilePath);
       var sampleSheetsData = sampleSheets[0].data;
       var sampleLineData = [];
-      console.log("sampleSheetsData",sampleSheetsData)
+      console.log("sampleSheetsData", sampleSheetsData);
       // 循环获取xlsx文件的样本信息数据
-      for(var j= 1;j<sampleSheetsData.length;j++){
+      for (var j = 1; j < sampleSheetsData.length; j++) {
         sampleLineData.push(sampleSheetsData[j]);
       }
       // 除去标题行具体数据
-      console.log("sampleLineData",sampleLineData);
-      const sampleArr = sampleLineData.map((item)=>{
-         var leftSlash = "/";
+      console.log("sampleLineData", sampleLineData);
+      const sampleArr = sampleLineData.map((item) => {
+        var leftSlash = "/";
         if (item[0] == " " || item[0] == undefined) {
           item[0] = leftSlash;
         }
@@ -377,8 +458,8 @@ export default {
           FNote: item[23],
           SampleName: item[24],
         };
-      })
-      console.log("sampleArr",sampleArr)
+      });
+      console.log("sampleArr", sampleArr);
       this.tableData = sampleArr;
     },
   },
@@ -451,8 +532,11 @@ a.help {
 i.el-icon.el-icon--upload {
   margin-top: 100px;
 }
-.leftText {
+.spanPosition {
   display: flex;
   align-items: center;
+}
+.el-switch__core .el-switch__inner .is-icon, .el-switch__core .el-switch__inner .is-text{
+  color:#000
 }
 </style>
