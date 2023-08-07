@@ -135,7 +135,7 @@ export default {
     },
     // 上传下机数据文件处理之前校验方法
     beforeAvatarUpload(file1){
-      let extension = file1.name.substring(file.name.lastIndexOf(".")+1);
+      let extension = file1.name.substring(file1.name.lastIndexOf(".")+1);
       console.log("extension",extension);
       let extensionList = ["txt","csv"];
       if(extensionList.indexOf(extension)<0){
