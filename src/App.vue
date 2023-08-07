@@ -37,6 +37,15 @@
               </el-upload>
             </div>
           </div>
+          <el-row class="mb-4">
+            <el-col :span="12"
+              ><div class="helpButton">
+                <el-button type="warning" @click="help"
+                  ><el-icon><QuestionFilled /></el-icon>帮助</el-button
+                >
+              </div></el-col
+            >
+          </el-row>
         </el-tab-pane>
       </el-tabs>
     </el-header>
@@ -151,7 +160,11 @@ export default {
         });
         return false;
       }
-    }
+    },
+    help(){
+      const { shell } = window.require("electron");
+      shell.openExternal("https://github.com/NTLx/AneuFiler");
+    },
   },
 };
 </script>
