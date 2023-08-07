@@ -179,13 +179,13 @@ export default {
       var path = require("path");
       var downloadFile = path.join(
         process.cwd(),
-        "/resources/sampleDataTemplate.xlsx"
+        "/resources/sampleDataTemplateAneuFiler.xlsx"
       );
       var win = window.require("@electron/remote").getCurrentWindow();
       win.webContents.downloadURL(downloadFile);
       console.log("downloadFile", downloadFile);
     },
-    
+
   },
 };
 </script>
