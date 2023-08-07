@@ -14,7 +14,6 @@ module.exports = defineConfig({
         "electron-log",
         "@electron/remote",
         "node-xlsx",
-        "xlsx",
         "officegen",
       ],
       nodeModulesPath: ["../../node_modules", "./node_modules"],
