@@ -23,6 +23,7 @@
                 :file-list="fileList1"
                 :data="{
                   sampleOutputStatus: uploadParams.sampleOutputStatus,
+                  outputFormat: uploadParams.outputFormat,
                 }"
                 :http-request="httpRequest"
                 :before-upload="beforeAvatarUpload"
@@ -222,6 +223,8 @@ export default {
     // 上传下机数据文件进行处理
     httpRequest(data) {
       var sampleOutputStatus = data.data.sampleOutputStatus;
+      var outputFormat = data.data.outputFormat;
+      console.log("uploadParams Data",data.data)
       // 获取上传的文件本地路径
       var filePath = data.file.path;
       var fileName = data.file.name;
@@ -255,7 +258,7 @@ export default {
           var exeFile = linuxURL;
         }
         console.log("exeFile", exeFile);
-        exec(exeFile + " -i " + filePath +" -s "+sampleOutputStatus, (error, stdout, stderr) => {
+        exec(exeFile + " -i " + filePath +" -e "+outputFormat+" -s "+sampleOutputStatus, (error, stdout, stderr) => {
           if (error || stderr) {
             const notice = "输入下机数据文件" + fileName + "处理有误";
             log.error(
@@ -475,6 +478,11 @@ export default {
     switchReceiveStatus(val){
       console.log("按样本输出开关状态", val);
       this.uploadParams.sampleOutputStatus = val;
+    },
+    // 切换文件格式
+    switchRadio(val){
+      console.log("当前切换后的文件格式",val);
+      this.uploadParams.outputFormat = val;
     }, 
   },
 };
