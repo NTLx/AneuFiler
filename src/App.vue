@@ -332,6 +332,25 @@ export default {
       win.webContents.downloadURL(downloadFile);
       console.log("downloadFile", downloadFile);
     },
+    // 上传样本信息数据文件处理之前的校验方法
+    beforeSampleInformationUpload(file2, fileList2) {
+      let extension1 = file2.name.substring(file2.name.lastIndexOf(".") + 1);
+      let extensionList1 = ["xlsx", "xls"];
+      if (extensionList1.indexOf(extension1) < 0) {
+        const formatMessage =
+          "很抱歉，您选择的文件格式不符合要求，请重新选择文件！";
+        ElNotification({
+          showClose: true,
+          message: formatMessage,
+          type: "error",
+          position: "top-right",
+          duration: "0",
+          offset: 60,
+        });
+        return false;
+      }
+      console.log(file2);
+    },
     //上传样本信息文件并生成报告
     httpRequest1(data1) {
       var sampleFileName = data1.file.name;
