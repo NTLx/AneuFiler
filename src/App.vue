@@ -351,6 +351,51 @@ export default {
       }
       console.log(file2);
     },
+    //日期格式转换1
+    formatDate1(numb, format = "年", format1 = "月", format2 = "日") {
+      let time = new Date((numb - 1) * 24 * 3600000 + 1);
+      time.setYear(time.getFullYear() - 70);
+      let year = time.getFullYear() + "";
+      let month = time.getMonth() + 1 + "";
+      let date = time.getDate() + "";
+      if (format && format.length === 1) {
+        return (
+          year +
+          format +
+          (month < 10 ? "0" + month : month) +
+          format1 +
+          (date < 10 ? "0" + date : date) +
+          format2
+        );
+      }
+      return (
+        year +
+        (month < 10 ? "0" + month : month) +
+        (date < 10 ? "0" + date : date)
+      );
+    },
+    //日期格式转换2
+    formatDate2(numb, format = "-") {
+      let time = new Date((numb - 1) * 24 * 3600000 + 1);
+      time.setYear(time.getFullYear() - 70);
+      let year = time.getFullYear() + "";
+      let month = time.getMonth() + 1 + "";
+      let date = time.getDate() + "";
+      if (format && format.length === 1) {
+        return (
+          year +
+          format +
+          (month < 10 ? "0" + month : month) +
+          format +
+          (date < 10 ? "0" + date : date)
+        );
+      }
+      return (
+        year +
+        (month < 10 ? "0" + month : month) +
+        (date < 10 ? "0" + date : date)
+      );
+    },
     //上传样本信息文件并生成报告
     httpRequest1(data1) {
       var sampleFileName = data1.file.name;
