@@ -21,7 +21,9 @@
                 accept=".txt,.csv"
                 :on-change="handleChange"
                 :file-list="fileList1"
-                :data="{}"
+                :data="{
+                  sampleOutputStatus: uploadParams.sampleOutputStatus,
+                }"
                 :http-request="httpRequest"
                 :before-upload="beforeAvatarUpload"
               >
@@ -176,7 +178,8 @@
                   <el-option v-for="item in options"
                     :key="item.value"
                     :label="item.label"
-                    :value="item.value"></el-option>
+                    :value="item.value">
+                  </el-option>
                 </el-select>
               </el-col>
             </el-row>
@@ -199,20 +202,26 @@ export default {
       tableData: [],
       value1: 0,
       value2:"default",
-      radio1: "GBK",
+      radio1: "UTF-8",
       radio2: "summaryFile",
       showUploadGen: true,
       showSampleInformation: true,
       uploadParams: {
-        outputFormat: "GBK",
+        outputFormat: "UTF-8",
         selectReport: "default",
-        FileType: "summaryFile",
+        fileType: "summaryFile",
+        sampleOutputStatus:"0",
       },
+      options: [
+        { label: "默认报告模板", value: "default" },
+        { label: "其他", value: "other" },
+      ],
     };
   },
   methods: {
     // 上传下机数据文件进行处理
     httpRequest(data) {
+      var sampleOutputStatus = data.data.sampleOutputStatus;
       // 获取上传的文件本地路径
       var filePath = data.file.path;
       var fileName = data.file.name;
@@ -246,7 +255,7 @@ export default {
           var exeFile = linuxURL;
         }
         console.log("exeFile", exeFile);
-        exec(exeFile + " -i " + filePath, (error, stdout, stderr) => {
+        exec(exeFile + " -i " + filePath +" -s "+sampleOutputStatus, (error, stdout, stderr) => {
           if (error || stderr) {
             const notice = "输入下机数据文件" + fileName + "处理有误";
             log.error(
@@ -462,6 +471,11 @@ export default {
       console.log("sampleArr", sampleArr);
       this.tableData = sampleArr;
     },
+    // 按样本输出开关按钮
+    switchReceiveStatus(val){
+      console.log("按样本输出开关状态", val);
+      this.uploadParams.sampleOutputStatus = val;
+    }, 
   },
 };
 </script>
