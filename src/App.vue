@@ -206,7 +206,7 @@ export default {
       radio1: "UTF-8",
       radio2: "summaryFile",
       showUploadGen: true,
-      showSampleInformation: true,
+      showSampleInformation: false,
       uploadParams: {
         outputFormat: "UTF-8",
         selectReport: "default",
@@ -483,7 +483,55 @@ export default {
     switchRadio(val){
       console.log("当前切换后的文件格式",val);
       this.uploadParams.outputFormat = val;
-    }, 
+    },
+     // 文件输出种类
+    switchFileType(val){
+      console.log("当前切换后的文件种类",val);
+      if(val == "summaryFile"){
+        this.radio2 = val;
+        this.showUploadGen = true
+        this.showSampleInformation = false
+        this.changeGenTab()
+      }else if(val == "summaryFileAndReportFile"){
+        this.radio2 = val;
+        this.showUploadGen = true
+        this.showSampleInformation = true
+        this.changeGenTab()
+      }else if(val == "reportFile"){
+        this.radio2 = val;
+        this.showUploadGen = false
+        this.showSampleInformation = true
+        this.changeSampleTab()
+      }
+      this.uploadParams.fileType = val;
+
+    },
+    changeGenTab() {
+      this.activeName = "first";
+      setTimeout(() => {
+        ElNotification({
+          message: "Genemapper下机数据上传",
+          type: "info",
+          showClose: true,
+          position: "top-right",
+          duration: "2000",
+          offset: 60,
+        });
+      }, 1000);
+    },
+    changeSampleTab(){
+       this.activeName = "second";
+      setTimeout(() => {
+        ElNotification({
+          message: "样本信息数据上传",
+          type: "info",
+          showClose: true,
+          position: "top-right",
+          duration: "2000",
+          offset: 60,
+        });
+      }, 1000);
+    },
   },
 };
 </script>
