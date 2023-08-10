@@ -35,6 +35,10 @@ module.exports = defineConfig({
             to: "./analysis",
           },
           {
+            from: "./src/assets/hunanjiahui.png",
+            to: "./hunanjiahui.png",
+          },
+          {
             from: "./src/assets/sampleDataTemplateAneuFiler.xlsx",
             to:"./sampleDataTemplateAneuFiler.xlsx",
           }
