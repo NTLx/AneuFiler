@@ -20,7 +20,7 @@ module.exports = defineConfig({
       builderOptions: {
         // options placed here will be merged with default configuration and passed to electron-builder
         productName: "AneuFiler",
-        appId: "com.test.app",
+        appId: "com.aneufiler.app",
         extraResources: [
           {
             from: "./src/assets/analysis.exe",
