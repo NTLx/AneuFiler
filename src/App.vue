@@ -488,7 +488,7 @@ export default {
       log.transports.console.level = "silly";
       var app = window.require("@electron/remote").app;
       var logFilePath = path.join(app.getPath("temp"));
-      var logFileName = "AneuFiler.log";
+      var logFileName = "AneuFilerVue.log";
       log.transports.file.resolvePath = () =>
         path.join(logFilePath, logFileName);
       var xlsx = window.require("node-xlsx").default;
@@ -507,6 +507,8 @@ export default {
       var sampleSheets = xlsx.parse(sampleFilePath);
       var sampleSheetsData = sampleSheets[0].data;
       var sampleLineData = [];
+      var outFileName = [];
+      var outFileNamePath = [];
       console.log("sampleSheetsData", sampleSheetsData);
       // 循环获取xlsx文件的样本信息数据
       for (var j = 1; j < sampleSheetsData.length; j++) {
@@ -2028,7 +2030,7 @@ export default {
         })
         ElNotification({
           message: "已生成报告，请注意查收！",
-          type: "Success",
+          type: "success",
           showClose: true,
           position: "top-right",
           duration: "2000",
@@ -3350,6 +3352,14 @@ export default {
             console.log("生成其他报告");
           }
         })
+        ElNotification({
+          message: "已生成报告，请注意查收！",
+          type: "success",
+          showClose: true,
+          position: "top-right",
+          duration: "2000",
+          offset: 50,
+        });
       }
     },
     // 按样本输出开关按钮
