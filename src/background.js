@@ -1,8 +1,10 @@
 "use strict";
 
 import { app, protocol, BrowserWindow } from "electron";
+import path from "path";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 const isDevelopment = process.env.NODE_ENV !== "production";
+const fs = require("fs");
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { secure: true, standard: true } },
@@ -42,7 +44,15 @@ app.on("window-all-closed", () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== "darwin") {
-    
+    var filepath = path.join(app.getPath("temp"));
+    var filename = "AneuFilerVue.log";
+    fs.unlink(path.join(filepath, filename), function (err) {
+      if (err) {
+        console.log("An error ocurred updating the file" + err.message);
+        return;
+      }
+      console.log("File succesfully deleted");
+    });
    app.quit()
   }
 });
