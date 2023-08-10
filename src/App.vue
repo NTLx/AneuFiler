@@ -189,6 +189,18 @@
                 </el-select>
               </el-col>
             </el-row>
+            <el-row>
+              <el-col :span="24">
+                <el-divider content-position="left">日志</el-divider>
+              </el-col>
+            </el-row>
+            <el-row class="fileSetting">
+              <el-col :span="24">
+                <el-button @click="openLogFile" type="primary">
+                  打开日志文件
+                </el-button>
+              </el-col>
+            </el-row>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -3371,6 +3383,7 @@ export default {
       }
       this.uploadParams.fileType = val;
     },
+    // 切换为GeneMapper下机数据上传Tab页
     changeGenTab() {
       this.activeName = "first";
       setTimeout(() => {
@@ -3384,6 +3397,7 @@ export default {
         });
       }, 1000);
     },
+    // 切换为样本信息数据上传Tab页
     changeSampleTab(){
       this.activeName = "second";
       setTimeout(() => {
@@ -3397,6 +3411,41 @@ export default {
         });
       }, 1000);
     },
+    //打开日志文件方法
+    openLogFile(){
+      var log = window.require("electron-log");
+      var path = require("path");
+      var app = window.require("@electron/remote").app;
+      var logFilepath = path.join(app.getPath("temp"));
+      console.log(logFilepath);
+      let convertedLogFilepath = logFilepath.replace(/\\/g, "/");
+      var logFilename = "AneuFilerVue.log";
+      log.transports.file.resolvePath = () =>
+        path.join(convertedLogFilepath, logFilename);
+      console.log(path.join(convertedLogFilepath, logFilename));
+      var fs = window.require("fs");
+      fs.access(
+        path.join(convertedLogFilepath, logFilename),
+        fs.constants.F_OK,
+        (err) => {
+          if (err) {
+            console.log("文件不存在");
+            ElNotification({
+              message: "由于您还未进行任何数据分析操作，因此暂时无日志生成！",
+              type: "error",
+              showClose: true,
+              position: "top-right",
+              duration: "0",
+              offset: 60,
+            });
+          } else {
+            console.log("文件存在");
+            const { shell } = window.require("electron");
+            shell.openExternal(path.join(convertedLogFilepath, logFilename));
+          }
+        }
+      );
+    }
   },
 };
 </script>
