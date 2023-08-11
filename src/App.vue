@@ -374,6 +374,16 @@ export default {
     handleClick(tab, event) {
       console.log(tab.props.label, event);
     },
+    //处理GeneMapper数据文件列表
+    handleChange(file,fileList1) {
+      this.fileList1 = fileList1.slice(-1);
+      console.log("fileList1", fileList1.length);
+    },
+    // 处理样本信息文件列表
+     handleChange1(file,fileList2) {
+      this.fileList2 = fileList2.slice(-1);
+      console.log("fileList1", fileList2.length);
+    },
     // 上传下机数据文件处理之前校验方法
     beforeAvatarUpload(file1) {
       let extension = file1.name.substring(file1.name.lastIndexOf(".") + 1);
