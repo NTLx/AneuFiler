@@ -443,11 +443,11 @@ export default {
       }else if(process.platform === "win32"){
         var downloadFile = path.join(process.cwd(),"/resources/sampleDataTemplateAneuFiler.xlsx");
         var win = window.require("@electron/remote").getCurrentWindow();
-      win.webContents.downloadURL(downloadFile);
+        win.webContents.downloadURL(downloadFile);
       }else if(process.platform === "linux"){
         var downloadFile = path.join(process.cwd(),"/resources/sampleDataTemplateAneuFiler.xlsx");
         var win = window.require("@electron/remote").getCurrentWindow();
-      win.webContents.downloadURL(downloadFile);
+        win.webContents.downloadURL(downloadFile);
       }
       console.log("downloadFile", downloadFile);
     },
