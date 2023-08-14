@@ -328,10 +328,20 @@ export default {
               if (fileType == "summaryFileAndReportFile") {
                 this.changeSampleTab();
                 //处理生成的SummaryFile
+                if(process.platform ==="darwin"){
+                  var inputFile = path.dirname(filePath)
+                }else if(process.platform ==="win32"){
                 var inputFile = filePath.substring(
                   0,
                   filePath.lastIndexOf("\\") + 1
                 );
+                }else if(process.platform ==="linux"){
+                  var inputFile = filePath.substring(
+                  0,
+                  filePath.lastIndexOf("\\") + 1
+                );
+                }
+                
                 var date = new Date();
                 const year = date.getFullYear(); // 获取年份，例如：2023
                 const month = date.getMonth() + 1; // 获取月份，注意月份从0开始，所以需要加1，例如：7
@@ -426,19 +436,19 @@ export default {
     // 下载样本模版文件
     downloadSampleTemplate() {
       var path = require("path");
-      
       if(process.platform === "darwin"){
-        var downloadFile = path.join(
-        process.cwd(),
-        "/Applications/AneuFiler.app/Contents/Resources/sampleDataTemplateAneuFiler.xlsx"
-      );
+        var downloadFile = path.join(process.cwd(),"/Applications/AneuFiler.app/Contents/Resources/sampleDataTemplateAneuFiler.xlsx");
+        var win = window.require("@electron/remote").getCurrentWindow();
+        win.webContents.downloadURL("file:///"+downloadFile);
       }else if(process.platform === "win32"){
         var downloadFile = path.join(process.cwd(),"/resources/sampleDataTemplateAneuFiler.xlsx");
+        var win = window.require("@electron/remote").getCurrentWindow();
+      win.webContents.downloadURL(downloadFile);
       }else if(process.platform === "linux"){
         var downloadFile = path.join(process.cwd(),"/resources/sampleDataTemplateAneuFiler.xlsx");
-      }
-      var win = window.require("@electron/remote").getCurrentWindow();
+        var win = window.require("@electron/remote").getCurrentWindow();
       win.webContents.downloadURL(downloadFile);
+      }
       console.log("downloadFile", downloadFile);
     },
     // 上传样本信息数据文件处理之前的校验方法
@@ -524,10 +534,19 @@ export default {
       log.transports.file.resolvePath = () =>
         path.join(logFilePath, logFileName);
       var xlsx = window.require("node-xlsx").default;
-      var sampleFileNameCurrentPath = sampleFilePath.substring(
+      if(process.platform ==="darwin"){
+        var sampleFileNameCurrentPath = path.dirname(sampleFilePath)
+      }else if(process.platform ==="win32"){
+        var sampleFileNameCurrentPath = sampleFilePath.substring(
         0,
         sampleFilePath.lastIndexOf("\\") + 1
       );
+      }else if(process.platform ==="linux"){
+        var sampleFileNameCurrentPath = sampleFilePath.substring(
+        0,
+        sampleFilePath.lastIndexOf("\\") + 1
+      );
+      }
       console.log("sampleFileNameCurrentPath", sampleFileNameCurrentPath);
       log.info(
         "\n" +
