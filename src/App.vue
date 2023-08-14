@@ -73,8 +73,8 @@
             :http-request="httpRequest1"
             :before-upload="beforeSampleInformationUpload"
             :data="{
-              fileType:uploadParams.fileType,
-              selectReport:uploadParams.selectReport
+              fileType: uploadParams.fileType,
+              selectReport: uploadParams.selectReport,
             }"
           >
             <el-button type="primary" class="uploadSampleData"
@@ -180,11 +180,17 @@
             </el-row>
             <el-row class="fileSetting">
               <el-col :span="24">
-                <el-select v-model="value2" size="large" @change="handleSelectChange">
-                  <el-option v-for="item in options"
+                <el-select
+                  v-model="value2"
+                  size="large"
+                  @change="handleSelectChange"
+                >
+                  <el-option
+                    v-for="item in options"
                     :key="item.value"
                     :label="item.label"
-                    :value="item.value">
+                    :value="item.value"
+                  >
                   </el-option>
                 </el-select>
               </el-col>
@@ -222,7 +228,7 @@ export default {
       lastOutput: [],
       outputDirectry: "",
       value1: 0,
-      value2:"default",
+      value2: "default",
       radio1: "UTF-8",
       radio2: "summaryFile",
       showUploadGen: true,
@@ -231,7 +237,7 @@ export default {
         outputFormat: "UTF-8",
         selectReport: "default",
         fileType: "summaryFile",
-        sampleOutputStatus:"0",
+        sampleOutputStatus: "0",
       },
       options: [
         { label: "默认报告模板", value: "default" },
@@ -244,8 +250,8 @@ export default {
     httpRequest(data) {
       var sampleOutputStatus = data.data.sampleOutputStatus;
       var outputFormat = data.data.outputFormat;
-      var fileType =data.data.fileType
-      console.log("uploadParams Data",data.data)
+      var fileType = data.data.fileType;
+      console.log("uploadParams Data", data.data);
       // 获取上传的文件本地路径
       var filePath = data.file.path;
       var fileName = data.file.name;
@@ -264,7 +270,7 @@ export default {
       //调用可执行文件脚本
       var macURL = path.join(
         process.cwd(),
-        "/Applications/AneuFilerVue.app/Contents/Resources/analysis.mac"
+        "/Applications/AneuFiler.app/Contents/Resources/analysis.mac"
       );
       var linuxURL = path.join(process.cwd(), "/resources/analysis");
       var windowURL = path.join(process.cwd(), "/resources/analysis.exe");
@@ -279,108 +285,117 @@ export default {
           var exeFile = linuxURL;
         }
         console.log("exeFile", exeFile);
-        exec(exeFile + " -i " + filePath +" -e "+outputFormat+" -s "+sampleOutputStatus, (error, stdout, stderr) => {
-          if (error || stderr) {
-            const notice = "输入下机数据文件" + fileName + "处理有误";
-            log.error(
-              "\n" +
-                "当前输入下机数据文件" +
-                fileName +
-                "处理有误！" +
+        exec(
+          exeFile +
+            " -i " +
+            filePath +
+            " -e " +
+            outputFormat +
+            " -s " +
+            sampleOutputStatus,
+          (error, stdout, stderr) => {
+            if (error || stderr) {
+              const notice = "输入下机数据文件" + fileName + "处理有误";
+              log.error(
                 "\n" +
-                "stderr:" +
-                stderr
-            );
-            ElNotification({
-              showClose: true,
-              message: notice,
-              type: "error",
-              position: "top-right",
-              duration: "0",
-              offset: 60,
-            });
-          } else if (stdout) {
-            const notice = "输入下机数据文件" + fileName + "处理完成";
-            log.info("\n" + "当前输入下机数据文件" + fileName + "处理完成！");
-            ElNotification({
-              showClose: true,
-              message: notice,
-              type: "success",
-              position: "top-right",
-              duration: "2000",
-              offset: 60,
-            });
-            console.log("stdout:\n" + stdout);
-            if(fileType =="summaryFileAndReportFile"){
-              this.changeSampleTab();
-              //处理生成的SummaryFile
-              var inputFile = filePath.substring(0,filePath.lastIndexOf("\\") + 1);
-              var date = new Date();
-              const year = date.getFullYear(); // 获取年份，例如：2023
-              const month = date.getMonth() + 1; // 获取月份，注意月份从0开始，所以需要加1，例如：7
-              const day = date.getDate(); // 获取日期，例如：12
-              const formattedDate = `${year}-${month}-${day}`;
-              // 去除文件后缀
-              var inputFileNameWithOutSuffix = fileName.substring(
-                0,
-                fileName.lastIndexOf(".")
+                  "当前输入下机数据文件" +
+                  fileName +
+                  "处理有误！" +
+                  "\n" +
+                  "stderr:" +
+                  stderr
               );
-              console.log("inputFile", inputFileNameWithOutSuffix);
-              var generateDataFolder =
-                inputFileNameWithOutSuffix + "." + formattedDate;
-              var outPutFileName =
-                generateDataFolder +
-                "." +
-                outputFormat +
-                ".Summary.tsv";
-              const summaryFile = path.join(
-                inputFile,
-                generateDataFolder,
-                outPutFileName
-              );
-              console.log("summaryFile", summaryFile);
-              var outputDirectry = path.join(inputFile, generateDataFolder);
-              console.log("outputDirectry", outputDirectry);
-              this.outputDirectry = outputDirectry;
-              var xlsx = window.require("node-xlsx");
-              // var tsvFile = fs.readFileSync(summaryFile, "utf8");
-              const parsedData = xlsx.parse(summaryFile);
-              console.log("parsedData", parsedData);
-              var parsedSheetData = parsedData[0].data;
-              // iconv.skipDecodeWarning = true;
-              var parsedLineData = [];
-              for (var j = 2; j < parsedSheetData.length; j++) {
-                parsedLineData.push(parsedSheetData[j]);
-              }
-              const outputArr = parsedLineData.map(function (item) {
-                return {
-                  sampleFileName: item[0],
-                  chromosome21: item[1],
-                  chromosome18: item[2],
-                  chromosome13: item[3],
-                  chromosomeX: item[4],
-                  chromosomeY: item[5],
-                  sexChromosome: item[6],
-                  comment: item[7],
-                };
+              ElNotification({
+                showClose: true,
+                message: notice,
+                type: "error",
+                position: "top-right",
+                duration: "0",
+                offset: 60,
               });
-              console.log("outputArr", outputArr);
-              this.outputArr1 = outputArr;
+            } else if (stdout) {
+              const notice = "输入下机数据文件" + fileName + "处理完成";
+              log.info("\n" + "当前输入下机数据文件" + fileName + "处理完成！");
+              ElNotification({
+                showClose: true,
+                message: notice,
+                type: "success",
+                position: "top-right",
+                duration: "2000",
+                offset: 60,
+              });
+              console.log("stdout:\n" + stdout);
+              if (fileType == "summaryFileAndReportFile") {
+                this.changeSampleTab();
+                //处理生成的SummaryFile
+                var inputFile = filePath.substring(
+                  0,
+                  filePath.lastIndexOf("\\") + 1
+                );
+                var date = new Date();
+                const year = date.getFullYear(); // 获取年份，例如：2023
+                const month = date.getMonth() + 1; // 获取月份，注意月份从0开始，所以需要加1，例如：7
+                const day = date.getDate(); // 获取日期，例如：12
+                const formattedDate = `${year}-${month}-${day}`;
+                // 去除文件后缀
+                var inputFileNameWithOutSuffix = fileName.substring(
+                  0,
+                  fileName.lastIndexOf(".")
+                );
+                console.log("inputFile", inputFileNameWithOutSuffix);
+                var generateDataFolder =
+                  inputFileNameWithOutSuffix + "." + formattedDate;
+                var outPutFileName =
+                  generateDataFolder + "." + outputFormat + ".Summary.tsv";
+                const summaryFile = path.join(
+                  inputFile,
+                  generateDataFolder,
+                  outPutFileName
+                );
+                console.log("summaryFile", summaryFile);
+                var outputDirectry = path.join(inputFile, generateDataFolder);
+                console.log("outputDirectry", outputDirectry);
+                this.outputDirectry = outputDirectry;
+                var xlsx = window.require("node-xlsx");
+                // var tsvFile = fs.readFileSync(summaryFile, "utf8");
+                const parsedData = xlsx.parse(summaryFile);
+                console.log("parsedData", parsedData);
+                var parsedSheetData = parsedData[0].data;
+                // iconv.skipDecodeWarning = true;
+                var parsedLineData = [];
+                for (var j = 2; j < parsedSheetData.length; j++) {
+                  parsedLineData.push(parsedSheetData[j]);
+                }
+                const outputArr = parsedLineData.map(function (item) {
+                  return {
+                    sampleFileName: item[0],
+                    chromosome21: item[1],
+                    chromosome18: item[2],
+                    chromosome13: item[3],
+                    chromosomeX: item[4],
+                    chromosomeY: item[5],
+                    sexChromosome: item[6],
+                    comment: item[7],
+                  };
+                });
+                console.log("outputArr", outputArr);
+                this.outputArr1 = outputArr;
+              }
             }
           }
-        });
+        );
       }
     },
     handleClick(tab, event) {
       console.log(tab.props.label, event);
     },
     //处理GeneMapper数据文件列表
-    handleChange(file,fileList1) {
+    handleChange(file, fileList1) {
       this.fileList1 = fileList1.slice(-1);
       console.log("fileList1", fileList1.length);
     },
     // 处理样本信息文件列表
-     handleChange1(file,fileList2) {
+    handleChange1(file, fileList2) {
       this.fileList2 = fileList2.slice(-1);
       console.log("fileList1", fileList2.length);
     },
@@ -411,10 +426,17 @@ export default {
     // 下载样本模版文件
     downloadSampleTemplate() {
       var path = require("path");
-      var downloadFile = path.join(
+      
+      if(process.platform === "darwin"){
+        var downloadFile = path.join(
         process.cwd(),
-        "/resources/sampleDataTemplateAneuFiler.xlsx"
+        "/Applications/AneuFiler.app/Contents/Resources/sampleDataTemplateAneuFiler.xlsx"
       );
+      }else if(process.platform === "win32"){
+        var downloadFile = path.join(process.cwd(),"/resources/sampleDataTemplateAneuFiler.xlsx");
+      }else if(process.platform === "linux"){
+        var downloadFile = path.join(process.cwd(),"/resources/sampleDataTemplateAneuFiler.xlsx");
+      }
       var win = window.require("@electron/remote").getCurrentWindow();
       win.webContents.downloadURL(downloadFile);
       console.log("downloadFile", downloadFile);
@@ -487,8 +509,8 @@ export default {
     httpRequest1(data1) {
       var fileType = data1.data.fileType;
       var selectReport = data1.data.selectReport;
-      console.log("fileType",fileType);
-      console.log("selectReport",selectReport);
+      console.log("fileType", fileType);
+      console.log("selectReport", selectReport);
       var sampleFileName = data1.file.name;
       console.log("样本文件名：", sampleFileName);
       var sampleFilePath = data1.file.path;
@@ -531,10 +553,10 @@ export default {
         var newReportDate = this.formatDate1(item[11]);
         //采样日期调用日期格式转换方法
         var newSamplingDate = this.formatDate2(item[9]);
-        console.log("采样",newSamplingDate)
+        console.log("采样", newSamplingDate);
         //接收日期调用日期格式转换方法
         var newReceiveDate = this.formatDate2(item[10]);
-        console.log("接收",newReceiveDate)
+        console.log("接收", newReceiveDate);
         var leftSlash = "/";
         if (item[0] == " " || item[0] == undefined) {
           item[0] = leftSlash;
@@ -638,14 +660,14 @@ export default {
       });
       console.log("sampleArr", sampleArr);
       this.tableData = sampleArr;
-      console.log("fileType",fileType)
-      if(fileType =="summaryFileAndReportFile"){
+      console.log("fileType", fileType);
+      if (fileType == "summaryFileAndReportFile") {
         var generateFileData = this.outputArr1;
         var generateFileDataPath = this.outputDirectry;
         var iconv = require("iconv-lite");
         iconv.skipDecodeWarning = true;
-        this.removeSummaryData= []
-        for(var k=0;k<generateFileData.length;k++){
+        this.removeSummaryData = [];
+        for (var k = 0; k < generateFileData.length; k++) {
           if (
             iconv.decode(generateFileData[k].comment, "gbk") == " " ||
             iconv.decode(generateFileData[k].comment, "gbk") == "21 三体" ||
@@ -668,11 +690,12 @@ export default {
             });
           }
         }
-        var removeSummaryData = this.removeSummaryData
-        sampleArr.forEach((item,index)=>{
-          removeSummaryData.forEach((item,index1)=>{
+        var removeSummaryData = this.removeSummaryData;
+        sampleArr.forEach((item, index) => {
+          removeSummaryData.forEach((item, index1) => {
             if (
-              sampleArr[index].SampleName == removeSummaryData[index1].sampleFileName
+              sampleArr[index].SampleName ==
+              removeSummaryData[index1].sampleFileName
             ) {
               var Result = "本结果提示，胎儿样本未见母体DNA污染，";
               var Trisomy13,
@@ -984,13 +1007,22 @@ export default {
                   subscript: true,
                 });
                 // var pObj = docx.createP()
-                var pic = path.join(
+                if(process.platform === "darwin"){
+                  var pic = path.join(process.cwd(),"/Applications/AneuFiler.app/Contents/Resources/hunanjiahui.png")
+                }else if(process.platform === "win32"){
+                  var pic = path.join(
                   process.cwd(),
                   "/resources/hunanjiahui.png"
                 );
+                }else if(process.platform === "linux"){
+                  var pic = path.join(
+                  process.cwd(),
+                  "/resources/hunanjiahui.png"
+                );
+                }
                 console.log("pic", pic);
                 header1.addImage(
-                  path.join(process.cwd(), "/resources/hunanjiahui.png"),
+                 pic,
                   {
                     cx: 685,
                     cy: 75,
@@ -2036,8 +2068,8 @@ export default {
                 console.log("生成其他报告");
               }
             }
-          })
-        })
+          });
+        });
         ElNotification({
           message: "已生成报告，请注意查收！",
           type: "success",
@@ -2046,8 +2078,8 @@ export default {
           duration: "2000",
           offset: 50,
         });
-      }else if(fileType =="reportFile"){
-        sampleArr.forEach((item,index)=>{
+      } else if (fileType == "reportFile") {
+        sampleArr.forEach((item, index) => {
           var Result = "本结果提示，胎儿样本未见母体DNA污染，";
           var Trisomy13,
             Trisomy18,
@@ -2207,7 +2239,8 @@ export default {
             sampleArr[index].F18 == "2" &&
             sampleArr[index].F13 == "2" &&
             sampleArr[index].FSexChromosome == "性染色体数目异常" &&
-            sampleArr[index].FNote == "未见明显MCC，提示X染色体单体，符合亲缘关系"
+            sampleArr[index].FNote ==
+              "未见明显MCC，提示X染色体单体，符合亲缘关系"
           ) {
             //判断规则7. 所有染色体为2，胎儿性染色体为性染色体数目异常 报告名：“胎儿样本编号”+“胎儿样本名”+“Qpcr快检”+“-X单体”
             Trisomy13 = "未见三体";
@@ -2330,10 +2363,15 @@ export default {
               .getHeader()
               .createP({ align: "right", superscript: true, subscript: true });
             // var pObj = docx.createP()
-            var pic = path.join(process.cwd(), "/resources/hunanjiahui.png");
-            console.log("pic", pic);
+            if(process.platform === "darwin"){
+              var pic = path.join(process.cwd(), "/Applications/AneuFiler.app/Contents/Resources/hunanjiahui.png");
+            }else if(process.platform === "win32"){
+              var pic = path.join(process.cwd(), "/resources/hunanjiahui.png");
+            }else if(process.platform === "linux"){
+              var pic = path.join(process.cwd(), "/resources/hunanjiahui.png");
+            }
             header1.addImage(
-              path.join(process.cwd(), "/resources/hunanjiahui.png"),
+              pic,
               {
                 cx: 685,
                 cy: 75,
@@ -3361,7 +3399,7 @@ export default {
           } else if (selectReport == "other") {
             console.log("生成其他报告");
           }
-        })
+        });
         ElNotification({
           message: "已生成报告，请注意查收！",
           type: "success",
@@ -3373,33 +3411,33 @@ export default {
       }
     },
     // 按样本输出开关按钮
-    switchReceiveStatus(val){
+    switchReceiveStatus(val) {
       console.log("按样本输出开关状态", val);
       this.uploadParams.sampleOutputStatus = val;
     },
     // 切换文件格式
-    switchRadio(val){
-      console.log("当前切换后的文件格式",val);
+    switchRadio(val) {
+      console.log("当前切换后的文件格式", val);
       this.uploadParams.outputFormat = val;
     },
-     // 文件输出种类
-    switchFileType(val){
-      console.log("当前切换后的文件种类",val);
-      if(val == "summaryFile"){
+    // 文件输出种类
+    switchFileType(val) {
+      console.log("当前切换后的文件种类", val);
+      if (val == "summaryFile") {
         this.radio2 = val;
-        this.showUploadGen = true
-        this.showSampleInformation = false
-        this.changeGenTab()
-      }else if(val == "summaryFileAndReportFile"){
+        this.showUploadGen = true;
+        this.showSampleInformation = false;
+        this.changeGenTab();
+      } else if (val == "summaryFileAndReportFile") {
         this.radio2 = val;
-        this.showUploadGen = true
-        this.showSampleInformation = true
-        this.changeGenTab()
-      }else if(val == "reportFile"){
+        this.showUploadGen = true;
+        this.showSampleInformation = true;
+        this.changeGenTab();
+      } else if (val == "reportFile") {
         this.radio2 = val;
-        this.showUploadGen = false
-        this.showSampleInformation = true
-        this.changeSampleTab()
+        this.showUploadGen = false;
+        this.showSampleInformation = true;
+        this.changeSampleTab();
       }
       this.uploadParams.fileType = val;
     },
@@ -3418,7 +3456,7 @@ export default {
       }, 1000);
     },
     // 切换为样本信息数据上传Tab页
-    changeSampleTab(){
+    changeSampleTab() {
       this.activeName = "second";
       setTimeout(() => {
         ElNotification({
@@ -3432,7 +3470,7 @@ export default {
       }, 1000);
     },
     //打开日志文件方法
-    openLogFile(){
+    openLogFile() {
       var log = window.require("electron-log");
       var path = require("path");
       var app = window.require("@electron/remote").app;
@@ -3460,12 +3498,31 @@ export default {
             });
           } else {
             console.log("文件存在");
-            const { shell } = window.require("electron");
-            shell.openExternal(path.join(convertedLogFilepath, logFilename));
+            if (process.platform === "darwin") {
+              const { shell } = window.require("electron");
+              const openFile = (filePath) => {
+                shell
+                  .openPath(filePath)
+                  .then(() => {
+                    console.log("文件已成功打开");
+                  })
+                  .catch((error) => {
+                    console.error("打开文件时出错:", error);
+                  });            
+              };
+              openFile(path.join(convertedLogFilepath, logFilename))
+              // shell.openExternal(path.join(convertedLogFilepath, logFilename));
+            } else if (process.platform === "win32") {
+              const { shell } = window.require("electron");
+              shell.openExternal(path.join(convertedLogFilepath, logFilename));
+            } else if (process.platform === "linux") {
+              const { shell } = window.require("electron");
+              shell.openExternal(path.join(convertedLogFilepath, logFilename));
+            }
           }
         }
       );
-    }
+    },
   },
 };
 </script>
@@ -3540,7 +3597,8 @@ i.el-icon.el-icon--upload {
   display: flex;
   align-items: center;
 }
-.el-switch__core .el-switch__inner .is-icon, .el-switch__core .el-switch__inner .is-text{
-  color:#000
+.el-switch__core .el-switch__inner .is-icon,
+.el-switch__core .el-switch__inner .is-text {
+  color: #000;
 }
 </style>
