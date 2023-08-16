@@ -129,35 +129,8 @@
               </el-col>
             </el-row>
             <el-row class="fileSetting">
-              <el-col :span="8"
-                ><el-switch
-                  v-model="value1"
-                  class="ml-2"
-                  size="large"
-                  inline-prompt
-                  active-text="开启按样本输出"
-                  active-value="1"
-                  inactive-value="0"
-                  inactive-text="开启按样本输出"
-                  @change="switchReceiveStatus"
-                ></el-switch
-              ></el-col>
-              <el-col :span="16" class="spanPosition">
-                <span>格式：</span>
-                <el-radio-group
-                  v-model="radio1"
-                  class="ml-4"
-                  @change="switchRadio"
-                  size="large"
-                >
-                  <el-radio-button label="GBK">GBK</el-radio-button>
-                  <el-radio-button label="UTF-8">UTF-8</el-radio-button>
-                </el-radio-group>
-              </el-col>
-            </el-row>
-            <el-row class="fileSetting">
               <el-col :span="24" class="spanPosition">
-                <span>选择输出文件种类：</span>
+                <span>类型：</span>
                 <el-radio-group
                   v-model="radio2"
                   @change="switchFileType"
@@ -172,6 +145,33 @@
                   <el-radio-button label="reportFile">报告文件</el-radio-button>
                 </el-radio-group>
               </el-col>
+            </el-row>
+            <el-row class="fileSetting">
+              <el-col :span="8" class="spanPosition">
+                <span>格式：</span>
+                <el-radio-group
+                  v-model="radio1"
+                  class="ml-4"
+                  @change="switchRadio"
+                  size="large"
+                >
+                  <el-radio-button label="UTF-8">UTF-8</el-radio-button>
+                  <el-radio-button label="GBK">GBK</el-radio-button>
+                </el-radio-group>
+              </el-col>
+              <el-col :span="8"
+                ><el-switch
+                  v-model="value1"
+                  class="ml-2"
+                  size="large"
+                  inline-prompt
+                  active-text="开启按样本输出"
+                  active-value="1"
+                  inactive-value="0"
+                  inactive-text="开启按样本输出"
+                  @change="switchReceiveStatus"
+                ></el-switch
+              ></el-col>
             </el-row>
             <el-row>
               <el-col :span="24">
