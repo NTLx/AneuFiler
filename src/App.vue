@@ -155,8 +155,8 @@
                   @change="switchRadio"
                   size="large"
                 >
-                  <el-radio-button label="UTF-8">UTF-8</el-radio-button>
-                  <el-radio-button label="GBK">GBK</el-radio-button>
+                <el-radio-button label="GBK">GBK</el-radio-button>
+                <el-radio-button label="UTF-8">UTF-8</el-radio-button>
                 </el-radio-group>
               </el-col>
               <el-col :span="8"
@@ -229,12 +229,12 @@ export default {
       outputDirectry: "",
       value1: 0,
       value2: "default",
-      radio1: "UTF-8",
+      radio1: "GBK",
       radio2: "summaryFile",
       showUploadGen: true,
       showSampleInformation: false,
       uploadParams: {
-        outputFormat: "UTF-8",
+        outputFormat: "GBK",
         selectReport: "default",
         fileType: "summaryFile",
         sampleOutputStatus: "0",
