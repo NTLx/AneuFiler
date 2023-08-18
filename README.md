@@ -68,9 +68,9 @@ Press the blue button `下载样本信息模版文件` to download sample templa
 
 > By default,The output file type is `结果文件`
 
-> select `结果文件+报告文件` options,then the tab will automatically jump from the `设置` tab to the `GeneMapper下机数据上传` tab, At the same time, the `样本信息数据上传` tab page will be displayed automatically.After uploading the GeneMapper off-machine data file, the tab page automatically jumps to the next tab page `样本信息数据上传`, click the upload button `上传样本信息数据`, and the report file can be output normally (the report file will be automatically generated in the result file folder).
+> When select `结果文件+报告文件` options, then the tab will automatically jump from the `设置` tab to the `GeneMapper下机数据上传` tab, At the same time, the `样本信息数据上传` tab page will be displayed automatically.After uploading the GeneMapper off-machine data file, the tab page automatically jumps to the next tab page `样本信息数据上传`, click the upload button `上传样本信息数据`, and the report file can be output normally (the report file will be automatically generated in the result file folder).
 
-> select `报告文件` options, 
+> When select `报告文件` options, then the tab will automatically jump from the `设置` tab to the `样本信息数据上传` tab. And click `上传样本信息数据` upload button to upload sample Information table, then the report file will be outputed normally(the report file will be automatically generated in the folder of the result file).
 
 ### Settings
 
