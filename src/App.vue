@@ -147,7 +147,7 @@
               </el-col>
             </el-row>
             <el-row class="fileSetting">
-              <el-col :span="8" class="spanPosition">
+              <!-- <el-col :span="8" class="spanPosition">
                 <span>格式：</span>
                 <el-radio-group
                   v-model="radio1"
@@ -158,8 +158,8 @@
                 <el-radio-button label="GBK">GBK</el-radio-button>
                 <el-radio-button label="UTF-8">UTF-8</el-radio-button>
                 </el-radio-group>
-              </el-col>
-              <el-col :span="8"
+              </el-col> -->
+              <el-col :span="24"
                 ><el-switch
                   v-model="value1"
                   class="ml-2"
@@ -229,12 +229,11 @@ export default {
       outputDirectry: "",
       value1: 0,
       value2: "default",
-      radio1: "GBK",
       radio2: "summaryFile",
       showUploadGen: true,
       showSampleInformation: false,
       uploadParams: {
-        outputFormat: "GBK",
+        outputFormat: this.outputFormat(),
         selectReport: "default",
         fileType: "summaryFile",
         sampleOutputStatus: "0",
@@ -246,6 +245,16 @@ export default {
     };
   },
   methods: {
+     // 根据操作系统设置输出文件默认值
+    outputFormat(){
+      if (process.platform == "darwin") {
+          return "UTF-8";
+        } else if (process.platform == "win32") {
+          return "GBK";
+        } else if (process.platform == "linux") {
+          return "UTF-8";
+        }
+    },
     // 上传下机数据文件进行处理
     httpRequest(data) {
       var sampleOutputStatus = data.data.sampleOutputStatus;
@@ -279,10 +288,13 @@ export default {
       if (filePath) {
         if (process.platform === "darwin") {
           var exeFile = macURL;
+          this.uploadParams.outputFormat = "UTF-8";
         } else if (process.platform === "win32") {
           var exeFile = windowURL;
+          this.uploadParams.outputFormat = "GBK";
         } else if (process.platform === "linux") {
           var exeFile = linuxURL;
+          this.uploadParams.outputFormat = "UTF-8";
         }
         console.log("exeFile", exeFile);
         exec(
@@ -3435,10 +3447,10 @@ export default {
       this.uploadParams.sampleOutputStatus = val;
     },
     // 切换文件格式
-    switchRadio(val) {
-      console.log("当前切换后的文件格式", val);
-      this.uploadParams.outputFormat = val;
-    },
+    // switchRadio(val) {
+    //   console.log("当前切换后的文件格式", val);
+    //   this.uploadParams.outputFormat = val;
+    // },
     // 文件输出种类
     switchFileType(val) {
       console.log("当前切换后的文件种类", val);
@@ -3487,6 +3499,7 @@ export default {
           offset: 60,
         });
       }, 1000);
+      this.sampleArr = []
     },
     //打开日志文件方法
     openLogFile() {
