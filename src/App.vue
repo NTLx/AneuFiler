@@ -247,13 +247,13 @@ export default {
   methods: {
      // 根据操作系统设置输出文件默认值
     outputFormat(){
-      if (process.platform == "darwin") {
-          return "UTF-8";
-        } else if (process.platform == "win32") {
-          return "GBK";
-        } else if (process.platform == "linux") {
-          return "UTF-8";
-        }
+     const platformEncodingMap = {
+        darwin:'UTF-8',
+        win32:'GBK',
+        linux:'UTF-8'
+      }
+      const platform = process.platform
+      return platformEncodingMap[platform] || "UTF-8"
     },
     // 上传下机数据文件进行处理
     httpRequest(data) {
