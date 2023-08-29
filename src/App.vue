@@ -309,10 +309,7 @@ export default {
             if (error || stderr) {
               const notice = "输入下机数据文件" + fileName + "处理有误";
               log.error(
-                "\n" +
-                  "当前输入下机数据文件" +
-                  fileName +
-                  "处理有误！" +
+                "\n" +notice+"！" +
                   "\n" +
                   "stderr:" +
                   stderr
@@ -327,7 +324,7 @@ export default {
               });
             } else if (stdout) {
               const notice = "输入下机数据文件" + fileName + "处理完成";
-              log.info("\n" + "当前输入下机数据文件" + fileName + "处理完成！");
+              log.info("\n" + notice+"！");
               ElNotification({
                 showClose: true,
                 message: notice,
@@ -443,7 +440,7 @@ export default {
     // 跳转帮助文档
     help() {
       const { shell } = window.require("electron");
-      shell.openExternal("https://github.com/NTLx/AneuFiler");
+      shell.openExternal("");
     },
     // 下载样本模版文件
     downloadSampleTemplate() {
