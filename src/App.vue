@@ -440,7 +440,7 @@ export default {
     // 跳转帮助文档
     help() {
       const { shell } = window.require("electron");
-      shell.openExternal("");
+      shell.openExternal("https://alidocs.dingtalk.com/i/p/b6Vz6PvgYDp7VmZ9/docs/KGZLxjv9VGZ0Gb4Puk6vownPW6EDybno");
     },
     // 下载样本模版文件
     downloadSampleTemplate() {
