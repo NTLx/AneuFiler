@@ -166,8 +166,8 @@
                   size="large"
                   inline-prompt
                   active-text="开启按样本输出"
-                  active-value="1"
-                  inactive-value="0"
+                  active-value="-s"
+                  inactive-value=""
                   inactive-text="开启按样本输出"
                   @change="switchReceiveStatus"
                 ></el-switch
@@ -227,7 +227,7 @@ export default {
       outputArr1: [],
       lastOutput: [],
       outputDirectry: "",
-      value1:"0",
+      value1:"",
       value2: "default",
       radio2: "summaryFile",
       showUploadGen: true,
@@ -236,7 +236,7 @@ export default {
         outputFormat: this.outputFormat(),
         selectReport: "default",
         fileType: "summaryFile",
-        sampleOutputStatus: "0",
+        sampleOutputStatus: "",
       },
       options: [
         { label: "默认报告模板", value: "default" },
@@ -331,7 +331,7 @@ export default {
             " -i " +
             filePath +
             " -e " +
-            outputFormat  +" -s "+
+            outputFormat  +" "+
             sampleOutputStatus +
             " -o " +
             outputDirectry,
