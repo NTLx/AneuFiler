@@ -227,7 +227,7 @@ export default {
       outputArr1: [],
       lastOutput: [],
       outputDirectry: "",
-      value1: 0,
+      value1:"0",
       value2: "default",
       radio2: "summaryFile",
       showUploadGen: true,
@@ -245,19 +245,20 @@ export default {
     };
   },
   methods: {
-     // 根据操作系统设置输出文件默认值
-    outputFormat(){
-     const platformEncodingMap = {
-        darwin:'UTF-8',
-        win32:'GBK',
-        linux:'UTF-8'
-      }
-      const platform = process.platform
-      return platformEncodingMap[platform] || "UTF-8"
+    // 根据操作系统设置输出文件默认值
+    outputFormat() {
+      const platformEncodingMap = {
+        darwin: "UTF-8",
+        win32: "GBK",
+        linux: "UTF-8",
+      };
+      const platform = process.platform;
+      return platformEncodingMap[platform] || "UTF-8";
     },
     // 上传下机数据文件进行处理
     httpRequest(data) {
       var sampleOutputStatus = data.data.sampleOutputStatus;
+      console.log("sampleOutputStatus",sampleOutputStatus)
       var outputFormat = data.data.outputFormat;
       var fileType = data.data.fileType;
       console.log("uploadParams Data", data.data);
@@ -267,6 +268,34 @@ export default {
       console.log("filePath", filePath);
       console.log("fileName", fileName);
       var path = require("path");
+
+      // 创建 Date 对象并传入时间戳
+      var date = new Date();
+      // 使用 Date 对象的方法获取日期和时间信息
+      var year = date.getFullYear(); // 年份
+      var month = date.getMonth() + 1; // 月份（注意月份从 0 开始，所以要加 1）
+      var day = date.getDate(); // 日期
+      var hours = date.getHours(); // 小时
+      var minutes = date.getMinutes(); // 分钟
+      var seconds = date.getSeconds(); // 秒
+      // 格式化日期和时间
+      var formattedDateTime = `${year}_${month}_${day}_${hours}_${minutes}_${seconds}`;
+      if (process.platform === "darwin") {
+        var inputFile = path.dirname(filePath);
+      } else if (process.platform === "win32") {
+        var inputFile = filePath.substring(0, filePath.lastIndexOf("\\") + 1);
+      } else if (process.platform === "linux") {
+        var inputFile = filePath.substring(0, filePath.lastIndexOf("\\") + 1);
+      }
+      var inputFileNameWithOutSuffix = fileName.substring(
+        0,
+        fileName.lastIndexOf(".")
+      );
+      console.log("inputFileNameWithOutSuffix", inputFileNameWithOutSuffix);
+      var generateDataFolder =
+        inputFileNameWithOutSuffix + "." + formattedDateTime;
+      var outputDirectry = path.join(inputFile, generateDataFolder);
+      console.log("outputDirectry", outputDirectry);
       // 生成日志文件
       var log = window.require("electron-log");
       log.transports.console.level = "silly";
@@ -302,18 +331,14 @@ export default {
             " -i " +
             filePath +
             " -e " +
-            outputFormat +
-            " -s " +
-            sampleOutputStatus,
+            outputFormat  +" -s "+
+            sampleOutputStatus +
+            " -o " +
+            outputDirectry,
           (error, stdout, stderr) => {
             if (error || stderr) {
               const notice = "输入下机数据文件" + fileName + "处理有误";
-              log.error(
-                "\n" +notice+"！" +
-                  "\n" +
-                  "stderr:" +
-                  stderr
-              );
+              log.error("\n" + notice + "！" + "\n" + "stderr:" + stderr);
               ElNotification({
                 showClose: true,
                 message: notice,
@@ -324,7 +349,7 @@ export default {
               });
             } else if (stdout) {
               const notice = "输入下机数据文件" + fileName + "处理完成";
-              log.info("\n" + notice+"！");
+              log.info("\n" + notice + "！");
               ElNotification({
                 showClose: true,
                 message: notice,
@@ -337,42 +362,49 @@ export default {
               if (fileType == "summaryFileAndReportFile") {
                 this.changeSampleTab();
                 //处理生成的SummaryFile
-                if(process.platform ==="darwin"){
-                  var inputFile = path.dirname(filePath)
-                }else if(process.platform ==="win32"){
-                var inputFile = filePath.substring(
-                  0,
-                  filePath.lastIndexOf("\\") + 1
-                );
-                }else if(process.platform ==="linux"){
-                  var inputFile = filePath.substring(
-                  0,
-                  filePath.lastIndexOf("\\") + 1
-                );
-                }
-                
-                var date = new Date();
-                const year = date.getFullYear(); // 获取年份，例如：2023
-                const month = date.getMonth() + 1; // 获取月份，注意月份从0开始，所以需要加1，例如：7
-                const day = date.getDate(); // 获取日期，例如：12
-                const formattedDate = `${year}-${month}-${day}`;
-                // 去除文件后缀
-                var inputFileNameWithOutSuffix = fileName.substring(
-                  0,
-                  fileName.lastIndexOf(".")
-                );
-                console.log("inputFile", inputFileNameWithOutSuffix);
-                var generateDataFolder =
-                  inputFileNameWithOutSuffix + "." + formattedDate;
+                // if(process.platform ==="darwin"){
+                //   var inputFile = path.dirname(filePath)
+                // }else if(process.platform ==="win32"){
+                // var inputFile = filePath.substring(
+                //   0,
+                //   filePath.lastIndexOf("\\") + 1
+                // );
+                // }else if(process.platform ==="linux"){
+                //   var inputFile = filePath.substring(
+                //   0,
+                //   filePath.lastIndexOf("\\") + 1
+                // );
+                // }
                 var outPutFileName =
-                  generateDataFolder + "." + outputFormat + ".Summary.tsv";
-                const summaryFile = path.join(
+                  inputFileNameWithOutSuffix +
+                  ".Summary.tsv";
+                var summaryFile = path.join(
                   inputFile,
                   generateDataFolder,
                   outPutFileName
                 );
-                console.log("summaryFile", summaryFile);
-                var outputDirectry = path.join(inputFile, generateDataFolder);
+                // var date = new Date();
+                // const year = date.getFullYear(); // 获取年份，例如：2023
+                // const month = date.getMonth() + 1; // 获取月份，注意月份从0开始，所以需要加1，例如：7
+                // const day = date.getDate(); // 获取日期，例如：12
+                // const formattedDate = `${year}-${month}-${day}`;
+                // // 去除文件后缀
+                // var inputFileNameWithOutSuffix = fileName.substring(
+                //   0,
+                //   fileName.lastIndexOf(".")
+                // );
+                // console.log("inputFile", inputFileNameWithOutSuffix);
+                // var generateDataFolder =
+                //   inputFileNameWithOutSuffix + "." + formattedDate;
+                // var outPutFileName =
+                //   generateDataFolder + "." + outputFormat + ".Summary.tsv";
+                // const summaryFile = path.join(
+                //   inputFile,
+                //   generateDataFolder,
+                //   outPutFileName
+                // );
+                // console.log("summaryFile", summaryFile);
+                // var outputDirectry = path.join(inputFile, generateDataFolder);
                 console.log("outputDirectry", outputDirectry);
                 this.outputDirectry = outputDirectry;
                 var xlsx = window.require("node-xlsx");
@@ -440,21 +472,32 @@ export default {
     // 跳转帮助文档
     help() {
       const { shell } = window.require("electron");
-      shell.openExternal("https://alidocs.dingtalk.com/i/p/b6Vz6PvgYDp7VmZ9/docs/KGZLxjv9VGZ0Gb4Puk6vownPW6EDybno");
+      shell.openExternal(
+        "https://alidocs.dingtalk.com/i/p/b6Vz6PvgYDp7VmZ9/docs/KGZLxjv9VGZ0Gb4Puk6vownPW6EDybno"
+      );
     },
     // 下载样本模版文件
     downloadSampleTemplate() {
       var path = require("path");
-      if(process.platform === "darwin"){
-        var downloadFile = path.join(process.cwd(),"/Applications/AneuFiler.app/Contents/Resources/sampleDataTemplateAneuFiler.xlsx");
+      if (process.platform === "darwin") {
+        var downloadFile = path.join(
+          process.cwd(),
+          "/Applications/AneuFiler.app/Contents/Resources/sampleDataTemplateAneuFiler.xlsx"
+        );
         var win = window.require("@electron/remote").getCurrentWindow();
-        win.webContents.downloadURL("file:///"+downloadFile);
-      }else if(process.platform === "win32"){
-        var downloadFile = path.join(process.cwd(),"/resources/sampleDataTemplateAneuFiler.xlsx");
+        win.webContents.downloadURL("file:///" + downloadFile);
+      } else if (process.platform === "win32") {
+        var downloadFile = path.join(
+          process.cwd(),
+          "/resources/sampleDataTemplateAneuFiler.xlsx"
+        );
         var win = window.require("@electron/remote").getCurrentWindow();
         win.webContents.downloadURL(downloadFile);
-      }else if(process.platform === "linux"){
-        var downloadFile = path.join(process.cwd(),"/resources/sampleDataTemplateAneuFiler.xlsx");
+      } else if (process.platform === "linux") {
+        var downloadFile = path.join(
+          process.cwd(),
+          "/resources/sampleDataTemplateAneuFiler.xlsx"
+        );
         var win = window.require("@electron/remote").getCurrentWindow();
         win.webContents.downloadURL(downloadFile);
       }
@@ -543,18 +586,18 @@ export default {
       log.transports.file.resolvePath = () =>
         path.join(logFilePath, logFileName);
       var xlsx = window.require("node-xlsx").default;
-      if(process.platform ==="darwin"){
-        var sampleFileNameCurrentPath = path.dirname(sampleFilePath)
-      }else if(process.platform ==="win32"){
+      if (process.platform === "darwin") {
+        var sampleFileNameCurrentPath = path.dirname(sampleFilePath);
+      } else if (process.platform === "win32") {
         var sampleFileNameCurrentPath = sampleFilePath.substring(
-        0,
-        sampleFilePath.lastIndexOf("\\") + 1
-      );
-      }else if(process.platform ==="linux"){
+          0,
+          sampleFilePath.lastIndexOf("\\") + 1
+        );
+      } else if (process.platform === "linux") {
         var sampleFileNameCurrentPath = sampleFilePath.substring(
-        0,
-        sampleFilePath.lastIndexOf("\\") + 1
-      );
+          0,
+          sampleFilePath.lastIndexOf("\\") + 1
+        );
       }
       console.log("sampleFileNameCurrentPath", sampleFileNameCurrentPath);
       log.info(
@@ -1035,29 +1078,29 @@ export default {
                   subscript: true,
                 });
                 // var pObj = docx.createP()
-                if(process.platform === "darwin"){
-                  var pic = path.join(process.cwd(),"/Applications/AneuFiler.app/Contents/Resources/hunanjiahui.png")
-                }else if(process.platform === "win32"){
+                if (process.platform === "darwin") {
                   var pic = path.join(
-                  process.cwd(),
-                  "/resources/hunanjiahui.png"
-                );
-                }else if(process.platform === "linux"){
+                    process.cwd(),
+                    "/Applications/AneuFiler.app/Contents/Resources/hunanjiahui.png"
+                  );
+                } else if (process.platform === "win32") {
                   var pic = path.join(
-                  process.cwd(),
-                  "/resources/hunanjiahui.png"
-                );
+                    process.cwd(),
+                    "/resources/hunanjiahui.png"
+                  );
+                } else if (process.platform === "linux") {
+                  var pic = path.join(
+                    process.cwd(),
+                    "/resources/hunanjiahui.png"
+                  );
                 }
                 console.log("pic", pic);
-                header1.addImage(
-                 pic,
-                  {
-                    cx: 685,
-                    cy: 75,
-                    underline: true,
-                    color: "ff0000",
-                  }
-                );
+                header1.addImage(pic, {
+                  cx: 685,
+                  cy: 75,
+                  underline: true,
+                  color: "ff0000",
+                });
                 header2.addText("家系编号:", {
                   font_size: 10.5,
                   line_height: 200,
@@ -2391,22 +2434,22 @@ export default {
               .getHeader()
               .createP({ align: "right", superscript: true, subscript: true });
             // var pObj = docx.createP()
-            if(process.platform === "darwin"){
-              var pic = path.join(process.cwd(), "/Applications/AneuFiler.app/Contents/Resources/hunanjiahui.png");
-            }else if(process.platform === "win32"){
+            if (process.platform === "darwin") {
+              var pic = path.join(
+                process.cwd(),
+                "/Applications/AneuFiler.app/Contents/Resources/hunanjiahui.png"
+              );
+            } else if (process.platform === "win32") {
               var pic = path.join(process.cwd(), "/resources/hunanjiahui.png");
-            }else if(process.platform === "linux"){
+            } else if (process.platform === "linux") {
               var pic = path.join(process.cwd(), "/resources/hunanjiahui.png");
             }
-            header1.addImage(
-              pic,
-              {
-                cx: 685,
-                cy: 75,
-                underline: true,
-                color: "ff0000",
-              }
-            );
+            header1.addImage(pic, {
+              cx: 685,
+              cy: 75,
+              underline: true,
+              color: "ff0000",
+            });
             header2.addText("家系编号:", { font_size: 10.5, line_height: 200 });
             var footer = docx.getFooter().createP();
             var footer1 = docx.getFooter().createP();
@@ -3496,7 +3539,7 @@ export default {
           offset: 60,
         });
       }, 1000);
-      this.sampleArr = []
+      this.sampleArr = [];
     },
     //打开日志文件方法
     openLogFile() {
@@ -3537,9 +3580,9 @@ export default {
                   })
                   .catch((error) => {
                     console.error("打开文件时出错:", error);
-                  });            
+                  });
               };
-              openFile(path.join(convertedLogFilepath, logFilename))
+              openFile(path.join(convertedLogFilepath, logFilename));
               // shell.openExternal(path.join(convertedLogFilepath, logFilename));
             } else if (process.platform === "win32") {
               const { shell } = window.require("electron");
