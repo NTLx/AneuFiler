@@ -227,7 +227,7 @@ export default {
       outputArr1: [],
       lastOutput: [],
       outputDirectry: "",
-      value1:"",
+      value1: "",
       value2: "default",
       radio2: "summaryFile",
       showUploadGen: true,
@@ -258,7 +258,7 @@ export default {
     // 上传下机数据文件进行处理
     httpRequest(data) {
       var sampleOutputStatus = data.data.sampleOutputStatus;
-      console.log("sampleOutputStatus",sampleOutputStatus)
+      console.log("sampleOutputStatus", sampleOutputStatus);
       var outputFormat = data.data.outputFormat;
       var fileType = data.data.fileType;
       console.log("uploadParams Data", data.data);
@@ -331,7 +331,8 @@ export default {
             " -i " +
             filePath +
             " -e " +
-            outputFormat  +" "+
+            outputFormat +
+            " " +
             sampleOutputStatus +
             " -o " +
             outputDirectry,
@@ -376,8 +377,7 @@ export default {
                 // );
                 // }
                 var outPutFileName =
-                  inputFileNameWithOutSuffix +
-                  ".Summary.tsv";
+                  inputFileNameWithOutSuffix + ".Summary.tsv";
                 var summaryFile = path.join(
                   inputFile,
                   generateDataFolder,
@@ -739,17 +739,21 @@ export default {
         iconv.skipDecodeWarning = true;
         this.removeSummaryData = [];
         for (var k = 0; k < generateFileData.length; k++) {
+          // console.log("一",iconv.decode(generateFileData[k].comment, "gbk"))
+          if( generateFileData[k].comment == undefined || generateFileData[k].comment == "0"){
+            console.log("sumarry 结果文件具体行:第",k)
+          }
           if (
-            iconv.decode(generateFileData[k].comment, "gbk") == " " ||
+            generateFileData[k].comment == undefined || generateFileData[k].comment == "0"||
             iconv.decode(generateFileData[k].comment, "gbk") == "21 三体" ||
             iconv.decode(generateFileData[k].comment, "gbk") == "18 三体" ||
             iconv.decode(generateFileData[k].comment, "gbk") == "13 三体" ||
-            iconv.decode(generateFileData[k].comment, "utf8") == " " ||
             iconv.decode(generateFileData[k].comment, "utf8") == "21 三体" ||
             iconv.decode(generateFileData[k].comment, "utf8") == "18 三体" ||
             iconv.decode(generateFileData[k].comment, "utf8") == "13 三体"
           ) {
             // 剔除需复核图谱数据
+            console.log("sdada");
             this.removeSummaryData.push({
               sampleFileName: generateFileData[k].sampleFileName,
               chromosome13: generateFileData[k].chromosome13,
@@ -762,6 +766,7 @@ export default {
           }
         }
         var removeSummaryData = this.removeSummaryData;
+        console.log("remove", removeSummaryData);
         sampleArr.forEach((item, index) => {
           removeSummaryData.forEach((item, index1) => {
             if (
@@ -3539,7 +3544,7 @@ export default {
           offset: 60,
         });
       }, 1000);
-      this.sampleArr = [];
+      this.tableData = [];
     },
     //打开日志文件方法
     openLogFile() {
