@@ -44,14 +44,18 @@
           <el-row class="mb-4">
             <el-col :span="12"
               ><div class="helpButton">
-                <el-button type="warning" @click="help"
+                <el-button type="warning" @click="help" size="large"
                   ><el-icon><QuestionFilled /></el-icon>帮助</el-button
                 >
               </div></el-col
             >
             <el-col :span="12">
               <div class="downloadButton">
-                <el-button type="primary" @click="downloadSampleTemplate">
+                <el-button
+                  type="primary"
+                  @click="downloadSampleTemplate"
+                  size="large"
+                >
                   <el-icon><Download /></el-icon>
                   下载样本信息模版文件
                 </el-button>
@@ -129,7 +133,7 @@
               </el-col>
             </el-row>
             <el-row class="fileSetting">
-              <el-col :span="24" class="spanPosition">
+              <el-col :span="12" class="spanPosition">
                 <span>类型：</span>
                 <el-radio-group
                   v-model="radio2"
@@ -145,6 +149,19 @@
                   <el-radio-button label="reportFile">报告文件</el-radio-button>
                 </el-radio-group>
               </el-col>
+              <el-col :span="12"
+                ><el-switch
+                  v-model="value1"
+                  class="ml-2"
+                  size="large"
+                  inline-prompt
+                  active-text="开启按样本输出"
+                  active-value="-s"
+                  inactive-value=""
+                  inactive-text="开启按样本输出"
+                  @change="switchReceiveStatus"
+                ></el-switch
+              ></el-col>
             </el-row>
             <el-row class="fileSetting">
               <!-- <el-col :span="8" class="spanPosition">
@@ -159,19 +176,6 @@
                 <el-radio-button label="UTF-8">UTF-8</el-radio-button>
                 </el-radio-group>
               </el-col> -->
-              <el-col :span="24"
-                ><el-switch
-                  v-model="value1"
-                  class="ml-2"
-                  size="large"
-                  inline-prompt
-                  active-text="开启按样本输出"
-                  active-value="-s"
-                  inactive-value=""
-                  inactive-text="开启按样本输出"
-                  @change="switchReceiveStatus"
-                ></el-switch
-              ></el-col>
             </el-row>
             <el-row>
               <el-col :span="24">
@@ -202,7 +206,7 @@
             </el-row>
             <el-row class="fileSetting">
               <el-col :span="24">
-                <el-button @click="openLogFile" type="primary">
+                <el-button @click="openLogFile" type="primary" size="large">
                   打开日志文件
                 </el-button>
               </el-col>
@@ -599,7 +603,26 @@ export default {
           sampleFilePath.lastIndexOf("\\") + 1
         );
       }
+      // 创建 Date 对象并传入时间戳
+      var date = new Date();
+      // 使用 Date 对象的方法获取日期和时间信息
+      var year = date.getFullYear(); // 年份
+      var month = date.getMonth() + 1; // 月份（注意月份从 0 开始，所以要加 1）
+      var day = date.getDate(); // 日期
+      var hours = date.getHours(); // 小时
+      var minutes = date.getMinutes(); // 分钟
+      var seconds = date.getSeconds(); // 秒
+      // 格式化日期和时间
+      var formattedDateTime = `${year}_${month}_${day}_${hours}_${minutes}_${seconds}`;
+      var sampleFileNameNoSuffix = sampleFileName.substring(
+        0,
+        sampleFileName.lastIndexOf(".")
+      );
       console.log("sampleFileNameCurrentPath", sampleFileNameCurrentPath);
+      console.log("sampleFileNameNoSuffix", sampleFileNameNoSuffix);
+      var reportFileFolder = sampleFileNameNoSuffix + "." + formattedDateTime;
+      var reportFilePath = sampleFileNameCurrentPath + reportFileFolder;
+      console.log("reportFileFoler", reportFileFolder);
       log.info(
         "\n" +
           "当前处理文件名：" +
@@ -740,11 +763,15 @@ export default {
         this.removeSummaryData = [];
         for (var k = 0; k < generateFileData.length; k++) {
           // console.log("一",iconv.decode(generateFileData[k].comment, "gbk"))
-          if( generateFileData[k].comment == undefined || generateFileData[k].comment == "0"){
-            console.log("sumarry 结果文件具体行:第",k)
+          if (
+            generateFileData[k].comment == undefined ||
+            generateFileData[k].comment == "0"
+          ) {
+            console.log("sumarry 结果文件具体行:第", k);
           }
           if (
-            generateFileData[k].comment == undefined || generateFileData[k].comment == "0"||
+            generateFileData[k].comment == undefined ||
+            generateFileData[k].comment == "0" ||
             iconv.decode(generateFileData[k].comment, "gbk") == "21 三体" ||
             iconv.decode(generateFileData[k].comment, "gbk") == "18 三体" ||
             iconv.decode(generateFileData[k].comment, "gbk") == "13 三体" ||
@@ -2155,6 +2182,14 @@ export default {
           offset: 50,
         });
       } else if (fileType == "reportFile") {
+        var fs = window.require("fs");
+        fs.mkdir(reportFilePath, (err) => {
+          if (err) {
+            console.error(err);
+          } else {
+            console.log("Directory created successfully.");
+          }
+        });
         sampleArr.forEach((item, index) => {
           var Result = "本结果提示，胎儿样本未见母体DNA污染，";
           var Trisomy13,
@@ -2410,8 +2445,6 @@ export default {
           }
           if (selectReport == "default") {
             var officegen = window.require("officegen");
-            var fs = window.require("fs");
-
             var docx = officegen({
               type: "docx",
               pageMargins: {
@@ -3462,7 +3495,7 @@ export default {
               ".docx";
             console.log("outFileName[index]", outFileName[index]);
             outFileNamePath[index] = path.join(
-              sampleFileNameCurrentPath,
+              reportFilePath,
               outFileName[index]
             );
             console.log("outFileNamePath[index]", outFileNamePath[index]);
