@@ -12,7 +12,7 @@
           name="first"
           v-if="showUploadGen"
         >
-          <div id="holder" class="holder" style="height: 519px">
+          <div id="holder" class="holder" style="height: 510px">
             <div>
               <el-upload
                 class="upload-demo"
@@ -57,7 +57,7 @@
                   size="large"
                 >
                   <el-icon><Download /></el-icon>
-                  下载样本信息模版文件
+                  模版
                 </el-button>
               </div>
             </el-col>
@@ -81,8 +81,8 @@
               selectReport: uploadParams.selectReport,
             }"
           >
-            <el-button type="primary" class="uploadSampleData"
-              >上传样本信息数据</el-button
+            <el-button type="primary" class="uploadSampleData" size="large"
+              ><el-icon><Upload /></el-icon>上传</el-button
             >
             <template #tip>
               <div class="el-upload__tip">
@@ -127,13 +127,12 @@
         </el-tab-pane>
         <el-tab-pane label="设置" name="third" class="setting">
           <div class="settingPosition">
-            <el-row>
+            <el-row class="row-container">
               <el-col :span="24">
                 <el-divider content-position="left">输出文件设置</el-divider>
               </el-col>
-            </el-row>
-            <el-row class="fileSetting">
-              <el-col :span="12" class="spanPosition">
+               <el-col :span="12">
+                <div class="spanPosition">
                 <span>类型：</span>
                 <el-radio-group
                   v-model="radio2"
@@ -148,6 +147,7 @@
                   >
                   <el-radio-button label="reportFile">报告文件</el-radio-button>
                 </el-radio-group>
+                </div>
               </el-col>
               <el-col :span="12"
                 ><el-switch
@@ -163,27 +163,11 @@
                 ></el-switch
               ></el-col>
             </el-row>
-            <el-row class="fileSetting">
-              <!-- <el-col :span="8" class="spanPosition">
-                <span>格式：</span>
-                <el-radio-group
-                  v-model="radio1"
-                  class="ml-4"
-                  @change="switchRadio"
-                  size="large"
-                >
-                <el-radio-button label="GBK">GBK</el-radio-button>
-                <el-radio-button label="UTF-8">UTF-8</el-radio-button>
-                </el-radio-group>
-              </el-col> -->
-            </el-row>
-            <el-row>
+            <el-row class="row-container">
               <el-col :span="24">
                 <el-divider content-position="left">报告设置</el-divider>
               </el-col>
-            </el-row>
-            <el-row class="fileSetting">
-              <el-col :span="24">
+               <el-col :span="24">
                 <el-select
                   v-model="value2"
                   size="large"
@@ -199,12 +183,10 @@
                 </el-select>
               </el-col>
             </el-row>
-            <el-row>
+            <el-row class="row-container">
               <el-col :span="24">
                 <el-divider content-position="left">日志</el-divider>
               </el-col>
-            </el-row>
-            <el-row class="fileSetting">
               <el-col :span="24">
                 <el-button @click="openLogFile" type="primary" size="large">
                   打开日志文件
@@ -3686,9 +3668,11 @@ a.help {
 .setting {
   position: relative;
 }
-/* .settingPosition {
-  margin-top: 20%;
-} */
+.settingPosition {
+  display: flex;
+  flex-direction: column;
+  height: calc(90vh-20px);
+}
 .grid-content {
   border-radius: 4px;
   text-align: left;
@@ -3706,9 +3690,16 @@ i.el-icon.el-icon--upload {
 .spanPosition {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .el-switch__core .el-switch__inner .is-icon,
 .el-switch__core .el-switch__inner .is-text {
   color: #000;
+}
+.row-container{
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
 }
 </style>
