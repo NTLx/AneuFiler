@@ -12,7 +12,7 @@
           name="first"
           v-if="showUploadGen"
         >
-          <div id="holder" class="holder" style="height: 510px">
+          <div id="holder" class="holder">
             <div>
               <el-upload
                 class="upload-demo"
@@ -3632,6 +3632,9 @@ export default {
 .demo-tabs .el-tab-pane {
   flex: 1;
 }
+#holder {
+  height: 77vh;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -3640,7 +3643,7 @@ export default {
   color: #2c3e50;
 }
 .upload-demo .el-upload-dragger {
-  height: 450px;
+  height: 69vh;
 }
 .el-upload-dragger {
   margin-top: 10px;
@@ -3677,15 +3680,11 @@ a.help {
   border-radius: 4px;
   text-align: left;
 }
-.fileSetting {
-  margin: 30px 0;
-}
-
 .el-divider__text {
   font-size: 16px !important;
 }
 i.el-icon.el-icon--upload {
-  margin-top: 100px;
+  margin-top: 21vh;
 }
 .spanPosition {
   display: flex;
