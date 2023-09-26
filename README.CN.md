@@ -5,7 +5,7 @@
 `AneuFiler` 专门用于“21、18、13和性染色体倍型检测试剂盒（荧光PCR-毛细管电泳法）”产生数据的分析：
 
 - 使用 [Electron](https://electronjs.org) 框架进行跨平台开发
-- 基于 [electron-quick-start](https://github.com/electron/electron-quick-start) 和 [MDUI](https://github.com/zdhxiong/mdui) 项目搭建用户界面
+- 基于 [element-plus](https://github.com/element-plus/element-plus) 和 [Vue3.0](https://github.com/vuejs/core) 项目搭建用户界面
 - 核心算法模块不开源
 
 当前发布版本为 [`v0.5.0`](https://github.com/NTLx/AneuFiler/releases/tag/v0.5.0) ， `Pre-release` 版本的核心算法尚未完善，不建议用于实际生产。
@@ -46,16 +46,14 @@
 
 ### 程序主窗口
 
-![main window](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-08-16_14-58-11.png)
+![main window](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-09-26_09-33-32.png)
 
 将一个文件（下机数据，用默认格式导出）拖拽至 `文件处理区` 即可；也可以点击提示区域，然后选择需要处理的文件。
 
 > - 仅支持 `txt` 或 `csv` 格式的输入文件；
 > - 点击方式添加文件时，一次只能选择一个文件进行处理。
 
-默认针对每一个输入文件都会按照样本名拆分输出结果到输出文件夹中。
-
-输出文件夹位于每个输入文件相同的目录下。
+默认输出文件夹位于每个输入文件相同的目录下。
 
 ### 查看帮助文档
 
@@ -63,11 +61,11 @@
 
 ### 下载样本信息模版文件
 
-点击主界面的蓝色 `下载样本信息模版文件` 按钮即可下载样本信息模版文件。
+点击主界面的蓝色 `下载样本信息模版` 按钮即可下载样本信息模版文件。
 
-### 样本信息数据上传
+### 样本信息数据上传窗口
 
-![new window](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-08-16_15-04-57.png)
+![new window](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-09-26_09-01-25.png)
 
 > 输出文件类型默认为`结果文件`
 
@@ -79,13 +77,13 @@
 
 设置标签页如下图：
 
-![each sample output](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-08-16_15-06-27.png)
+![each sample output](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-09-26_09-01-05.png)
 
 #### 输出文件设置
 
-默认开启按样本输出为关闭状态，如需按样本输出（针对输入文件的样本会按照不同样本名输出到不同的结果文件中），请开启该开关。
+Windows 操作系统环境下，默认输出文件的格式为"GBK"。
 
-默认输出编码格式为 `GBK` ；为获得更广泛的兼容性，可手动修改为 `UTF-8`编码格式 。
+默认开启按样本输出为关闭状态，如需按样本输出（针对输入文件的样本会按照不同样本名输出到不同的结果文件中），请开启该开关。
 
 默认输出文件类型只包含结果文件。如需输出报告文件，请选择`结果文件+报告文件`选项。如只需输出报告文件，请选择`报告文件`选项。
 
@@ -99,7 +97,7 @@
 
 点击设置界面中打开日志文件便会打开如下图所示的日志文件内容：
 
-![log](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-08-16_15-07-41.png)
+![log](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-09-26_09-15-30.png)
 
 ## 反馈
 

@@ -5,7 +5,7 @@
 `AneuFiler` was used for "21, 18, 13 and sex chromosome genotype test kit" data analysis specifically:
 
 - Based on [Electron](https://electronjs.org)
-- Based on [electron-quick-start](https://github.com/electron/electron-quick-start) and [MDUI](https://github.com/zdhxiong/mdui) project
+- Based on [element-plus](https://github.com/element-plus/element-plus) and [Vue3.0](https://github.com/vuejs/core) project
 - core algorithm was not open source
 
 Current release is [`v0.5.0`](https://github.com/NTLx/AneuFiler/releases/tag/v0.5.0), `Pre-release` was not recommended for actual production.
@@ -46,13 +46,13 @@ Move app to `Application` :
 
 ## Main window
 
-![main window](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-08-16_14-58-11.png)
+![main window](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-09-26_09-33-32.png)
 
 Drag file(s) to process region (means `文件处理区`), or just click this region to select a file.
 
 > input file format: only support `txt` and `csv`
 
-By default, the output will be splited according to sample names, and the result file(s) will be output to the dir where the input file comes from.
+By default, the result file(s) will be output to the dir where the input file comes from.
 
 ### Manual
 
@@ -60,31 +60,31 @@ You may press the orange button `帮助` to check manual, it will simply open a 
 
 ### download sample information file
 
-Press the blue button `下载样本信息模版文件` to download sample template file.
+Press the blue button `下载样本信息模版` to download sample template file.
 
 ###  Upload sample information file window
 
-![new window](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-08-16_15-04-57.png)
+![new window](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-09-26_09-01-25.png)
 
 > By default,The output file type is `结果文件`
 
-> When select `结果文件+报告文件` options, then the tab will automatically jump from the `设置` tab to the `GeneMapper下机数据上传` tab, At the same time, the `样本信息数据上传` tab page will be displayed automatically.After uploading the GeneMapper off-machine data file, the tab page automatically jumps to the next tab page `样本信息数据上传`, click the upload button `上传样本信息数据`, and the report file can be output normally (the report file will be automatically generated in the result file folder).
+> When select `结果文件+报告文件` options, then the tab will automatically jump from the `设置` tab to the `GeneMapper下机数据上传` tab, At the same time, the `样本信息数据上传` tab page will be displayed automatically.After uploading the GeneMapper off-machine data file, the tab page automatically jumps to the next tab page `样本信息数据上传`, click the upload button `上传`, and the report file can be output normally (the report file will be automatically generated in the result file folder).
 
-> When select `报告文件` options, then the tab will automatically jump from the `设置` tab to the `样本信息数据上传` tab. And click `上传样本信息数据` upload button to upload sample Information table, then the report file will be outputed normally(the report file will be automatically generated in the folder of the result file).
+> When select `报告文件` options, then the tab will automatically jump from the `设置` tab to the `样本信息数据上传` tab. And click `上传` upload button to upload sample Information table, then the report file will be outputed normally(the report file will be automatically generated in the folder of the result file).
 
 ### Settings
 
-The setting Tab is as shown
+Several settings was offered in `设置面板` , defaut settings should be like this:
 
-![each sample output](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-08-16_15-06-27.png)
+![each sample output](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-09-26_09-01-05.png)
+
+The default output file format is "GBK" in the windows environment.
 
 By default, the output by sample is turned off. If you want to output by sample (the samples for the input file will be output to different result files according to different sample names), please enable this switch.
 
-The default output encoding format is `GBK`; for wider compatibility, it can be manually modified to `UTF-8` encoding format.
-
 The default output file type contains only result files. To output result file(s) and report file(s), please select the `结果文件+报告文件` option. If you only want to output report file(s), please select the `报告文件` option.
 
-### Report File Setting 
+### Settings for output report files 
 
 You can choose a specific report file template style. If you need a  report style, please inform the developer in advance.
 
@@ -92,9 +92,9 @@ You can choose a specific report file template style. If you need a  report styl
 
 ### Log
 
-The log panel is as shown
+The log panel is as shown.
 
-![log](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-08-16_15-07-41.png)
+![log](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-09-26_09-15-30.png)
 
 ## Feedback
 
