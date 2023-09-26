@@ -158,6 +158,10 @@
                   active-text="开启按样本输出"
                   active-value="-s"
                   inactive-value=""
+                  style="
+                    --el-switch-on-color: #13ce66;
+                    --el-switch-off-color: #ff4949;
+                  "
                   inactive-text="开启按样本输出"
                   @change="switchReceiveStatus"
                 ></el-switch
@@ -3693,7 +3697,7 @@ i.el-icon.el-icon--upload {
 }
 .el-switch__core .el-switch__inner .is-icon,
 .el-switch__core .el-switch__inner .is-text {
-  color: #000;
+  /* color: #000; */
 }
 .row-container{
   display: flex;
