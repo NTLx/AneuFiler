@@ -57,7 +57,7 @@
                   size="large"
                 >
                   <el-icon><Download /></el-icon>
-                  模版
+                  下载样本信息模版
                 </el-button>
               </div>
             </el-col>
