@@ -483,6 +483,17 @@ export default {
           break;
       }
     },
+    // info消息通知
+    showInfoNotification(message) {
+      ElNotification({
+        message: message,
+        type: "info",
+        showClose: true,
+        position: "top-right",
+        duration: "2000",
+        offset: 60,
+      });
+    },
     //处理GeneMapper数据文件列表
     handleChange(file, fileList1) {
       this.fileList1 = fileList1.slice(-1);
