@@ -23,7 +23,7 @@
     "@vueuse/core": "^10.1.2",
     "child_process": "^1.0.2",
     "core-js": "^3.8.3",
-    "electron": "^22.0.0",
+    "electron": "22.3.24",
     "electron-devtools-installer": "^3.2.0",
     "electron-log": "^4.4.8",
     "element-plus": "^2.3.6",
@@ -31,8 +31,7 @@
     "node-xlsx": "^0.21.2",
     "officegen": "^0.6.5",
     "path-browserify": "^1.0.1",
-    "vue": "^3.2.13",
-    "xlsx": "^0.18.5"
+    "vue": "^3.2.13"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

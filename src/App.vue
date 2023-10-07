@@ -206,7 +206,7 @@
 
 <script>
 /* eslint-disable */
-import { ElNotification } from "element-plus";
+import { ElNotification, ElLoading } from "element-plus";
 export default {
   data() {
     return {
@@ -282,6 +282,11 @@ export default {
     },
     // 上传下机数据文件进行处理
     httpRequest(data) {
+      var loading = ElLoading.service({
+        lock: true,
+        text: "上传处理中",
+        background: "rgba(0, 0, 0, 0.7)",
+      });
       var sampleOutputStatus = data.data.sampleOutputStatus;
       console.log("sampleOutputStatus", sampleOutputStatus);
       var outputFormat = data.data.outputFormat;
@@ -363,6 +368,7 @@ export default {
             outputDirectry,
           (error, stdout, stderr) => {
             if (error || stderr) {
+              loading.close()
               const notice = "输入下机数据文件" + fileName + "处理有误";
               log.error("\n" + notice + "！" + "\n" + "stderr:" + stderr);
               ElNotification({
@@ -374,6 +380,7 @@ export default {
                 offset: 60,
               });
             } else if (stdout) {
+              loading.close()
               const notice = "输入下机数据文件" + fileName + "处理完成";
               log.info("\n" + notice + "！");
               ElNotification({
@@ -594,6 +601,11 @@ export default {
     },
     //上传样本信息文件并生成报告
     httpRequest1(data1) {
+      var loading = ElLoading.service({
+        lock: true,
+        text: "上传处理中",
+        background: "rgba(0, 0, 0, 0.7)",
+      });
       var fileType = data1.data.fileType;
       var selectReport = data1.data.selectReport;
       console.log("fileType", fileType);
@@ -2195,6 +2207,7 @@ export default {
             }
           });
         });
+        loading.close()
         ElNotification({
           message: "已生成报告，请注意查收！",
           type: "success",
@@ -3532,6 +3545,7 @@ export default {
             console.log("生成其他报告");
           }
         });
+        loading.close()
         ElNotification({
           message: "已生成报告，请注意查收！",
           type: "success",
