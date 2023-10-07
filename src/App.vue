@@ -90,7 +90,7 @@
               </div>
             </template>
           </el-upload>
-          <el-table :data="tableData" style="width: 100%">
+          <el-table :data="tableData" style="width: 100%" id="myTable">
             <el-table-column type="expand">
               <template #default="props">
                 <div m="18">
@@ -117,12 +117,12 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="MSampleNo" label="母样本编号" />
-            <el-table-column prop="FSampleNo" label="子样本编号" />
-            <el-table-column prop="MSampleName" label="母亲样本名" />
-            <el-table-column prop="FSampleName" label="胎儿样本名" />
-            <el-table-column prop="sex" label="性别" />
-            <el-table-column prop="age" label="年龄" />
+            <el-table-column prop="MSampleNo" label="母样本编号" align="center" fixed />
+            <el-table-column prop="FSampleNo" label="子样本编号" align="center" />
+            <el-table-column prop="MSampleName" label="母亲样本名" align="center" />
+            <el-table-column prop="FSampleName" label="胎儿样本名" align="center" />
+            <el-table-column prop="sex" label="性别" align="center" />
+            <el-table-column prop="age" label="年龄"  align="center"/>
           </el-table>
         </el-tab-pane>
         <el-tab-pane label="设置" name="third" class="setting">
@@ -235,6 +235,41 @@ export default {
     };
   },
   methods: {
+    // 获取浏览器窗口高度
+    getWindowHeight() {
+      return (
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight
+      );
+    },
+    // 获取浏览器窗口宽度
+    getWindowWidth() {
+      return (
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth
+      );
+    },
+    //调节表格高度
+    adjustTableHeight() {
+      var table = document.getElementById("myTable");
+      var windowHeight = this.getWindowHeight();
+      var windowWidth = this.getWindowWidth();
+      if (table == null) {
+        console.log("nothing");
+        console.log("windowHeight", windowHeight);
+        console.log("windowWidth", windowWidth);
+      } else {
+        console.log("windowHeight", windowHeight);
+        console.log("windowWidth", windowWidth);
+        // console.log("table.offsetTop", table.offsetTop);
+        var tableHeight = windowHeight - table.offsetTop - 100;
+        table.style.height = tableHeight + "px";
+        var tableWidth = windowWidth - 20;
+        table.style.width = tableWidth + "px";
+      }
+    },
     // 根据操作系统设置输出文件默认值
     outputFormat() {
       const platformEncodingMap = {
@@ -742,6 +777,7 @@ export default {
       this.tableData = sampleArr;
       console.log("fileType", fileType);
       if (fileType == "summaryFileAndReportFile") {
+        this.adjustTableHeight();
         var generateFileData = this.outputArr1;
         var generateFileDataPath = this.outputDirectry;
         var iconv = require("iconv-lite");
@@ -2169,6 +2205,7 @@ export default {
         });
       } else if (fileType == "reportFile") {
         var fs = window.require("fs");
+        this.adjustTableHeight();
         fs.mkdir(reportFilePath, (err) => {
           if (err) {
             console.error(err);
