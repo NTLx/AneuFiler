@@ -494,6 +494,39 @@ export default {
         offset: 60,
       });
     },
+    // error消息通知
+    showErrorNotification(message) {
+      ElNotification({
+        message: message,
+        type: "error",
+        showClose: true,
+        position: "top-right",
+        duration: "2000",
+        offset: 60,
+      });
+    },
+    // success消息通知
+    showSuccessNotification(message) {
+      ElNotification({
+        message: message,
+        type: "success",
+        showClose: true,
+        position: "top-right",
+        duration: "2000",
+        offset: 60,
+      });
+    },
+    // warning 消息通知
+    showWarningNotification(message) {
+      ElNotification({
+        message: message,
+        type: "warning",
+        showClose: true,
+        position: "top-right",
+        duration: "2000",
+        offset: 60,
+      });
+    },
     //处理GeneMapper数据文件列表
     handleChange(file, fileList1) {
       this.fileList1 = fileList1.slice(-1);
