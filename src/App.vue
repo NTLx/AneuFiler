@@ -471,6 +471,17 @@ export default {
     },
     handleClick(tab, event) {
       console.log(tab.props.label, event);
+      var label = tab.props.label;
+      switch (label) {
+        case "GeneMapper下机数据上传":
+        case "样本信息数据上传":
+        case "设置":
+          this.showInfoNotification(label);
+          break;
+        default:
+          // 默认情况下的处理逻辑
+          break;
+      }
     },
     //处理GeneMapper数据文件列表
     handleChange(file, fileList1) {
