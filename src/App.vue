@@ -94,35 +94,52 @@
             <el-table-column type="expand">
               <template #default="props">
                 <div m="18">
-                  <p m="t-0 b-2">与胎儿关系: {{ props.row.FRelation }}</p>
-                  <p m="t-0 b-2">与母亲关系: {{ props.row.MRelation }}</p>
+                  <p m="t-0 b-2">与胎儿关系: {{ props.row.relationship_with_fetus }}</p>
+                  <p m="t-0 b-2">与母亲关系: {{ props.row.relationship_with_mother }}</p>
                   <p m="t-0 b-2">送检医师: {{ props.row.sendingPhysician }}</p>
                   <p m="t-0 b-2">采样日期: {{ props.row.samplingDate }}</p>
                   <p m="t-0 b-2">接收日期: {{ props.row.receiveDate }}</p>
                   <p m="t-0 b-2">报告日期: {{ props.row.reportDate }}</p>
-                  <p m="t-0 b-2">母亲样本类型: {{ props.row.MSampleType }}</p>
-                  <p m="t-0 b-2">胎儿样本类型: {{ props.row.FSampleType }}</p>
-                  <p m="t-0 b-2">母21: {{ props.row.M21 }}</p>
-                  <p m="t-0 b-2">母18: {{ props.row.M18 }}</p>
-                  <p m="t-0 b-2">母13: {{ props.row.M13 }}</p>
-                  <p m="t-0 b-2">母性染色体: {{ props.row.MSexChromosome }}</p>
-                  <p m="t-0 b-2">母备注: {{ props.row.MNote }}</p>
-                  <p m="t-0 b-2">胎儿21: {{ props.row.F21 }}</p>
-                  <p m="t-0 b-2">胎儿18: {{ props.row.F18 }}</p>
-                  <p m="t-0 b-2">胎儿13: {{ props.row.F13 }}</p>
+                  <p m="t-0 b-2">母亲样本类型: {{ props.row.motherSampleType }}</p>
+                  <p m="t-0 b-2">胎儿样本类型: {{ props.row.fetusSampleType }}</p>
+                  <p m="t-0 b-2">母21: {{ props.row.mother21 }}</p>
+                  <p m="t-0 b-2">母18: {{ props.row.mother18 }}</p>
+                  <p m="t-0 b-2">母13: {{ props.row.mother13 }}</p>
+                  <p m="t-0 b-2">母性染色体: {{ props.row.motherSexChromosome }}</p>
+                  <p m="t-0 b-2">母备注: {{ props.row.motherNote }}</p>
+                  <p m="t-0 b-2">胎儿21: {{ props.row.fetus21 }}</p>
+                  <p m="t-0 b-2">胎儿18: {{ props.row.fetus18 }}</p>
+                  <p m="t-0 b-2">胎儿13: {{ props.row.fetus13 }}</p>
                   <p m="t-0 b-2">
-                    胎儿性染色体: {{ props.row.FSexChromosome }}
+                    胎儿性染色体: {{ props.row.fetusSexChromosome }}
                   </p>
-                  <p m="t-0 b-2">胎儿备注: {{ props.row.FNote }}</p>
+                  <p m="t-0 b-2">胎儿备注: {{ props.row.feutsNote }}</p>
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="MSampleNo" label="母样本编号" align="center" fixed />
-            <el-table-column prop="FSampleNo" label="子样本编号" align="center" />
-            <el-table-column prop="MSampleName" label="母亲样本名" align="center" />
-            <el-table-column prop="FSampleName" label="胎儿样本名" align="center" />
+            <el-table-column
+              prop="motherSampleNumber"
+              label="母样本编号"
+              align="center"
+              fixed
+            />
+            <el-table-column
+              prop="fetusSampleNumber"
+              label="子样本编号"
+              align="center"
+            />
+            <el-table-column
+              prop="motherSampleName"
+              label="母亲样本名"
+              align="center"
+            />
+            <el-table-column
+              prop="fetusSampleName"
+              label="胎儿样本名"
+              align="center"
+            />
             <el-table-column prop="sex" label="性别" align="center" />
-            <el-table-column prop="age" label="年龄"  align="center"/>
+            <el-table-column prop="age" label="年龄" align="center" />
           </el-table>
         </el-tab-pane>
         <el-tab-pane label="设置" name="third" class="setting">
@@ -131,22 +148,24 @@
               <el-col :span="24">
                 <el-divider content-position="left">输出文件设置</el-divider>
               </el-col>
-               <el-col :span="12">
+              <el-col :span="12">
                 <div class="spanPosition">
-                <span>类型：</span>
-                <el-radio-group
-                  v-model="radio2"
-                  @change="switchFileType"
-                  size="large"
-                >
-                  <el-radio-button label="summaryFile"
-                    >结果文件</el-radio-button
+                  <span>类型：</span>
+                  <el-radio-group
+                    v-model="radio2"
+                    @change="switchFileType"
+                    size="large"
                   >
-                  <el-radio-button label="summaryFileAndReportFile"
-                    >结果文件+报告文件</el-radio-button
-                  >
-                  <el-radio-button label="reportFile">报告文件</el-radio-button>
-                </el-radio-group>
+                    <el-radio-button label="summaryFile"
+                      >结果文件</el-radio-button
+                    >
+                    <el-radio-button label="summaryFileAndReportFile"
+                      >结果文件+报告文件</el-radio-button
+                    >
+                    <el-radio-button label="reportFile"
+                      >报告文件</el-radio-button
+                    >
+                  </el-radio-group>
                 </div>
               </el-col>
               <el-col :span="12"
@@ -171,7 +190,7 @@
               <el-col :span="24">
                 <el-divider content-position="left">报告设置</el-divider>
               </el-col>
-               <el-col :span="24">
+              <el-col :span="24">
                 <el-select
                   v-model="value2"
                   size="large"
@@ -206,7 +225,7 @@
 
 <script>
 /* eslint-disable */
-import { ElNotification, ElLoading } from "element-plus";
+import { ElNotification, ElLoading, breadcrumbItemProps } from "element-plus";
 export default {
   data() {
     return {
@@ -368,15 +387,15 @@ export default {
             outputDirectry,
           (error, stdout, stderr) => {
             if (error || stderr) {
-              loading.close()
+              loading.close();
               const notice = "输入下机数据文件" + fileName + "处理有误";
               log.error("\n" + notice + "！" + "\n" + "stderr:" + stderr);
-              this.showErrorNotification(notice)
+              this.showErrorNotification(notice);
             } else if (stdout) {
-              loading.close()
+              loading.close();
               const notice = "输入下机数据文件" + fileName + "处理完成";
               log.info("\n" + notice + "！");
-              this.showSuccessNotification(notice)
+              this.showSuccessNotification(notice);
               console.log("stdout:\n" + stdout);
               if (fileType == "summaryFileAndReportFile") {
                 this.changeSampleTab();
@@ -531,7 +550,7 @@ export default {
       if (extensionList.indexOf(extension) < 0) {
         const formatMessage =
           "很抱歉，您选择的文件格式不符合要求，请重新选择文件！";
-        this.showErrorNotification(formatMessage)
+        this.showErrorNotification(formatMessage);
         return false;
       }
     },
@@ -576,7 +595,7 @@ export default {
       if (extensionList1.indexOf(extension1) < 0) {
         const formatMessage =
           "很抱歉，您选择的文件格式不符合要求，请重新选择文件！";
-        this.showErrorNotification(formatMessage)
+        this.showErrorNotification(formatMessage);
         return false;
       }
       console.log(file2);
@@ -692,130 +711,335 @@ export default {
       );
       var sampleSheets = xlsx.parse(sampleFilePath);
       var sampleSheetsData = sampleSheets[0].data;
-      var sampleLineData = [];
+      // var sampleLineData = [];
       var outFileName = [];
       var outFileNamePath = [];
+      var motherSampleNumber = [];
+      var motherSampleName = [];
+      var fetusSampleNumber = [];
+      var fetusSampleName = [];
+      var sex = [];
+      var age = [];
+      var relationship_with_fetus = [];
+      var relationship_with_mother = [];
+      var sendingPhysician = [];
+      var samplingDate = [];
+      var receiveDate = [];
+      var reportDate = [];
+      var motherSampleType = [];
+      var fetusSampleType = [];
+      var mother21 = [];
+      var mother18 = [];
+      var mother13 = [];
+      var motherSexChromosome = [];
+      var motherNote = [];
+      var fetus21 = [];
+      var fetus18 = [];
+      var fetus13 = [];
+      var fetusSexChromosome = [];
+      var feutsNote = [];
+      var sampleName = [];
       console.log("sampleSheetsData", sampleSheetsData);
-      // 循环获取xlsx文件的样本信息数据
-      for (var j = 1; j < sampleSheetsData.length; j++) {
-        sampleLineData.push(sampleSheetsData[j]);
+      for (var n = 1; n < sampleSheetsData.length; n++) {
+        for (var m = 0; m < sampleSheetsData[0].length; m++) {
+          switch (sampleSheetsData[0][m]) {
+            case "母亲样本编号":
+              motherSampleNumber.push(sampleSheetsData[n][m]);
+              break;
+            case "母亲样本名":
+              motherSampleName.push(sampleSheetsData[n][m]);
+              break;
+            case "胎儿样本编号":
+              fetusSampleNumber.push(sampleSheetsData[n][m]);
+              break;
+            case "胎儿样本名":
+              fetusSampleName.push(sampleSheetsData[n][m]);
+              break;
+            case "性别":
+              sex.push(sampleSheetsData[n][m]);
+              break;
+            case "年龄":
+              age.push(sampleSheetsData[n][m]);
+              break;
+            case "与胎儿关系":
+              relationship_with_fetus.push(sampleSheetsData[n][m]);
+              break;
+            case "与母亲关系":
+              relationship_with_mother.push(sampleSheetsData[n][m]);
+              break;
+            case "送检医师":
+              sendingPhysician.push(sampleSheetsData[n][m]);
+              break;
+            case "采样日期":
+              samplingDate.push(this.formatDate2(sampleSheetsData[n][m]));
+              break;
+            case "接收日期":
+              receiveDate.push(this.formatDate2(sampleSheetsData[n][m]));
+              break;
+            case "报告日期":
+              reportDate.push(this.formatDate1(sampleSheetsData[n][m]));
+              break;
+            case "母亲样本类型":
+              motherSampleType.push(sampleSheetsData[n][m]);
+              break;
+            case "胎儿样本类型":
+              fetusSampleType.push(sampleSheetsData[n][m]);
+              break;
+            case "母21":
+              mother21.push(sampleSheetsData[n][m]);
+              break;
+            case "母18":
+              mother18.push(sampleSheetsData[n][m]);
+              break;
+            case "母13":
+              mother13.push(sampleSheetsData[n][m]);
+              break;
+            case "母性染色体":
+              motherSexChromosome.push(sampleSheetsData[n][m]);
+              break;
+            case "母备注":
+              motherNote.push(sampleSheetsData[n][m]);
+              break;
+            case "胎儿21":
+              fetus21.push(sampleSheetsData[n][m]);
+              break;
+            case "胎儿18":
+              fetus18.push(sampleSheetsData[n][m]);
+              break;
+            case "胎儿13":
+              fetus13.push(sampleSheetsData[n][m]);
+              break;
+            case "胎儿性染色体":
+              fetusSexChromosome.push(sampleSheetsData[n][m]);
+              break;
+            case "胎儿备注":
+              feutsNote.push(sampleSheetsData[n][m]);
+              break;
+            case "样本":
+              sampleName.push(sampleSheetsData[n][m]);
+              break;
+            default:
+              break;
+          }
+        }
       }
-      // 除去标题行具体数据
-      console.log("sampleLineData", sampleLineData);
-      const sampleArr = sampleLineData.map((item) => {
-        //报告日期调用日期格式转换方法
-        var newReportDate = this.formatDate1(item[11]);
-        //采样日期调用日期格式转换方法
-        var newSamplingDate = this.formatDate2(item[9]);
-        console.log("采样", newSamplingDate);
-        //接收日期调用日期格式转换方法
-        var newReceiveDate = this.formatDate2(item[10]);
-        console.log("接收", newReceiveDate);
+      var sampleArrData = {
+        motherSampleNumber: motherSampleNumber,
+        motherSampleName: motherSampleName,
+        fetusSampleNumber: fetusSampleNumber,
+        fetusSampleName: fetusSampleName,
+        sex: sex,
+        age: age,
+        relationship_with_fetus: relationship_with_fetus,
+        relationship_with_mother: relationship_with_mother,
+        sendingPhysician: sendingPhysician,
+        samplingDate: samplingDate,
+        receiveDate: receiveDate,
+        reportDate: reportDate,
+        motherSampleType: motherSampleType,
+        fetusSampleType: fetusSampleType,
+        mother21: mother21,
+        mother18: mother18,
+        mother13: mother13,
+        motherSexChromosome: motherSexChromosome,
+        motherNote: motherNote,
+        fetus21: fetus21,
+        fetus18: fetus18,
+        fetus13: fetus13,
+        fetusSexChromosome: fetusSexChromosome,
+        feutsNote: feutsNote,
+        sampleName: sampleName,
+      };
+      console.log("样本数据", sampleArrData);
+      var sampleArr = sampleArrData.motherSampleNumber.map(function (
+        name,
+        index
+      ) {
         var leftSlash = "/";
-        if (item[0] == " " || item[0] == undefined) {
-          item[0] = leftSlash;
+        if (
+          sampleArrData.motherSampleNumber[index] == " " ||
+          sampleArrData.motherSampleNumber[index] == undefined
+        ) {
+          sampleArrData.motherSampleNumber[index] = leftSlash;
         }
-        if (item[1] == " " || item[1] == undefined) {
-          item[1] = leftSlash;
+        if (
+          sampleArrData.motherSampleName[index] == " " ||
+          sampleArrData.motherSampleName[index] == undefined
+        ) {
+          sampleArrData.motherSampleName[index] = leftSlash;
         }
-        if (item[2] == " " || item[2] == undefined) {
-          item[2] = leftSlash;
+        if (
+          sampleArrData.fetusSampleNumber[index] == " " ||
+          sampleArrData.fetusSampleNumber[index] == undefined
+        ) {
+          sampleArrData.fetusSampleNumber[index] = leftSlash;
         }
-        if (item[3] == " " || item[3] == undefined) {
-          item[3] = leftSlash;
+        if (
+          sampleArrData.fetusSampleName[index] == " " ||
+          sampleArrData.fetusSampleName[index] == undefined
+        ) {
+          sampleArrData.fetusSampleName[index] = leftSlash;
         }
-        if (item[4] == " " || item[4] == undefined) {
-          item[4] = leftSlash;
+        if (
+          sampleArrData.sex[index] == " " ||
+          sampleArrData.sex[index] == undefined
+        ) {
+          sampleArrData.sex[index] = leftSlash;
         }
-        if (item[5] == " " || item[5] == undefined) {
-          item[5] = leftSlash;
+        if (
+          sampleArrData.age[index] == " " ||
+          sampleArrData.age[index] == undefined
+        ) {
+          sampleArrData.age[index] = leftSlash;
         }
-        if (item[6] == " " || item[6] == undefined) {
-          item[6] = leftSlash;
+        if (
+          sampleArrData.relationship_with_fetus[index] == " " ||
+          sampleArrData.relationship_with_fetus[index] == undefined
+        ) {
+          sampleArrData.relationship_with_fetus[index] = leftSlash;
         }
-        if (item[7] == " " || item[7] == undefined) {
-          item[7] = leftSlash;
+        if (
+          sampleArrData.relationship_with_mother[index] == " " ||
+          sampleArrData.relationship_with_mother[index] == undefined
+        ) {
+          sampleArrData.relationship_with_mother[index] = leftSlash;
         }
-        if (item[8] == " " || item[8] == undefined) {
-          item[8] = leftSlash;
+        if (
+          sampleArrData.sendingPhysician[index] == " " ||
+          sampleArrData.sendingPhysician[index] == undefined
+        ) {
+          sampleArrData.sendingPhysician[index] = leftSlash;
         }
-        if (item[9] == " " || item[9] == undefined) {
-          item[9] = leftSlash;
+        if (
+          sampleArrData.samplingDate[index] == " " ||
+          sampleArrData.samplingDate[index] == undefined
+        ) {
+          sampleArrData.samplingDate[index] = leftSlash;
         }
-        if (item[10] == " " || item[10] == undefined) {
-          item[10] = leftSlash;
+        if (
+          sampleArrData.receiveDate[index] == " " ||
+          sampleArrData.receiveDate[index] == undefined
+        ) {
+          sampleArrData.receiveDate[index] = leftSlash;
         }
-        if (item[11] == " " || item[11] == undefined) {
-          item[11] = leftSlash;
+        if (
+          sampleArrData.reportDate[index] == " " ||
+          sampleArrData.reportDate[index] == undefined
+        ) {
+          sampleArrData.reportDate[index] = leftSlash;
         }
-        if (item[12] == " " || item[12] == undefined) {
-          item[12] = leftSlash;
+        if (
+          sampleArrData.motherSampleType[index] == " " ||
+          sampleArrData.motherSampleType[index] == undefined
+        ) {
+          sampleArrData.motherSampleType[index] = leftSlash;
         }
-        if (item[13] == " " || item[13] == undefined) {
-          item[13] = leftSlash;
+        if (
+          sampleArrData.fetusSampleType[index] == " " ||
+          sampleArrData.fetusSampleType[index] == undefined
+        ) {
+          sampleArrData.fetusSampleType[index] = leftSlash;
         }
-        if (item[14] == " " || item[14] == undefined) {
-          item[14] = leftSlash;
+        if (
+          sampleArrData.mother21[index] == " " ||
+          sampleArrData.mother21[index] == undefined
+        ) {
+          sampleArrData.mother21[index] = leftSlash;
         }
-        if (item[15] == " " || item[15] == undefined) {
-          item[15] = leftSlash;
+        if (
+          sampleArrData.mother18[index] == " " ||
+          sampleArrData.mother18[index] == undefined
+        ) {
+          sampleArrData.mother18[index] = leftSlash;
         }
-        if (item[16] == " " || item[16] == undefined) {
-          item[16] = leftSlash;
+        if (
+          sampleArrData.mother13[index] == " " ||
+          sampleArrData.mother13[index] == undefined
+        ) {
+          sampleArrData.mother13[index] = leftSlash;
         }
-        if (item[17] == " " || item[17] == undefined) {
-          item[17] = leftSlash;
+        if (
+          sampleArrData.motherNote[index] == " " ||
+          sampleArrData.motherNote[index] == undefined
+        ) {
+          sampleArrData.motherNote[index] = leftSlash;
         }
-        if (item[18] == " " || item[18] == undefined) {
-          item[18] = leftSlash;
+        if (
+          sampleArrData.fetus21[index] == " " ||
+          sampleArrData.fetus21[index] == undefined
+        ) {
+          sampleArrData.fetus21[index] = leftSlash;
         }
-        if (item[19] == " " || item[19] == undefined) {
-          item[19] = leftSlash;
+        if (
+          sampleArrData.fetus18[index] == " " ||
+          sampleArrData.fetus18[index] == undefined
+        ) {
+          sampleArrData.fetus18[index] = leftSlash;
         }
-        if (item[20] == " " || item[20] == undefined) {
-          item[20] = leftSlash;
+        if (
+          sampleArrData.fetus13[index] == " " ||
+          sampleArrData.fetus13[index] == undefined
+        ) {
+          sampleArrData.fetus13[index] = leftSlash;
         }
-        if (item[21] == " " || item[21] == undefined) {
-          item[21] = leftSlash;
+        if (
+          sampleArrData.fetusSexChromosome[index] == " " ||
+          sampleArrData.fetusSexChromosome[index] == undefined
+        ) {
+          sampleArrData.fetusSexChromosome[index] = leftSlash;
         }
-        if (item[22] == " " || item[22] == undefined) {
-          item[22] = leftSlash;
+        if (
+          sampleArrData.feutsNote[index] == " " ||
+          sampleArrData.feutsNote[index] == undefined
+        ) {
+          sampleArrData.feutsNote[index] = leftSlash;
         }
-        if (item[23] == " " || item[23] == undefined) {
-          item[23] = leftSlash;
+        if (
+          sampleArrData.sampleName[index] == " " ||
+          sampleArrData.sampleName[index] == undefined
+        ) {
+          sampleArrData.sampleName[index] = leftSlash;
         }
         return {
-          MSampleNo: item[0],
-          FSampleNo: item[1],
-          MSampleName: item[2],
-          FSampleName: item[3],
-          sex: item[4],
-          age: item[5],
-          FRelation: item[6],
-          MRelation: item[7],
-          sendingPhysician: item[8],
-          samplingDate: newSamplingDate,
-          receiveDate: newReceiveDate,
-          reportDate: newReportDate,
-          MSampleType: item[12],
-          FSampleType: item[13],
-          M21: item[14],
-          M18: item[15],
-          M13: item[16],
-          MSexChromosome: item[17],
-          MNote: item[18],
-          F21: item[19],
-          F18: item[20],
-          F13: item[21],
-          FSexChromosome: item[22],
-          FNote: item[23],
-          SampleName: item[24],
+          motherSampleNumber: name,
+          motherSampleName: sampleArrData.motherSampleName[index],
+          fetusSampleNumber: sampleArrData.fetusSampleNumber[index],
+          fetusSampleName: sampleArrData.fetusSampleName[index],
+          sex: sampleArrData.sex[index],
+          age: sampleArrData.age[index],
+          relationship_with_fetus: sampleArrData.relationship_with_fetus[index],
+          relationship_with_mother:
+          sampleArrData.relationship_with_mother[index],
+          sendingPhysician: sampleArrData.sendingPhysician[index],
+          samplingDate: sampleArrData.samplingDate[index],
+          receiveDate: sampleArrData.receiveDate[index],
+          reportDate: sampleArrData.reportDate[index],
+          motherSampleType: sampleArrData.motherSampleType[index],
+          fetusSampleType: sampleArrData.fetusSampleType[index],
+          mother21: sampleArrData.mother21[index],
+          mother18: sampleArrData.mother18[index],
+          mother13: sampleArrData.mother13[index],
+          motherSexChromosome: sampleArrData.motherSexChromosome[index],
+          motherNote: sampleArrData.motherNote[index],
+          fetus21: sampleArrData.fetus21[index],
+          fetus18: sampleArrData.fetus18[index],
+          fetus13: sampleArrData.fetus13[index],
+          fetusSexChromosome: sampleArrData.fetusSexChromosome[index],
+          feutsNote: sampleArrData.feutsNote[index],
+          sampleName: sampleArrData.sampleName[index],
         };
       });
       console.log("sampleArr", sampleArr);
-      this.tableData = sampleArr;
-      console.log("fileType", fileType);
-      if (fileType == "summaryFileAndReportFile") {
+      if (sampleArr.length == 0) {
+        var nullNotice =
+          "样本信息表中数据暂无数据,请重新上传有数据的样本信息表!";
+        this.showErrorNotification(nullNotice);
+        log.error("\n" + nullNotice);
+        loading.close();
+      }else{
+        this.tableData = sampleArr;
+        loading.close()
+        if (fileType == "summaryFileAndReportFile") {
         this.adjustTableHeight();
         var generateFileData = this.outputArr1;
         var generateFileDataPath = this.outputDirectry;
@@ -858,7 +1082,7 @@ export default {
         sampleArr.forEach((item, index) => {
           removeSummaryData.forEach((item, index1) => {
             if (
-              sampleArr[index].SampleName ==
+              sampleArr[index].sampleName ==
               removeSummaryData[index1].sampleFileName
             ) {
               var Result = "本结果提示，胎儿样本未见母体DNA污染，";
@@ -2234,9 +2458,9 @@ export default {
             }
           });
         });
-        loading.close()
-        var reportMessage = "已生成报告，请注意查收！"
-        this.showSuccessNotification(reportMessage)
+        loading.close();
+        var reportMessage = "已生成报告，请注意查收！";
+        this.showSuccessNotification(reportMessage);
       } else if (fileType == "reportFile") {
         var fs = window.require("fs");
         this.adjustTableHeight();
@@ -2266,10 +2490,10 @@ export default {
             reportOtherResult,
             simpleReport;
           if (
-            sampleArr[index].F21 == "2" &&
-            sampleArr[index].F18 == "2" &&
-            sampleArr[index].F13 == "2" &&
-            sampleArr[index].FSexChromosome == "XN"
+            sampleArr[index].fetus21 == "2" &&
+            sampleArr[index].fetus18 == "2" &&
+            sampleArr[index].fetus13 == "2" &&
+            sampleArr[index].fetusSexChromosome == "XN"
           ) {
             Trisomy13 = "未见三体";
             Trisomy18 = "未见三体";
@@ -2288,10 +2512,10 @@ export default {
             reportOtherResult = "，可排除18号、13号、21号三体型。";
             simpleReport = "-阴性";
           } else if (
-            sampleArr[index].F21 == "3" &&
-            sampleArr[index].F18 == "2" &&
-            sampleArr[index].F13 == "2" &&
-            sampleArr[index].FSexChromosome == "XN"
+            sampleArr[index].fetus21 == "3" &&
+            sampleArr[index].fetus18 == "2" &&
+            sampleArr[index].fetus13 == "2" &&
+            sampleArr[index].fetusSexChromosome == "XN"
           ) {
             //判断规则2. 胎儿21染色体为3，性染色体全都对应XN 报告名：“胎儿样本编号”+“胎儿样本名”+“Qpcr快检”+“-T21”
             Trisomy13 = "未见三体";
@@ -2311,10 +2535,10 @@ export default {
             reportOtherResult = "，可排除18号、13号三体型。";
             simpleReport = "-T21";
           } else if (
-            sampleArr[index].F21 == "2" &&
-            sampleArr[index].F18 == "3" &&
-            sampleArr[index].F13 == "2" &&
-            sampleArr[index].FSexChromosome == "XN"
+            sampleArr[index].fetus21 == "2" &&
+            sampleArr[index].fetus18 == "3" &&
+            sampleArr[index].fetus13 == "2" &&
+            sampleArr[index].fetusSexChromosome == "XN"
           ) {
             //判断规则3. 胎儿18染色体为3，性染色体全都对应XN 报告名：“胎儿样本编号”+“胎儿样本名”+“Qpcr快检”+“-T18”
             Trisomy13 = "未见三体";
@@ -2334,10 +2558,10 @@ export default {
             reportOtherResult = "，可排除21号、13号三体型。";
             simpleReport = "-T18";
           } else if (
-            sampleArr[index].F21 == "2" &&
-            sampleArr[index].F18 == "2" &&
-            sampleArr[index].F13 == "3" &&
-            sampleArr[index].FSexChromosome == "XN"
+            sampleArr[index].fetus21 == "2" &&
+            sampleArr[index].fetus18 == "2" &&
+            sampleArr[index].fetus13 == "3" &&
+            sampleArr[index].fetusSexChromosome == "XN"
           ) {
             //判断规则4. 胎儿13染色体为3，性染色体全都对应XN 报告名：“胎儿样本编号”+“胎儿样本名”+“Qpcr快检”+“-T13”
             Trisomy13 = "提示三体";
@@ -2357,10 +2581,10 @@ export default {
             reportOtherResult = "，可排除21号、18号三体型。";
             simpleReport = "-T13";
           } else if (
-            sampleArr[index].F21 == "3" &&
-            sampleArr[index].F18 == "3" &&
-            sampleArr[index].F13 == "3" &&
-            sampleArr[index].FSexChromosome == "XXX"
+            sampleArr[index].fetus21 == "3" &&
+            sampleArr[index].fetus18 == "3" &&
+            sampleArr[index].fetus13 == "3" &&
+            sampleArr[index].fetusSexChromosome == "XXX"
           ) {
             //判断规则5. 胎儿所有染色体为3，胎儿性染色体为XXX 报告名：“胎儿样本编号”+“胎儿样本名”+“Qpcr快检”+“-三倍体”
             Trisomy13 = "提示三体";
@@ -2380,10 +2604,10 @@ export default {
             reportOtherResult = "。";
             simpleReport = "-三倍体";
           } else if (
-            sampleArr[index].F21 == "3" &&
-            sampleArr[index].F18 == "3" &&
-            sampleArr[index].F13 == "3" &&
-            sampleArr[index].FSexChromosome == "XXY"
+            sampleArr[index].fetus21 == "3" &&
+            sampleArr[index].fetus18 == "3" &&
+            sampleArr[index].fetus13 == "3" &&
+            sampleArr[index].fetusSexChromosome == "XXY"
           ) {
             //判断规则6. 胎儿所有染色体为3，胎儿性染色体为XXY 报告名：“胎儿样本编号”+“胎儿样本名”+“Qpcr快检”+“-三倍体”
             Trisomy13 = "提示三体";
@@ -2403,11 +2627,11 @@ export default {
             reportOtherResult = "。";
             simpleReport = "-三倍体";
           } else if (
-            sampleArr[index].F21 == "2" &&
-            sampleArr[index].F18 == "2" &&
-            sampleArr[index].F13 == "2" &&
-            sampleArr[index].FSexChromosome == "性染色体数目异常" &&
-            sampleArr[index].FNote ==
+            sampleArr[index].fetus21 == "2" &&
+            sampleArr[index].fetus18 == "2" &&
+            sampleArr[index].fetus13 == "2" &&
+            sampleArr[index].fetusSexChromosome == "性染色体数目异常" &&
+            sampleArr[index].feutsNote ==
               "未见明显MCC，提示X染色体单体，符合亲缘关系"
           ) {
             //判断规则7. 所有染色体为2，胎儿性染色体为性染色体数目异常 报告名：“胎儿样本编号”+“胎儿样本名”+“Qpcr快检”+“-X单体”
@@ -2428,11 +2652,11 @@ export default {
             reportOtherResult = "，可排除18号、13号、21号三体型。";
             simpleReport = "-X单体";
           } else if (
-            sampleArr[index].F21 == "2" &&
-            sampleArr[index].F18 == "2" &&
-            sampleArr[index].F13 == "2" &&
-            sampleArr[index].FSexChromosome == "性染色体数目异常" &&
-            sampleArr[index].FNote == "未见明显MCC，提示XXY，符合亲缘关系"
+            sampleArr[index].fetus21 == "2" &&
+            sampleArr[index].fetus18 == "2" &&
+            sampleArr[index].fetus13 == "2" &&
+            sampleArr[index].fetusSexChromosome == "性染色体数目异常" &&
+            sampleArr[index].feutsNote == "未见明显MCC，提示XXY，符合亲缘关系"
           ) {
             //判断规则8. 所有染色体为2，胎儿性染色体为性染色体数目异常 报告名：“胎儿样本编号”+“胎儿样本名”+“Qpcr快检”+”-XXY“
             Trisomy13 = "未见三体";
@@ -2452,11 +2676,11 @@ export default {
             reportOtherResult = "，可排除18号、13号、21号三体型。";
             simpleReport = "-XXY";
           } else if (
-            sampleArr[index].F21 == "2" &&
-            sampleArr[index].F18 == "2" &&
-            sampleArr[index].F13 == "2" &&
-            sampleArr[index].FSexChromosome == "性染色体数目异常" &&
-            sampleArr[index].FNote == "未见明显MCC，提示XXX，符合亲缘关系"
+            sampleArr[index].fetus21 == "2" &&
+            sampleArr[index].fetus18 == "2" &&
+            sampleArr[index].fetus13 == "2" &&
+            sampleArr[index].fetusSexChromosome == "性染色体数目异常" &&
+            sampleArr[index].feutsNote == "未见明显MCC，提示XXX，符合亲缘关系"
           ) {
             //判断规则9. 所有染色体为2，胎儿性染色体为性染色体数目异常 报告名：“胎儿样本编号”+“胎儿样本名”+“Qpcr快检”+“-XXX”
             Trisomy13 = "未见三体";
@@ -2476,11 +2700,11 @@ export default {
             reportOtherResult = "，可排除18号、13号、21号三体型。";
             simpleReport = "-XXX";
           } else if (
-            sampleArr[index].F21 == "2" &&
-            sampleArr[index].F18 == "2" &&
-            sampleArr[index].F13 == "2" &&
-            sampleArr[index].FSexChromosome == "性染色体数目异常" &&
-            sampleArr[index].FNote == "未见明显MCC，提示XYY，符合亲缘关系"
+            sampleArr[index].fetus21 == "2" &&
+            sampleArr[index].fetus18 == "2" &&
+            sampleArr[index].fetus13 == "2" &&
+            sampleArr[index].fetusSexChromosome == "性染色体数目异常" &&
+            sampleArr[index].feutsNote == "未见明显MCC，提示XYY，符合亲缘关系"
           ) {
             //判断规则10. 所有染色体为2，胎儿性染色体为性染色体数目异常 报告名：“胎 儿样本编号”+“胎儿样本名”+“Qpcr快检”+”-XYY“
             Trisomy13 = "未见三体";
@@ -3566,9 +3790,10 @@ export default {
             console.log("生成其他报告");
           }
         });
-        loading.close()
-        var reportMessage = "已生成报告，请注意查收！"
-        this.showSuccessNotification(reportMessage)
+        loading.close();
+        var reportMessage = "已生成报告，请注意查收！";
+        this.showSuccessNotification(reportMessage);
+      }
       }
     },
     // 按样本输出开关按钮
@@ -3605,17 +3830,17 @@ export default {
     // 切换为GeneMapper下机数据上传Tab页
     changeGenTab() {
       this.activeName = "first";
-      var genMessage = "Genemapper下机数据上传"
+      var genMessage = "Genemapper下机数据上传";
       setTimeout(() => {
-        this.showInfoNotification(genMessage)
+        this.showInfoNotification(genMessage);
       }, 500);
     },
     // 切换为样本信息数据上传Tab页
     changeSampleTab() {
       this.activeName = "second";
-      var sampleMessage = "样本信息数据上传"
+      var sampleMessage = "样本信息数据上传";
       setTimeout(() => {
-        this.showInfoNotification(sampleMessage)
+        this.showInfoNotification(sampleMessage);
       }, 500);
       this.tableData = [];
     },
@@ -3638,8 +3863,9 @@ export default {
         (err) => {
           if (err) {
             console.log("文件不存在");
-            var logNotice = "由于您还未进行任何数据分析操作，因此暂时无日志生成！"
-            this.showErrorNotification(logNotice)
+            var logNotice =
+              "由于您还未进行任何数据分析操作，因此暂时无日志生成！";
+            this.showErrorNotification(logNotice);
           } else {
             console.log("文件存在");
             if (process.platform === "darwin") {
@@ -3747,7 +3973,7 @@ i.el-icon.el-icon--upload {
 .el-switch__core .el-switch__inner .is-text {
   /* color: #000; */
 }
-.row-container{
+.row-container {
   display: flex;
   flex: 1;
   justify-content: center;
