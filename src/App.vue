@@ -371,26 +371,12 @@ export default {
               loading.close()
               const notice = "输入下机数据文件" + fileName + "处理有误";
               log.error("\n" + notice + "！" + "\n" + "stderr:" + stderr);
-              ElNotification({
-                showClose: true,
-                message: notice,
-                type: "error",
-                position: "top-right",
-                duration: "0",
-                offset: 60,
-              });
+              this.showErrorNotification(notice)
             } else if (stdout) {
               loading.close()
               const notice = "输入下机数据文件" + fileName + "处理完成";
               log.info("\n" + notice + "！");
-              ElNotification({
-                showClose: true,
-                message: notice,
-                type: "success",
-                position: "top-right",
-                duration: "2000",
-                offset: 60,
-              });
+              this.showSuccessNotification(notice)
               console.log("stdout:\n" + stdout);
               if (fileType == "summaryFileAndReportFile") {
                 this.changeSampleTab();
@@ -545,14 +531,7 @@ export default {
       if (extensionList.indexOf(extension) < 0) {
         const formatMessage =
           "很抱歉，您选择的文件格式不符合要求，请重新选择文件！";
-        ElNotification({
-          showClose: true,
-          message: formatMessage,
-          type: "error",
-          position: "top-right",
-          duration: "0",
-          offset: 60,
-        });
+        this.showErrorNotification(formatMessage)
         return false;
       }
     },
@@ -597,14 +576,7 @@ export default {
       if (extensionList1.indexOf(extension1) < 0) {
         const formatMessage =
           "很抱歉，您选择的文件格式不符合要求，请重新选择文件！";
-        ElNotification({
-          showClose: true,
-          message: formatMessage,
-          type: "error",
-          position: "top-right",
-          duration: "0",
-          offset: 60,
-        });
+        this.showErrorNotification(formatMessage)
         return false;
       }
       console.log(file2);
@@ -2263,14 +2235,8 @@ export default {
           });
         });
         loading.close()
-        ElNotification({
-          message: "已生成报告，请注意查收！",
-          type: "success",
-          showClose: true,
-          position: "top-right",
-          duration: "2000",
-          offset: 50,
-        });
+        var reportMessage = "已生成报告，请注意查收！"
+        this.showSuccessNotification(reportMessage)
       } else if (fileType == "reportFile") {
         var fs = window.require("fs");
         this.adjustTableHeight();
@@ -3601,14 +3567,8 @@ export default {
           }
         });
         loading.close()
-        ElNotification({
-          message: "已生成报告，请注意查收！",
-          type: "success",
-          showClose: true,
-          position: "top-right",
-          duration: "2000",
-          offset: 50,
-        });
+        var reportMessage = "已生成报告，请注意查收！"
+        this.showSuccessNotification(reportMessage)
       }
     },
     // 按样本输出开关按钮
@@ -3645,30 +3605,18 @@ export default {
     // 切换为GeneMapper下机数据上传Tab页
     changeGenTab() {
       this.activeName = "first";
+      var genMessage = "Genemapper下机数据上传"
       setTimeout(() => {
-        ElNotification({
-          message: "Genemapper下机数据上传",
-          type: "info",
-          showClose: true,
-          position: "top-right",
-          duration: "2000",
-          offset: 60,
-        });
-      }, 1000);
+        this.showInfoNotification(genMessage)
+      }, 500);
     },
     // 切换为样本信息数据上传Tab页
     changeSampleTab() {
       this.activeName = "second";
+      var sampleMessage = "样本信息数据上传"
       setTimeout(() => {
-        ElNotification({
-          message: "样本信息数据上传",
-          type: "info",
-          showClose: true,
-          position: "top-right",
-          duration: "2000",
-          offset: 60,
-        });
-      }, 1000);
+        this.showInfoNotification(sampleMessage)
+      }, 500);
       this.tableData = [];
     },
     //打开日志文件方法
@@ -3690,14 +3638,8 @@ export default {
         (err) => {
           if (err) {
             console.log("文件不存在");
-            ElNotification({
-              message: "由于您还未进行任何数据分析操作，因此暂时无日志生成！",
-              type: "error",
-              showClose: true,
-              position: "top-right",
-              duration: "0",
-              offset: 60,
-            });
+            var logNotice = "由于您还未进行任何数据分析操作，因此暂时无日志生成！"
+            this.showErrorNotification(logNotice)
           } else {
             console.log("文件存在");
             if (process.platform === "darwin") {
