@@ -41,6 +41,10 @@ module.exports = defineConfig({
           {
             from: "./src/assets/sampleDataTemplateAneuFiler.xlsx",
             to:"./sampleDataTemplateAneuFiler.xlsx",
+          },
+          {
+            from:"./src/assets/app256x256.png",
+            to:"./app256x256.png"
           }
         ],
         dmg: {

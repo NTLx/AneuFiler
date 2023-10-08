@@ -391,6 +391,7 @@ export default {
               const notice = "输入下机数据文件" + fileName + "处理有误";
               log.error("\n" + notice + "！" + "\n" + "stderr:" + stderr);
               this.showErrorNotification(notice);
+              this.errorNotification(fileName,notice)
             } else if (stdout) {
               loading.close();
               const notice = "输入下机数据文件" + fileName + "处理完成";
@@ -551,6 +552,7 @@ export default {
         const formatMessage =
           "很抱歉，您选择的文件格式不符合要求，请重新选择文件！";
         this.showErrorNotification(formatMessage);
+        this.errorNotification(file1.name,formatMessage)
         return false;
       }
     },
@@ -596,6 +598,7 @@ export default {
         const formatMessage =
           "很抱歉，您选择的文件格式不符合要求，请重新选择文件！";
         this.showErrorNotification(formatMessage);
+        this.errorNotification(file2.name,formatMessage)
         return false;
       }
       console.log(file2);
@@ -1035,6 +1038,14 @@ export default {
           "样本信息表中数据暂无数据,请重新上传有数据的样本信息表!";
         this.showErrorNotification(nullNotice);
         log.error("\n" + nullNotice);
+        this.errorNotification(
+          sampleFileName,
+          "当前处理输入文件：" +
+            sampleFileName +
+            "有误！" +
+            "\n" +
+            "样本信息表数据为空，请记得添加样本信息数据！"
+        );
         loading.close();
       }else{
         this.tableData = sampleArr;
@@ -3796,6 +3807,16 @@ export default {
       }
       }
     },
+    // 运行脚本后错误系统通知
+    errorNotification(fileName, body) {
+      var path = require("path");
+      var pic = path.join(process.cwd(), "/resources/app256x256.png");
+      const options = {
+        icon: pic,
+        body: body,
+      };
+      const notification = new Notification("AneuFiler Error", options);
+    },
     // 按样本输出开关按钮
     switchReceiveStatus(val) {
       console.log("按样本输出开关状态", val);
@@ -3866,6 +3887,7 @@ export default {
             var logNotice =
               "由于您还未进行任何数据分析操作，因此暂时无日志生成！";
             this.showErrorNotification(logNotice);
+            this.errorNotification(logFilename,logNotice)
           } else {
             console.log("文件存在");
             if (process.platform === "darwin") {
