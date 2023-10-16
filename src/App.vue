@@ -347,13 +347,24 @@ export default {
       var seconds = date.getSeconds(); // 秒
       // 格式化日期和时间
       var formattedDateTime = `${year}_${month}_${day}_${hours}_${minutes}_${seconds}`;
-      if (process.platform === "darwin") {
-        var inputFile = path.dirname(filePath);
-      } else if (process.platform === "win32") {
-        var inputFile = filePath.substring(0, filePath.lastIndexOf("\\") + 1);
-      } else if (process.platform === "linux") {
-        var inputFile = filePath.substring(0, filePath.lastIndexOf("\\") + 1);
+      // if (process.platform === "darwin") {
+      //   var inputFile = path.dirname(filePath);
+      // } else if (process.platform === "win32") {
+      //   var inputFile = filePath.substring(0, filePath.lastIndexOf("\\") + 1);
+      // } else if (process.platform === "linux") {
+      //   var inputFile = filePath.substring(0, filePath.lastIndexOf("\\") + 1);
+      // }
+      var inputFile 
+      function platform(name){
+        const currentplatform ={
+          darwin:()=>{inputFile = path.dirname(filePath),console.log("macos")},
+          win32:()=>{inputFile = filePath.substring(0,filePath.lastIndexOf("\\") + 1),console.log("window")},
+          linux:()=>{inputFile = filePath.substring(0,filePath.lastIndexOf("\\")+1),console.log("linux")}
+        }
+        return currentplatform[name]?currentplatform[name]():console.log("其他操作系统")
       }
+      var platformName = process.platform
+      platform(platformName)
       var inputFileNameWithOutSuffix = fileName.substring(
         0,
         fileName.lastIndexOf(".")
