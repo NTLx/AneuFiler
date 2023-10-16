@@ -301,19 +301,8 @@ export default {
       var table = document.getElementById("myTable");
       var windowHeight = this.getWindowHeight();
       var windowWidth = this.getWindowWidth();
-      if (table == null) {
-        console.log("nothing");
-        console.log("windowHeight", windowHeight);
-        console.log("windowWidth", windowWidth);
-      } else {
-        console.log("windowHeight", windowHeight);
-        console.log("windowWidth", windowWidth);
-        // console.log("table.offsetTop", table.offsetTop);
-        var tableHeight = windowHeight - table.offsetTop - 100;
-        table.style.height = tableHeight + "px";
-        var tableWidth = windowWidth - 20;
-        table.style.width = tableWidth + "px";
-      }
+      var tableHeight,tableWidth
+      table == null ?(console.log("nothing"),console.log("windowHeight", windowHeight),console.log("windowWidth", windowWidth)):(console.log("windowHeight", windowHeight),console.log("windowWidth", windowWidth),tableHeight = windowHeight - table.offsetTop-100,tableWidth = windowWidth - 20,table.style.height = tableHeight + "px",table.style.width = tableWidth + "px");
     },
     // 根据操作系统设置输出文件默认值
     outputFormat() {
