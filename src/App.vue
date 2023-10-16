@@ -38,6 +38,9 @@
                     文件名当中不能含有空格、特殊符号、中文
                   </div>
                 </template>
+                <template #file>
+                  <el-text size="large">GeneMapper下机输入文件：{{fileList1[0].name}}</el-text>
+                </template>
               </el-upload>
             </div>
           </div>
