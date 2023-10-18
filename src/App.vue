@@ -369,17 +369,17 @@ export default {
         0,
         fileName.lastIndexOf(".")
       );
-      console.log("inputFileNameWithOutSuffix", inputFileNameWithOutSuffix);
+      console.log("输入文件名不含后缀", inputFileNameWithOutSuffix);
       var generateDataFolder =
         inputFileNameWithOutSuffix + "." + formattedDateTime;
       var outputDirectry = path.join(inputFile, generateDataFolder);
-      console.log("outputDirectry", outputDirectry);
+      console.log("输出文件根文件夹", outputDirectry);
       // 生成日志文件
       var log = window.require("electron-log");
       log.transports.console.level = "silly";
       var app = window.require("@electron/remote").app;
       var logFilepath = path.join(app.getPath("temp"));
-      console.log(logFilepath);
+      console.log("日志文件根文件夹",logFilepath);
       var logFilename = "AneuFilerVue.log";
       log.transports.file.resolvePath = () =>
         path.join(logFilepath, logFilename);
@@ -390,7 +390,6 @@ export default {
       );
       var linuxURL = path.join(process.cwd(), "/resources/analysis");
       var windowURL = path.join(process.cwd(), "/resources/analysis.exe");
-      console.log("windowURL", windowURL);
       const { exec } = window.require("child_process");
       if (filePath) {
         if (process.platform === "darwin") {
@@ -429,20 +428,6 @@ export default {
               console.log("stdout:\n" + stdout);
               if (fileType == "summaryFileAndReportFile") {
                 this.changeSampleTab();
-                //处理生成的SummaryFile
-                // if(process.platform ==="darwin"){
-                //   var inputFile = path.dirname(filePath)
-                // }else if(process.platform ==="win32"){
-                // var inputFile = filePath.substring(
-                //   0,
-                //   filePath.lastIndexOf("\\") + 1
-                // );
-                // }else if(process.platform ==="linux"){
-                //   var inputFile = filePath.substring(
-                //   0,
-                //   filePath.lastIndexOf("\\") + 1
-                // );
-                // }
                 var outPutFileName =
                   inputFileNameWithOutSuffix + ".Summary.tsv";
                 var summaryFile = path.join(
@@ -450,36 +435,12 @@ export default {
                   generateDataFolder,
                   outPutFileName
                 );
-                // var date = new Date();
-                // const year = date.getFullYear(); // 获取年份，例如：2023
-                // const month = date.getMonth() + 1; // 获取月份，注意月份从0开始，所以需要加1，例如：7
-                // const day = date.getDate(); // 获取日期，例如：12
-                // const formattedDate = `${year}-${month}-${day}`;
-                // // 去除文件后缀
-                // var inputFileNameWithOutSuffix = fileName.substring(
-                //   0,
-                //   fileName.lastIndexOf(".")
-                // );
-                // console.log("inputFile", inputFileNameWithOutSuffix);
-                // var generateDataFolder =
-                //   inputFileNameWithOutSuffix + "." + formattedDate;
-                // var outPutFileName =
-                //   generateDataFolder + "." + outputFormat + ".Summary.tsv";
-                // const summaryFile = path.join(
-                //   inputFile,
-                //   generateDataFolder,
-                //   outPutFileName
-                // );
-                // console.log("summaryFile", summaryFile);
-                // var outputDirectry = path.join(inputFile, generateDataFolder);
                 console.log("outputDirectry", outputDirectry);
                 this.outputDirectry = outputDirectry;
                 var xlsx = window.require("node-xlsx");
-                // var tsvFile = fs.readFileSync(summaryFile, "utf8");
                 const parsedData = xlsx.parse(summaryFile);
                 console.log("parsedData", parsedData);
                 var parsedSheetData = parsedData[0].data;
-                // iconv.skipDecodeWarning = true;
                 var parsedLineData = [];
                 for (var j = 2; j < parsedSheetData.length; j++) {
                   parsedLineData.push(parsedSheetData[j]);
@@ -575,7 +536,7 @@ export default {
     // 上传下机数据文件处理之前校验方法
     beforeAvatarUpload(file1) {
       let extension = file1.name.substring(file1.name.lastIndexOf(".") + 1);
-      console.log("extension", extension);
+      console.log("当前文件后缀", extension);
       let extensionList = ["txt", "csv"];
       if (extensionList.indexOf(extension) < 0) {
         const formatMessage =
@@ -617,7 +578,7 @@ export default {
         var win = window.require("@electron/remote").getCurrentWindow();
         win.webContents.downloadURL(downloadFile);
       }
-      console.log("downloadFile", downloadFile);
+      console.log("下载文件路径", downloadFile);
     },
     // 上传样本信息数据文件处理之前的校验方法
     beforeSampleInformationUpload(file2, fileList2) {
@@ -630,7 +591,6 @@ export default {
         this.errorNotification(file2.name, formatMessage);
         return false;
       }
-      console.log(file2);
     },
     //日期格式转换1
     formatDate1(numb, format = "年", format1 = "月", format2 = "日") {
@@ -686,8 +646,8 @@ export default {
       });
       var fileType = data1.data.fileType;
       var selectReport = data1.data.selectReport;
-      console.log("fileType", fileType);
-      console.log("selectReport", selectReport);
+      console.log("当前输出文件类型：", fileType);
+      console.log("报告模版：", selectReport);
       var sampleFileName = data1.file.name;
       console.log("样本文件名：", sampleFileName);
       var sampleFilePath = data1.file.path;
@@ -729,11 +689,11 @@ export default {
         0,
         sampleFileName.lastIndexOf(".")
       );
-      console.log("sampleFileNameCurrentPath", sampleFileNameCurrentPath);
-      console.log("sampleFileNameNoSuffix", sampleFileNameNoSuffix);
+      console.log("样本文件根路径", sampleFileNameCurrentPath);
+      console.log("样本无后缀文件名", sampleFileNameNoSuffix);
       var reportFileFolder = sampleFileNameNoSuffix + "." + formattedDateTime;
       var reportFilePath = sampleFileNameCurrentPath + reportFileFolder;
-      console.log("reportFileFoler", reportFileFolder);
+      console.log("报告文件夹名", reportFileFolder);
       log.info(
         "\n" +
           "当前处理文件名：" +
@@ -1118,7 +1078,7 @@ export default {
             }
           }
           var removeSummaryData = this.removeSummaryData;
-          console.log("remove", removeSummaryData);
+          console.log("移除的结果文件：", removeSummaryData);
           sampleArr.forEach((item, index) => {
             removeSummaryData.forEach((item, index1) => {
               if (
@@ -1399,7 +1359,7 @@ export default {
                   reportOtherResult = "，可排除18号、13号、21号三体型。";
                   simpleReport = "-XYY";
                 }
-                console.log("测试", selectReport);
+                console.log("当前报告模板", selectReport);
                 if (selectReport == "default") {
                   var officegen = window.require("officegen");
                   var fs = window.require("fs");
@@ -1451,7 +1411,7 @@ export default {
                       "/resources/hunanjiahui.png"
                     );
                   }
-                  console.log("pic", pic);
+                  console.log("图片路径", pic);
                   header1.addImage(pic, {
                     cx: 685,
                     cy: 75,
@@ -1469,8 +1429,6 @@ export default {
                   var chiefPhysicianName = "邬玲仟";
                   var telephone = "0731-84805365";
                   var addressName = "湖南省长沙市开福区湘雅路74号";
-
-                  console.log("reportDateTime", sampleArr[index].reportDate);
                   footer.addHorizontalLine();
                   footer1.addText("检测人：", { font_size: 9, bold: true });
                   footer1.addText(InspectorName, { font_size: 9 });
@@ -1485,7 +1443,6 @@ export default {
                   );
                   footer1.addText(chiefPhysicianName, { font_size: 9 });
                   var footer2 = docx.getFooter().createP();
-                  // console.log("footer2[index]",footer2[index])
                   footer2.addText("咨询热线：", { font_size: 9, bold: true });
                   footer2.addText(telephone, {
                     font_size: 9,
@@ -2128,26 +2085,6 @@ export default {
                       },
                     ],
                   ];
-                  // var style2 = {
-                  //     '@w:val': 'single',
-                  //     '@w:sz': '4',
-                  //     '@w:space': '0',
-                  //     '@w:color': '000000'//黑色
-                  //   }
-                  // // var style2 ={
-                  // //     '@w:val': 'single',
-                  // //     '@w:sz': '4',
-                  // //     '@w:space': '1',
-                  // //     '@w:color': 'FFFFFF'//白色
-                  // // }
-                  // var borderStyle = {
-                  //     'w:top': style2,
-                  //     'w:bottom': style2,
-                  //     // 'w:left': style2,
-                  //     // 'w:right': style2,
-                  //     'w:insideH': style2,
-                  //     // 'w:insideV': style,
-                  //   }
                   var tableStyle2 = {
                     tableColWidth: 8600,
                     tableSize: 18,
@@ -2845,7 +2782,6 @@ export default {
               );
               footer1.addText(chiefPhysicianName, { font_size: 9 });
               var footer2 = docx.getFooter().createP();
-              // console.log("footer2[index]",footer2[index])
               footer2.addText("咨询热线：", { font_size: 9, bold: true });
               footer2.addText(telephone, {
                 font_size: 9,
@@ -3486,26 +3422,6 @@ export default {
                   },
                 ],
               ];
-              // var style2 = {
-              //     '@w:val': 'single',
-              //     '@w:sz': '4',
-              //     '@w:space': '0',
-              //     '@w:color': '000000'//黑色
-              //   }
-              // // var style2 ={
-              // //     '@w:val': 'single',
-              // //     '@w:sz': '4',
-              // //     '@w:space': '1',
-              // //     '@w:color': 'FFFFFF'//白色
-              // // }
-              // var borderStyle = {
-              //     'w:top': style2,
-              //     'w:bottom': style2,
-              //     // 'w:left': style2,
-              //     // 'w:right': style2,
-              //     'w:insideH': style2,
-              //     // 'w:insideV': style,
-              //   }
               var tableStyle2 = {
                 tableColWidth: 8600,
                 tableSize: 18,
@@ -3865,11 +3781,6 @@ export default {
       console.log("按样本输出开关状态", val);
       this.uploadParams.sampleOutputStatus = val;
     },
-    // 切换文件格式
-    // switchRadio(val) {
-    //   console.log("当前切换后的文件格式", val);
-    //   this.uploadParams.outputFormat = val;
-    // },
     // 文件输出种类
     switchFileType(val) {
       console.log("当前切换后的文件种类", val);
@@ -3946,7 +3857,6 @@ export default {
                   });
               };
               openFile(path.join(convertedLogFilepath, logFilename));
-              // shell.openExternal(path.join(convertedLogFilepath, logFilename));
             } else if (process.platform === "win32") {
               const { shell } = window.require("electron");
               shell.openExternal(path.join(convertedLogFilepath, logFilename));
