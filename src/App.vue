@@ -255,6 +255,7 @@
 <script>
 /* eslint-disable */
 import { ElNotification, ElLoading } from "element-plus";
+import { format } from 'path';
 export default {
   data() {
     return {
@@ -325,17 +326,14 @@ export default {
         background: "rgba(0, 0, 0, 0.7)",
       });
       var sampleOutputStatus = data.data.sampleOutputStatus;
-      console.log("sampleOutputStatus", sampleOutputStatus);
+      console.log("样本输出状态", sampleOutputStatus);
       var outputFormat = data.data.outputFormat;
       var fileType = data.data.fileType;
-      console.log("uploadParams Data", data.data);
+      console.log("上传参数", data.data);
       // 获取上传的文件本地路径
       var filePath = data.file.path;
       var fileName = data.file.name;
-      console.log("filePath", filePath);
-      console.log("fileName", fileName);
       var path = require("path");
-
       // 创建 Date 对象并传入时间戳
       var date = new Date();
       // 使用 Date 对象的方法获取日期和时间信息
@@ -347,19 +345,22 @@ export default {
       var seconds = date.getSeconds(); // 秒
       // 格式化日期和时间
       var formattedDateTime = `${year}_${month}_${day}_${hours}_${minutes}_${seconds}`;
-      // if (process.platform === "darwin") {
-      //   var inputFile = path.dirname(filePath);
-      // } else if (process.platform === "win32") {
-      //   var inputFile = filePath.substring(0, filePath.lastIndexOf("\\") + 1);
-      // } else if (process.platform === "linux") {
-      //   var inputFile = filePath.substring(0, filePath.lastIndexOf("\\") + 1);
-      // }
+      // 日志文件
+      var log = window.require("electron-log");
+      log.transports.console.level = "silly";
+      var app = window.require("@electron/remote").app;
+      var logFilepath = path.join(app.getPath("temp"));
+      console.log("日志文件根文件夹",logFilepath);
+      var logFilename = "AneuFilerVue.log";
+      log.transports.file.resolvePath = () =>
+        path.join(logFilepath, logFilename);
+  
       var inputFile 
       function platform(name){
         const currentplatform ={
-          darwin:()=>{inputFile = path.dirname(filePath),console.log("macos")},
-          win32:()=>{inputFile = filePath.substring(0,filePath.lastIndexOf("\\") + 1),console.log("window")},
-          linux:()=>{inputFile = filePath.substring(0,filePath.lastIndexOf("\\")+1),console.log("linux")}
+          darwin:()=>{inputFile = path.dirname(filePath)},
+          win32:()=>{inputFile = filePath.substring(0,filePath.lastIndexOf("\\") + 1)},
+          linux:()=>{inputFile = filePath.substring(0,filePath.lastIndexOf("\\")+1)}
         }
         return currentplatform[name]?currentplatform[name]():console.log("其他操作系统")
       }
@@ -374,15 +375,7 @@ export default {
         inputFileNameWithOutSuffix + "." + formattedDateTime;
       var outputDirectry = path.join(inputFile, generateDataFolder);
       console.log("输出文件根文件夹", outputDirectry);
-      // 生成日志文件
-      var log = window.require("electron-log");
-      log.transports.console.level = "silly";
-      var app = window.require("@electron/remote").app;
-      var logFilepath = path.join(app.getPath("temp"));
-      console.log("日志文件根文件夹",logFilepath);
-      var logFilename = "AneuFilerVue.log";
-      log.transports.file.resolvePath = () =>
-        path.join(logFilepath, logFilename);
+      
       //调用可执行文件脚本
       var macURL = path.join(
         process.cwd(),
@@ -416,14 +409,14 @@ export default {
           (error, stdout, stderr) => {
             if (error || stderr) {
               loading.close();
-              const notice = "输入下机数据文件" + fileName + "处理有误";
-              log.error("\n" + notice + "！" + "\n" + "stderr:" + stderr);
+              const notice = "输入下机数据文件" + fileName + "处理有误!";
+              log.error( notice + "\n" + "stderr:" + stderr);
               this.showErrorNotification(notice);
               this.errorNotification(fileName, notice);
             } else if (stdout) {
               loading.close();
-              const notice = "输入下机数据文件" + fileName + "处理完成";
-              log.info("\n" + notice + "！");
+              const notice = "输入下机数据文件" + fileName + "处理完成!";
+              log.info(notice);
               this.showSuccessNotification(notice);
               console.log("stdout:\n" + stdout);
               if (fileType == "summaryFileAndReportFile") {
@@ -542,6 +535,7 @@ export default {
         const formatMessage =
           "很抱歉，您选择的文件格式不符合要求，请重新选择文件！";
         this.showErrorNotification(formatMessage);
+        log.error(formatMessage)
         this.errorNotification(file1.name, formatMessage);
         return false;
       }
@@ -588,6 +582,7 @@ export default {
         const formatMessage =
           "很抱歉，您选择的文件格式不符合要求，请重新选择文件！";
         this.showErrorNotification(formatMessage);
+        log.error(formatMessage);
         this.errorNotification(file2.name, formatMessage);
         return false;
       }
@@ -1025,6 +1020,7 @@ export default {
       if (sampleArr.length == 0) {
         var nullNotice =
           "样本信息表中数据暂无数据,请重新上传有数据的样本信息表!";
+        log.error(nullNotice)
         this.showErrorNotification(nullNotice);
         log.error("\n" + nullNotice);
         this.errorNotification(
@@ -3783,18 +3779,20 @@ export default {
     },
     // 文件输出种类
     switchFileType(val) {
-      console.log("当前切换后的文件种类", val);
       if (val == "summaryFile") {
+        console.log("当前输出文件种类：结果文件")
         this.radio2 = val;
         this.showUploadGen = true;
         this.showSampleInformation = false;
         this.changeGenTab();
       } else if (val == "summaryFileAndReportFile") {
+        console.log("当前输出文件种类：结果文件和报告文件")
         this.radio2 = val;
         this.showUploadGen = true;
         this.showSampleInformation = true;
         this.changeGenTab();
       } else if (val == "reportFile") {
+        console.log("当前输出文件种类：报告文件")
         this.radio2 = val;
         this.showUploadGen = false;
         this.showSampleInformation = true;
@@ -3837,23 +3835,26 @@ export default {
         fs.constants.F_OK,
         (err) => {
           if (err) {
-            console.log("文件不存在");
+            console.log("日志文件不存在");
             var logNotice =
               "由于您还未进行任何数据分析操作，因此暂时无日志生成！";
             this.showErrorNotification(logNotice);
+            log.error(logNotice)
             this.errorNotification(logFilename, logNotice);
           } else {
-            console.log("文件存在");
+            console.log("日志文件存在");
+            var os = window.require("os")
+            log.info("当前操作系统版本：",os.version())
             if (process.platform === "darwin") {
               const { shell } = window.require("electron");
               const openFile = (filePath) => {
                 shell
                   .openPath(filePath)
                   .then(() => {
-                    console.log("文件已成功打开");
+                    console.log("日志文件已成功打开");
                   })
                   .catch((error) => {
-                    console.error("打开文件时出错:", error);
+                    console.error("打开日志文件时出错:", error);
                   });
               };
               openFile(path.join(convertedLogFilepath, logFilename));
