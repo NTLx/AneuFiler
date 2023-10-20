@@ -255,7 +255,6 @@
 <script>
 /* eslint-disable */
 import { ElNotification, ElLoading } from "element-plus";
-import { format } from 'path';
 export default {
   data() {
     return {
@@ -373,7 +372,7 @@ export default {
       console.log("输入文件名不含后缀", inputFileNameWithOutSuffix);
       var generateDataFolder =
         inputFileNameWithOutSuffix + "." + formattedDateTime;
-      var outputDirectry = path.join(inputFile, generateDataFolder);
+      var outputDirectry = inputFile+generateDataFolder;
       console.log("输出文件根文件夹", outputDirectry);
       
       //调用可执行文件脚本
@@ -399,12 +398,18 @@ export default {
         exec(
           exeFile +
             " -i " +
-            filePath +
+            '"'+filePath+
+            '"'+
             " -e " +
-            outputFormat +
+            '"'+
+            outputFormat+
+            '"'+
             " " +
-            sampleOutputStatus +
+            '"'+
+            sampleOutputStatus+
+            '"'+
             " -o " +
+            '"'+
             outputDirectry,
           (error, stdout, stderr) => {
             if (error || stderr) {
@@ -423,11 +428,8 @@ export default {
                 this.changeSampleTab();
                 var outPutFileName =
                   inputFileNameWithOutSuffix + ".Summary.tsv";
-                var summaryFile = path.join(
-                  inputFile,
-                  generateDataFolder,
-                  outPutFileName
-                );
+                var summaryFile = outputDirectry+"\/"+outPutFileName
+                console.log("summaryFile",summaryFile)
                 console.log("outputDirectry", outputDirectry);
                 this.outputDirectry = outputDirectry;
                 var xlsx = window.require("node-xlsx");
@@ -1038,6 +1040,7 @@ export default {
         if (fileType == "summaryFileAndReportFile") {
           this.adjustTableHeight();
           var generateFileData = this.outputArr1;
+          console.log("generateFileData",generateFileData)
           var generateFileDataPath = this.outputDirectry;
           var iconv = require("iconv-lite");
           iconv.skipDecodeWarning = true;
@@ -1078,8 +1081,7 @@ export default {
           sampleArr.forEach((item, index) => {
             removeSummaryData.forEach((item, index1) => {
               if (
-                sampleArr[index].sampleName ==
-                removeSummaryData[index1].sampleFileName
+                sampleArr[index].sampleName ==removeSummaryData[index1].sampleFileName
               ) {
                 var Result = "本结果提示，胎儿样本未见母体DNA污染，";
                 var Trisomy13,
@@ -1703,7 +1705,7 @@ export default {
                     ],
                     [
                       {
-                        val: sampleArr[index].MSampleNo,
+                        val: sampleArr[index].motherSampleNumber,
                         opts: {
                           align: "left",
                           vAlign: "center",
@@ -1721,7 +1723,7 @@ export default {
                         },
                       },
                       {
-                        val: sampleArr[index].MSampleName,
+                        val: sampleArr[index].motherSampleName,
                         opts: {
                           align: "left",
                           vAlign: "center",
@@ -1773,7 +1775,7 @@ export default {
                         },
                       },
                       {
-                        val: sampleArr[index].FRelation,
+                        val: sampleArr[index].relationship_with_fetus,
                         opts: {
                           align: "left",
                           vAlign: "center",
@@ -1790,7 +1792,7 @@ export default {
                         },
                       },
                       {
-                        val: sampleArr[index].MSampleType,
+                        val: sampleArr[index].motherSampleType,
                         opts: {
                           align: "left",
                           vAlign: "center",
@@ -1827,7 +1829,7 @@ export default {
                     ],
                     [
                       {
-                        val: sampleArr[index].FSampleNo,
+                        val: sampleArr[index].fetusSampleNumber,
                         opts: {
                           align: "left",
                           vAlign: "center",
@@ -1845,7 +1847,7 @@ export default {
                         },
                       },
                       {
-                        val: sampleArr[index].FSampleName,
+                        val: sampleArr[index].fetusSampleName,
                         opts: {
                           align: "left",
                           vAlign: "center",
@@ -1897,7 +1899,7 @@ export default {
                         },
                       },
                       {
-                        val: sampleArr[index].MRelation,
+                        val: sampleArr[index].relationship_with_mother,
                         opts: {
                           align: "left",
                           vAlign: "center",
@@ -1914,7 +1916,7 @@ export default {
                         },
                       },
                       {
-                        val: sampleArr[index].FSampleType,
+                        val: sampleArr[index].fetusSampleType,
                         opts: {
                           align: "left",
                           vAlign: "center",
@@ -2411,8 +2413,8 @@ export default {
                     font_face_east: "SimSun",
                   });
                   outFileName[index] =
-                    sampleArr[index].FSampleNo +
-                    sampleArr[index].FSampleName +
+                    sampleArr[index].fetusSampleName +
+                    sampleArr[index].fetusSampleNumber +
                     "Qpcr快检" +
                     simpleReport +
                     ".docx";
@@ -3040,7 +3042,7 @@ export default {
                 ],
                 [
                   {
-                    val: sampleArr[index].MSampleNo,
+                    val: sampleArr[index].motherSampleNumber,
                     opts: {
                       align: "left",
                       vAlign: "center",
@@ -3058,7 +3060,7 @@ export default {
                     },
                   },
                   {
-                    val: sampleArr[index].MSampleName,
+                    val: sampleArr[index].motherSampleName,
                     opts: {
                       align: "left",
                       vAlign: "center",
@@ -3110,7 +3112,7 @@ export default {
                     },
                   },
                   {
-                    val: sampleArr[index].FRelation,
+                    val: sampleArr[index].relationship_with_fetus,
                     opts: {
                       align: "left",
                       vAlign: "center",
@@ -3127,7 +3129,7 @@ export default {
                     },
                   },
                   {
-                    val: sampleArr[index].MSampleType,
+                    val: sampleArr[index].motherSampleType,
                     opts: {
                       align: "left",
                       vAlign: "center",
@@ -3164,7 +3166,7 @@ export default {
                 ],
                 [
                   {
-                    val: sampleArr[index].FSampleNo,
+                    val: sampleArr[index].fetusSampleNumber,
                     opts: {
                       align: "left",
                       vAlign: "center",
@@ -3182,7 +3184,7 @@ export default {
                     },
                   },
                   {
-                    val: sampleArr[index].FSampleName,
+                    val: sampleArr[index].fetusSampleName,
                     opts: {
                       align: "left",
                       vAlign: "center",
@@ -3234,7 +3236,7 @@ export default {
                     },
                   },
                   {
-                    val: sampleArr[index].MRelation,
+                    val: sampleArr[index].relationship_with_mother,
                     opts: {
                       align: "left",
                       vAlign: "center",
@@ -3251,7 +3253,7 @@ export default {
                     },
                   },
                   {
-                    val: sampleArr[index].FSampleType,
+                    val: sampleArr[index].fetusSampleType,
                     opts: {
                       align: "left",
                       vAlign: "center",
@@ -3735,8 +3737,8 @@ export default {
                 font_face_east: "SimSun",
               });
               outFileName[index] =
-                sampleArr[index].FSampleNo +
-                sampleArr[index].FSampleName +
+                sampleArr[index].fetusSampleNumber +
+                sampleArr[index].fetusSampleName +
                 "Qpcr快检" +
                 simpleReport +
                 ".docx";
