@@ -410,7 +410,7 @@ export default {
             '"'+
             " -o " +
             '"'+
-            outputDirectry,
+            outputDirectry+'"',
           (error, stdout, stderr) => {
             if (error || stderr) {
               loading.close();
