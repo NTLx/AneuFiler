@@ -171,13 +171,13 @@
         </el-tab-pane>
         <el-tab-pane label="设置" name="third" class="setting">
           <div class="settingPosition">
-            <el-row class="row-container">
+            <el-row class="row-container" :gutter="40">
               <el-col :span="24">
                 <el-divider content-position="left">输出文件设置</el-divider>
               </el-col>
-              <el-col :span="12">
+              <el-col :span="2"></el-col>
+              <el-col :span="10">
                 <div class="spanPosition">
-                  <span>类型：</span>
                   <el-radio-group
                     v-model="radio2"
                     @change="switchFileType"
@@ -186,16 +186,16 @@
                     <el-radio-button label="summaryFile"
                       >结果文件</el-radio-button
                     >
-                    <el-radio-button label="summaryFileAndReportFile"
-                      >结果文件+报告文件</el-radio-button
-                    >
                     <el-radio-button label="reportFile"
                       >报告文件</el-radio-button
+                    >
+                    <el-radio-button label="summaryFileAndReportFile"
+                      >结果文件+报告文件</el-radio-button
                     >
                   </el-radio-group>
                 </div>
               </el-col>
-              <el-col :span="12"
+              <el-col :span="10"
                 ><el-switch
                   v-model="value1"
                   class="ml-2"
@@ -212,12 +212,14 @@
                   @change="switchReceiveStatus"
                 ></el-switch
               ></el-col>
+              <el-col :span="2"></el-col>
             </el-row>
-            <el-row class="row-container">
+            <el-row class="row-container" :gutter="40">
               <el-col :span="24">
                 <el-divider content-position="left">报告设置</el-divider>
               </el-col>
-              <el-col :span="24">
+              <el-col :span="2"></el-col>
+              <el-col :span="20">
                 <el-select
                   v-model="value2"
                   size="large"
@@ -232,18 +234,21 @@
                   </el-option>
                 </el-select>
               </el-col>
+              <el-col :span="2"></el-col>
             </el-row>
-            <el-row class="row-container">
+            <el-row class="row-container" :gutter="40">
               <el-col :span="24">
                 <el-divider content-position="left">日志</el-divider>
               </el-col>
-              <el-col :span="24">
+              <el-col :span="2"></el-col>
+              <el-col :span="20">
                 <el-tooltip class="box-item" content="打开日志文件" effect="light">
                   <el-button @click="openLogFile" type="primary" size="large">
                     <el-icon><Document /></el-icon>日志
                   </el-button>
                 </el-tooltip>
               </el-col>
+              <el-col :span="2"></el-col>
             </el-row>
           </div>
         </el-tab-pane>
@@ -3948,7 +3953,8 @@ i.el-icon.el-icon--upload {
 .spanPosition {
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
+  width: 100%;
 }
 .el-switch__core .el-switch__inner .is-icon,
 .el-switch__core .el-switch__inner .is-text {
@@ -3959,5 +3965,8 @@ i.el-icon.el-icon--upload {
   flex: 1;
   justify-content: center;
   align-items: center;
+}
+.el-col-10{
+  margin-top: 24px;
 }
 </style>
