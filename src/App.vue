@@ -35,7 +35,7 @@
                 </div>
                 <template #tip>
                   <div class="el-upload__tip">
-                    文件名当中不能含有空格、特殊符号、中文
+                    文件名当中不能含有特殊符号
                   </div>
                 </template>
                 <template #file>
@@ -3966,7 +3966,7 @@ i.el-icon.el-icon--upload {
   justify-content: center;
   align-items: center;
 }
-.el-col-10{
+/* .el-col-10{
   margin-top: 24px;
-}
+} */
 </style>
