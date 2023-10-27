@@ -8,7 +8,7 @@
 - 基于 [element-plus](https://github.com/element-plus/element-plus) 和 [Vue3.0](https://github.com/vuejs/core) 项目搭建用户界面
 - 核心算法模块不开源
 
-当前发布版本为 [`v0.5.0`](https://github.com/NTLx/AneuFiler/releases/tag/v0.5.0) ， `Pre-release` 版本的核心算法尚未完善，不建议用于实际生产。
+当前发布版本为 [`v0.6.0`](https://github.com/NTLx/AneuFiler/releases/tag/v0.6.0) ， `Pre-release` 版本的核心算法尚未完善，不建议用于实际生产。
 
 > 版本号发布格式说明：
 >
@@ -22,13 +22,15 @@
 
 目前提供适用于 Mac OS X（64位）和 Windows 系统的发行版。
 
-> Windows 版软件为 32 位，可在 32 位和 64 位 Windows 系统上运行。
+>Windows 32 位软件，可在 32 位和 64 位 Windows 系统上运行；
+>
+>Windows 64 位软件，只可在 64 位 Windows 系统上运行。
 
 ### Windows
 
 在 Windows 系统下可直接运行 `Portable` 版程序，无需安装。
 
-[Portable 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.5.0/AneuFiler.v0.5.0.Win_Portable.exe)
+[Portable 下载链接](https://github.com/NTLx/AneuFiler/releases/download/v0.6.0/AneuFiler.v0.6.0.Win_Portable.exe)
 
 > 若以上连接效果不佳，请尝试使用 [下载镜像](http://cloud.cubicise.com:10081/s/yRdWpmNkiMMpRtq)
 
@@ -46,7 +48,7 @@
 
 ### 程序主窗口
 
-![main window](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-09-26_09-33-32.png)
+![main window](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-10-27_11-07-50.png)
 
 将一个文件（下机数据，用默认格式导出）拖拽至 `文件处理区` 即可；也可以点击提示区域，然后选择需要处理的文件。
 
@@ -55,37 +57,43 @@
 
 默认输出文件夹位于每个输入文件相同的目录下。
 
-### 查看帮助文档
+#### 查看帮助文档
 
-可点击主界面的橙色 `帮助` 按钮查看帮助文档。
+在联网条件下，可点击主界面的橙色 `帮助` 按钮查看帮助文档。
 
-### 下载样本信息模版文件
+#### 下载样本信息模版文件
 
-点击主界面的蓝色 `下载样本信息模版` 按钮即可下载样本信息模版文件。
+点击主界面的蓝色 `模版` 按钮即可下载样本信息模版文件。
 
 ### 样本信息数据上传窗口
 
-![new window](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-09-26_09-01-25.png)
+上传样本信息数据标签页如下图：
 
-> 输出文件类型默认为`结果文件`
+![new window](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-10-27_11-08-33.png)
 
-> 当选择`结果文件+报告文件`选项，标签页会由`设置`标签页自动跳转至`GeneMapper下机数据上传`标签页，同时`样本信息数据上传`标签页会自动显示出来。上传GeneMapper下机数据文件后，标签页自动跳转到下一个标签页`样本信息数据上传`，点击上传按钮`上传样本信息数据`，便可正常输出报告文件（报告文件会自动生成在结果文件的文件夹中）。
-
-> 当选择`报告文件`选项后，标签页会由`设置`标签页自动跳转至`样本信息数据上传`标签页。点击`上传样本信息数据`上传按钮，便可正常输出报告文件（报告文件会自动生成在结果文件的文件夹中）。
-
-### 选项
+### 设置窗口
 
 设置标签页如下图：
 
-![each sample output](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-09-26_09-01-05.png)
+![each sample output](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-10-27_11-08-01.png)
 
 #### 输出文件设置
 
 Windows 操作系统环境下，默认输出文件的格式为"GBK"。
 
-默认开启按样本输出为关闭状态，如需按样本输出（针对输入文件的样本会按照不同样本名输出到不同的结果文件中），请开启该开关。
+默认`开启按样本输出`为关闭状态，如需按样本输出（针对输入文件的样本会按照不同样本名输出到不同的结果文件中），请开启该开关。
 
-默认输出文件类型只包含结果文件。如需输出报告文件，请选择`结果文件+报告文件`选项。如只需输出报告文件，请选择`报告文件`选项。
+默认输出文件类型只包含`结果文件`。如需输出报告文件，选择`结果文件+报告文件`选项后，软件界面如下图所示：
+
+![new window1](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-10-27_12-43-43.png)
+
+上传GeneMapper下机数据文件后，标签页自动跳转到下一个标签页`样本信息数据上传`，点击`上传`按钮上传样本信息数据表，便可正常输出报告文件（报告文件会自动生成在结果文件的文件夹中）。
+
+如只需输出报告文件，选择`报告文件`选项后，软件界面如下图所示。
+
+![new window2](https://cdn.jsdelivr.net/gh/Letmeouted/PCPicture/Snipaste_2023-10-27_12-45-25.png)
+
+点击`上传`按钮上传样本信息数据表，便可正常输出报告文件（报告文件会自动生成在结果文件的文件夹中）。
 
 #### 报告文件设置
 
